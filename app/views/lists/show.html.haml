@@ -1,0 +1,38 @@
+%h1= @list.email
+
+%h3 Subscribers
+
+- @list.subscriptions.each do |subscription|
+  = subscription.subscriber.email
+  - if subscription.subscriber.fingerprint.present?
+    ✓
+
+%h3 Options
+
+= simple_form_for(@list) do |f|
+  = f.input :email, disabled: true
+  = f.input :fingerprint, disabled: true
+  = f.input :log_level, collection: %w[ERROR WARN INFO DEBUG]
+  = f.input :subject_prefix
+  = f.input :subject_prefix_in, label: 'Subject-prefix for incoming emails'
+  = f.input :subject_prefix_out
+  = f.input :openpgp_header_preference, collection: %w[signencrypt encrypt sign]
+  = f.input :public_footer
+  = f.input :headers_to_meta, hint: 'One header-name per line, please.'
+  = f.input :bounces_drop_on_headers, placeholder: 'X-Spam-Flag: yes', hint: 'One match per line, please.'
+  = f.input :keywords_admin_only, collection: ["add-subscriber", "delete-subscriber", "delete-key"], input_html: { multiple: true }
+  = f.input :keywords_admin_notify, collection: ["add-key"], input_html: { multiple: true }
+  = f.input :send_encrypted_only
+  = f.input :receive_encrypted_only
+  = f.input :receive_signed_only
+  = f.input :receive_authenticated_only
+  = f.input :receive_from_subscriber_emailaddresses_only
+  = f.input :receive_admin_only
+  = f.input :keep_msgid
+  = f.input :bounces_drop_all
+  = f.input :bounces_notify_admins
+  = f.input :include_list_headers
+  = f.input :include_openpgp_header
+  = f.input :max_message_size_kb
+
+  = f.button :submit
