@@ -1,13 +1,65 @@
 class List < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
-  has_many :subscribers, through: :subscriptions
 
   serialize :headers_to_meta, JSON
   serialize :bounces_drop_on_headers, JSON
   serialize :keywords_admin_only, JSON
   serialize :keywords_admin_notify, JSON
 
-  def admins
-    subscriptions.where(admin: true).map(&:subscriber)
+  def to_s
+    email
   end
+
+  def admins
+    subscriptions.where(admin: true)
+  end
+
+  def keys(identifier='.')
+    gpg.keys(identifier)
+  end
+
+  def gpg
+    @gpg_ctx ||= begin
+     # TODO: figure out why the homedir isn't recognized
+      ENV['GNUPGHOME'] = listdir
+      setup_gpg_agent if self.gpg_passphrase.present?
+      GPGME::Ctx.new
+    end
+  end
+
+  # TODO: place this somewhere sensible.
+  # Call cleanup when script finishes.
+  #Signal.trap(0, proc { @list.cleanup })
+  def cleanup
+    if @gpg_agent_pid
+      Process.kill('TERM', @gpg_agent_pid.to_i)
+    end
+  rescue => e
+    $stderr.puts "Failed to kill gpg-agent: #{e}"
+  end
+
+  def fingerprint=(arg)
+    # Strip whitespace from incoming arg.
+    write_attribute(:fingerprint, arg.gsub(/\s*/, '').chomp)
+  end
+
+  def listdir
+    @listdir ||= File.join(
+        SchleuderConfig.lists_dir,
+        self.email.split('@').reverse
+      )
+  end
+
+  def setup_gpg_agent
+    # TODO: move this to gpgme/mail-gpg
+    require 'open3'
+    ENV['GPG_AGENT_INFO'] = `eval $(gpg-agent --allow-preset-passphrase --daemon) && echo $GPG_AGENT_INFO`
+    @gpg_agent_pid = ENV['GPG_AGENT_INFO'].split(':')[1]
+    `gpgconf --list-dir`.match(/libexecdir:(.*)/)
+    gppbin = File.join($1, 'gpg-preset-passphrase')
+    Open3.popen3(gppbin, '--preset', self.fingerprint) do |stdin, stdout, stderr|
+      stdin.puts self.gpg_passphrase
+    end
+  end
+
 end

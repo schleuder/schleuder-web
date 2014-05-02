@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  resources :lists
+  resources :lists do
+    get    'keys',              to: 'keys#index'
+    get    'keys/new',          to: 'keys#new'
+    get    'keys/:fingerprint', to: 'keys#show', as: :key
+    delete 'keys/:fingerprint', to: 'keys#destroy'
+    post   'keys',              to: 'keys#create', as: 'key_create'
+  end
+  resources  :subscriptions
+  resources  :accounts
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

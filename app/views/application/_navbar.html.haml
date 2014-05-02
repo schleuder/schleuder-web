@@ -1,0 +1,6 @@
+- if current_user.present?
+  .nav
+    = link_to current_user.email, current_user
+    -##logout= link_to(t('Logout'), destroy_login_path)
+
+

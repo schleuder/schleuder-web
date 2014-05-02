@@ -14,13 +14,13 @@ class CreateLists < ActiveRecord::Migration
       t.text    :public_footer, default: ''
       t.text    :headers_to_meta, default: '["from","to","date",":cc"]'
       t.text    :bounces_drop_on_headers, default: '{"x-spam-flag":"yes"}'
-      t.text    :keywords_admin_only, default: '["add-subscriber", "delete-subscriber", "delete-key"]'
+      t.text    :keywords_admin_only, default: '["unsubscribe", "unsubscribe", "delete-key"]'
       t.text    :keywords_admin_notify, default: '["add-key"]'
       t.boolean :send_encrypted_only, default: false
       t.boolean :receive_encrypted_only, default: false
       t.boolean :receive_signed_only, default: false
       t.boolean :receive_authenticated_only, default: false
-      t.boolean :receive_from_subscriber_emailaddresses_only, default: false
+      t.boolean :receive_from_subscribed_emailaddresses_only, default: false
       t.boolean :receive_admin_only, default: false
       t.boolean :keep_msgid, default: true
       t.boolean :bounces_drop_all, default: false

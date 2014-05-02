@@ -1,0 +1,10 @@
+%h1 Keys for #{@list}
+
+%table
+  %tr
+    %th Fingerprint
+    %th Primary UID
+  - @keys.each do |key|
+    %tr 
+      %td= link_to key.fingerprint, list_key_path(@list, key)
+      %td= key.uids.first.uid

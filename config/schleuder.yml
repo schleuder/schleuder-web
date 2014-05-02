@@ -1,0 +1,12 @@
+defaults: &defaults
+  lists_dir: /var/schleuderlists
+  plugins_dir: /etc/schleuder/plugins/
+  delivery_method: sendmail
+
+test:
+  <<: *defaults
+development:
+  <<: *defaults
+  delivery_method: file
+production:
+  <<: *defaults

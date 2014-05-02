@@ -13,6 +13,13 @@
 
 ActiveRecord::Schema.define(version: 20140501112859) do
 
+  create_table "accounts", force: true do |t|
+    t.string "email"
+    t.string "password_digest"
+  end
+
+  add_index "accounts", ["email"], name: "index_accounts_on_email", unique: true
+
   create_table "lists", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -28,13 +35,13 @@ ActiveRecord::Schema.define(version: 20140501112859) do
     t.text     "public_footer",                               default: ""
     t.text     "headers_to_meta",                             default: "[\"from\",\"to\",\"date\",\":cc\"]"
     t.text     "bounces_drop_on_headers",                     default: "{\"x-spam-flag\":\"yes\"}"
-    t.text     "keywords_admin_only",                         default: "[\"add-subscriber\", \"delete-subscriber\", \"delete-key\"]"
+    t.text     "keywords_admin_only",                         default: "[\"unsubscribe\", \"unsubscribe\", \"delete-key\"]"
     t.text     "keywords_admin_notify",                       default: "[\"add-key\"]"
     t.boolean  "send_encrypted_only",                         default: false
     t.boolean  "receive_encrypted_only",                      default: false
     t.boolean  "receive_signed_only",                         default: false
     t.boolean  "receive_authenticated_only",                  default: false
-    t.boolean  "receive_from_subscriber_emailaddresses_only", default: false
+    t.boolean  "receive_from_subscribed_emailaddresses_only", default: false
     t.boolean  "receive_admin_only",                          default: false
     t.boolean  "keep_msgid",                                  default: true
     t.boolean  "bounces_drop_all",                            default: false
@@ -44,23 +51,17 @@ ActiveRecord::Schema.define(version: 20140501112859) do
     t.integer  "max_message_size_kb",                         default: 10240
   end
 
-  create_table "subscribers", force: true do |t|
-    t.string "email"
-    t.string "fingerprint"
-    t.string "password_digest"
-  end
-
   create_table "subscriptions", force: true do |t|
-    t.integer  "subscriber_id"
     t.integer  "list_id"
+    t.string   "email"
+    t.string   "fingerprint"
     t.boolean  "admin",             default: false
     t.boolean  "delivery_disabled", default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "subscriptions", ["email", "list_id"], name: "index_subscriptions_on_email_and_list_id", unique: true
   add_index "subscriptions", ["list_id"], name: "index_subscriptions_on_list_id"
-  add_index "subscriptions", ["subscriber_id", "list_id"], name: "index_subscriptions_on_subscriber_id_and_list_id", unique: true
-  add_index "subscriptions", ["subscriber_id"], name: "index_subscriptions_on_subscriber_id"
 
 end

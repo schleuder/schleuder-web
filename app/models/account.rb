@@ -1,0 +1,7 @@
+class Account < ActiveRecord::Base
+  has_secure_password
+  # Associate through email-addresses because with IDs we'd need an account for
+  # every subscription.
+  has_many :subscriptions, primary_key: :email, foreign_key: :email, dependent: :destroy
+  has_many :lists, through: :subscriptions
+end
