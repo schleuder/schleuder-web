@@ -1,0 +1,12 @@
+.page-header
+  %h1= @account
+
+.col-lg-6
+  .panel.panel-info
+    .panel-heading Change password
+    .panel-body
+      = simple_form_for(@account, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
+        = f.input :password, as: :password, required: true
+        = f.input :password_confirmation, as: :password, required: true
+
+        = f.submit 'Save', class: 'btn btn-primary'

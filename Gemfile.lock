@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/plataformatec/simple_form.git
+  revision: d7306558665d38fe3a0c277ce263e99f635958de
+  specs:
+    simple_form (3.1.0.rc1)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
+
+GIT
   remote: https://github.com/jkraemer/mail-gpg
   revision: 0d23916abb1f3e2274b3e072341d125cf10d062b
   branch: verify_result_passing
@@ -106,9 +114,6 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
-    simple_form (3.0.2)
-      actionpack (~> 4.0)
-      activemodel (~> 4.0)
     spring (1.1.2)
     sprockets (2.11.0)
       hike (~> 1.2)
@@ -151,7 +156,7 @@ DEPENDENCIES
   rails (= 4.1.0)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
-  simple_form
+  simple_form (~> 3.1.0.rc1)!
   spring
   sqlite3
   squire

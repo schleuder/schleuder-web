@@ -14,6 +14,18 @@ class List < ActiveRecord::Base
     subscriptions.where(admin: true)
   end
 
+  def is_admin?(account)
+    admins.map(&:email).include?(account.email)
+  end
+
+  def is_subscribed?(account)
+    subscriptions.map(&:email).include?(account.email)
+  end
+
+  def key
+    keys(fingerprint).first
+  end
+
   def keys(identifier='.')
     gpg.keys(identifier)
   end

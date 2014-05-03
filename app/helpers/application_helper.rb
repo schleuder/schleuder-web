@@ -27,4 +27,8 @@ module ApplicationHelper
   def bc_part(name, url)
     " » #{link_to_unless(current_page?(url), name, url)}"
   end
+
+  def key_as_ascii(key)
+    GPGME::Key.export key.fingerprint, armor: true
+  end
 end

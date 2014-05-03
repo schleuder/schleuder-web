@@ -5,7 +5,7 @@ class ListsController < ApplicationController
 
   def update
     if @list.update(list_params)
-      redirect_to @list
+      redirect_to @list, notice: "✓ Options saved."
     else
       render 'edit'
     end

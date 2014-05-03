@@ -8,7 +8,6 @@ class KeysController < ApplicationController
 
   def show
     @key = @list.keys(params[:fingerprint]).first
-    @key_ascii = GPGME::Key.export @key.fingerprint, armor: true
   end
 
   def destroy

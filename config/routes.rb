@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'login/new',             to: 'logins#new', as: :new_login
+  get 'login/cookiesrequired', to: 'logins#cookiesrequired', as: :cookiesrequired_login
+  post 'login/create',         to: 'logins#create', as: :create_login
+  get 'login/create',          to: redirect('/login/new')
+  get 'login/destroy',         to: 'logins#destroy', as: :destroy_login
+
+  resources :accounts
+
   resources :lists do
     get    'keys',              to: 'keys#index'
     get    'keys/new',          to: 'keys#new'

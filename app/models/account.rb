@@ -4,4 +4,8 @@ class Account < ActiveRecord::Base
   # every subscription.
   has_many :subscriptions, primary_key: :email, foreign_key: :email, dependent: :destroy
   has_many :lists, through: :subscriptions
+
+  def to_s
+    email
+  end
 end

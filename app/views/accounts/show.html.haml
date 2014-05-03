@@ -1,0 +1,27 @@
+.page-header
+  %h1= @account
+
+= link_to(edit_account_path(@account), class: 'btn btn-default') do
+  %span.glyphicon.glyphicon-wrench
+  Change Password
+
+%h3 Lists subscribed to:
+%ul
+  - @account.lists.each do |list|
+    %li= link_to list, list
+
+%h3 Lists administrating:
+%ul
+  - @account.subscriptions.each do |subscription|
+    - if subscription.admin?
+      %li= link_to subscription.list, subscription.list
+
+TODO:
+%ul
+  %li Edit subscriptions
+  %li Edit own subscriptions as non-admin
+  %li Unsubscribe self as non-admin
+  %li Create account
+  %li Delete account
+  %li Authorization
+  %li Superadmin

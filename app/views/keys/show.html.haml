@@ -1,5 +1,6 @@
-%h1= @key.fingerprint
+.page-header
+  %h1= @key.fingerprint
 
 %pre= @key
-%pre= @key_ascii
+%pre= key_as_ascii(@key)
 

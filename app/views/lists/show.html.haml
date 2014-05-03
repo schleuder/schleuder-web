@@ -1,63 +1,20 @@
-%h1= @list.email
+.page-header
+  %h1
+    = @list.email
+    %span.small= @list.fingerprint
 
-Fingerprint:
-= @list.fingerprint
+- if @list.is_admin?(current_user)
+  = link_to(edit_list_path(@list), class: 'btn btn-default') do
+    %span.glyphicon.glyphicon-wrench
+    Edit list
 
-%h2 Subscriptions
-
-%table
-  %tr 
-    %th email
-    %th fingerprint
-    %th
-  - @list.subscriptions.each do |subscription|
-    %tr
-      %td= subscription.email
-      %td
-        - if subscription.key.present?
-          = link_to subscription.fingerprint, list_key_path(@list, subscription.key)
-        - else
-          = subscription.fingerprint
-          %span.error Key not present!
-      %td
-        = link_to :unsubscribe, subscription, method: :delete, data: { confirm: 'Are you sure?' }
-        - if subscription.key.blank?
-          %span= link_to 'Upload key', list_keys_new_path(@list)
+- if @list.is_subscribed?(current_user)
+  = link_to(list_keys_new_path(@list), class: 'btn btn-success') do
+    %span.glyphicon.glyphicon-upload
+    Upload key
 
 
-%h4 New subscription
-= simple_form_for(Subscription.new) do |f|
-  = f.input :list_id, as: :hidden, input_html: { value: @list.id }
-  = f.input :email
-  = f.input :fingerprint
-  = f.input :admin
-  = f.input :delivery_disabled
-  = f.button :submit, 'Subscribe'
-
-%h2 Options
-
-= simple_form_for(@list) do |f|
-  = f.input :log_level, collection: %w[ERROR WARN INFO DEBUG]
-  = f.input :subject_prefix
-  = f.input :subject_prefix_in, label: 'Subject-prefix for incoming emails'
-  = f.input :subject_prefix_out
-  = f.input :openpgp_header_preference, collection: %w[signencrypt encrypt sign]
-  = f.input :public_footer
-  = f.input :headers_to_meta, hint: 'One header-name per line, please.'
-  = f.input :bounces_drop_on_headers, placeholder: 'X-Spam-Flag: yes', hint: 'One match per line, please.'
-  = f.input :keywords_admin_only, collection: ["subscribe", "unsubscribe", "delete-key"], input_html: { multiple: true }
-  = f.input :keywords_admin_notify, collection: ["add-key"], input_html: { multiple: true }
-  = f.input :send_encrypted_only
-  = f.input :receive_encrypted_only
-  = f.input :receive_signed_only
-  = f.input :receive_authenticated_only
-  = f.input :receive_from_subscribed_emailaddresses_only
-  = f.input :receive_admin_only
-  = f.input :keep_msgid
-  = f.input :bounces_drop_all
-  = f.input :bounces_notify_admins
-  = f.input :include_list_headers
-  = f.input :include_openpgp_header
-  = f.input :max_message_size_kb
-
-  = f.button :submit, 'Update options'
+.clearfix
+%br
+%pre= @list.key
+%pre= key_as_ascii(@list.key)

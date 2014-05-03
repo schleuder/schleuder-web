@@ -1,10 +1,13 @@
-%h1 Keys for #{@list}
+.page-header
+  %h1 Keys for #{@list}
 
-%table
-  %tr
-    %th Fingerprint
-    %th Primary UID
-  - @keys.each do |key|
-    %tr 
-      %td= link_to key.fingerprint, list_key_path(@list, key)
-      %td= key.uids.first.uid
+%table.table
+  %thead
+    %tr
+      %th Fingerprint
+      %th Primary UID
+  %tbody
+    - @keys.each do |key|
+      %tr 
+        %td= link_to key.fingerprint, list_key_path(@list, key)
+        %td= key.uids.first.uid
