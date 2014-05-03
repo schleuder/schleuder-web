@@ -1,0 +1,19 @@
+!!!
+%html{:lang => 'en'}
+  %head
+    %title Schleuder
+    = stylesheet_link_tag "application", :media => "all"
+    = csrf_meta_tags
+  %body
+    .navbar
+      .navbar-inner
+        .container
+          .brand Schleuder
+          = render 'navbar'
+    .container
+      .row
+        = render 'breadcrumb'
+        .span10
+          = render 'flashes'
+          = yield
+

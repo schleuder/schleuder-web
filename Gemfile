@@ -47,3 +47,5 @@ gem 'simple_form'
 gem 'mail-gpg', git: 'https://github.com/jkraemer/mail-gpg', branch: 'verify_result_passing'
 
 gem 'squire'
+
+gem 'bootstrap-generators'
