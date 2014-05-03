@@ -1,11 +1,13 @@
 .page-header
   %h1 Login
 
-= form_tag(create_login_path, { class: 'form-horizontal', role: 'form' }) do
-  .form-group
-    = label_tag :email, 'Email', class: 'col-sm-2 control-label'
-    .col-sm-3= text_field_tag :email, '', class: 'form-control'
-  .form-group
-    = label_tag :password, 'Password', class: 'col-sm-2 control-label'
-    .col-sm-3= password_field_tag :password, '', class: 'form-control'
-  = button_tag 'Login', class: 'btn btn-primary'
+.col-lg-6
+  = form_tag(create_login_path, { class: 'form-horizontal', role: 'form' }) do
+    .form-group
+      = label_tag :email, 'Email', class: 'col-sm-2 control-label'
+      .col-sm-6= text_field_tag :email, '', class: 'form-control'
+    .form-group
+      = label_tag :password, 'Password', class: 'col-sm-2 control-label'
+      .col-sm-6= password_field_tag :password, '', class: 'form-control'
+    = button_tag 'Login', class: 'btn btn-primary'
+    = link_to 'Create account', new_account_path

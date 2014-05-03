@@ -2,11 +2,15 @@ defaults: &defaults
   lists_dir: /var/schleuderlists
   plugins_dir: /etc/schleuder/plugins/
   delivery_method: sendmail
+  mailer_from: noreply@example.org
+  web_hostname: example.org
 
 test:
   <<: *defaults
 development:
   <<: *defaults
   delivery_method: file
+  mailer_from: noreply@localhost
+  web_hostname: localhost:3000
 production:
   <<: *defaults

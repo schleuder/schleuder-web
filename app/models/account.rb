@@ -9,6 +9,10 @@ class Account < ActiveRecord::Base
     email
   end
 
+  def superadmin?
+    self.email == 'root@localhost'
+  end
+
   def admin_lists
     subscriptions.where(admin: true).map(&:list)
   end

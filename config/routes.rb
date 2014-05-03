@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  get 'login/new',             to: 'logins#new', as: :new_login
-  get 'login/cookiesrequired', to: 'logins#cookiesrequired', as: :cookiesrequired_login
-  post 'login/create',         to: 'logins#create', as: :create_login
-  get 'login/create',          to: redirect('/login/new')
-  get 'login/destroy',         to: 'logins#destroy', as: :destroy_login
+  get  'login/new',             to: 'logins#new', as: :new_login
+  get  'login/cookiesrequired', to: 'logins#cookiesrequired', as: :cookiesrequired_login
+  post 'login/create',          to: 'logins#create', as: :create_login
+  get  'login/create',          to: redirect('/login/new')
+  get  'login/destroy',         to: 'logins#destroy', as: :destroy_login
 
+  post 'accounts/verify',       to: 'accounts#verify', as: :verify_account
+  get  'accounts/setup/:token', to: 'accounts#setup',  as: :setup_account
   resources :accounts
 
   resources :lists do

@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140501112859) do
+ActiveRecord::Schema.define(version: 20140503213122) do
+
+  create_table "account_requests", force: true do |t|
+    t.string   "token"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "account_requests", ["token"], name: "index_account_requests_on_token", unique: true
 
   create_table "accounts", force: true do |t|
     t.string "email"

@@ -5,20 +5,29 @@
   %span.glyphicon.glyphicon-wrench
   Change Password
 
-%h3 Lists subscribed to:
-%ul
-  - @account.lists.each do |list|
-    %li= link_to list, list
+- if @subscribed_lists.present?
+  %h3 Lists subscribed to:
+  %ul
+    - @subscribed_lists.each do |list|
+      %li= link_to list, list
 
-%h3 Lists administrating:
-%ul
-  - @account.admin_lists.each do |list|
-    %li= link_to list, list
+- if @admin_lists.present?
+  %h3 Lists administrating:
+  %ul
+    - @admin_lists.each do |list|
+      %li= link_to list, list
 
+.pull-right
+  = link_to "Delete account", @account, method: :delete, data: { confirm: "Are you really sure? This does NOT unsubscribe you from any list!" }, class: 'btn btn-danger'
+.clearfix
+
+%br
+%br
+%br
+%hr
 TODO:
 %ul
   %li Edit subscriptions
   %li Edit own subscriptions as non-admin
   %li Unsubscribe self as non-admin
-  %li Create account
-  %li Delete account
+  %li Fix cancan

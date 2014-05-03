@@ -38,7 +38,6 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    logger.info "session[:exp].time?: #{session[:login_expires_at].kind_of?(Time)}"
     expiry = Time.parse(session[:login_expires_at])
     if current_account && expiry > Time.now
       update_session_expiry

@@ -8,7 +8,7 @@
     %span.glyphicon.glyphicon-wrench
     Edit list
 
-- if @list.is_subscribed?(current_user)
+- if @list.is_subscribed?(current_user) || @account.superadmin?
   = link_to(list_keys_new_path(@list), class: 'btn btn-success') do
     %span.glyphicon.glyphicon-upload
     Upload key

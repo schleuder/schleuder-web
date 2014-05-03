@@ -1,0 +1,14 @@
+.page-header
+  %h1 Create webschleuder-account for #{@account}
+
+.col-lg-5
+  To complete the sign-up please choose a webschleuder-password for #{@account}.
+
+  = simple_form_for(@account, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
+    .form-group
+      = text_field_tag 'token', @token, hidden: true
+      = f.input :password
+      = f.input :password_confirmation
+
+    = f.submit 'Create Account', class: 'btn btn-primary'
+
