@@ -3,8 +3,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_filter :authenticate
-  before_filter :authorize
-  before_filter :load_resource, except: [:index, :new, :create]
+  load_and_authorize_resource
+  # ensure authorization is checked.
+  check_authorization
 
   helper_method :current_account
   helper_method :current_user
@@ -54,10 +55,6 @@ class ApplicationController < ActionController::Base
     current_account = session[:current_account_id] = nil
     redirect_to new_login_url, msg_type => msg
   end
-
-  def authorize
-  end
-
 
   def load_resource
     var_name = controller_name.singularize

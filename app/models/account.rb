@@ -8,4 +8,8 @@ class Account < ActiveRecord::Base
   def to_s
     email
   end
+
+  def admin_lists
+    subscriptions.where(admin: true).map(&:list)
+  end
 end

@@ -41,11 +41,10 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'haml'
 gem 'haml-rails'
-
 gem 'simple_form', '~> 3.1.0.rc1', github: 'plataformatec/simple_form'
+gem 'bootstrap-generators'
 
+gem 'cancan'
+gem 'squire'
 gem 'mail-gpg', git: 'https://github.com/jkraemer/mail-gpg', branch: 'verify_result_passing'
 
-gem 'squire'
-
-gem 'bootstrap-generators'

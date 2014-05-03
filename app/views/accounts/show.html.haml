@@ -12,9 +12,8 @@
 
 %h3 Lists administrating:
 %ul
-  - @account.subscriptions.each do |subscription|
-    - if subscription.admin?
-      %li= link_to subscription.list, subscription.list
+  - @account.admin_lists.each do |list|
+    %li= link_to list, list
 
 TODO:
 %ul
@@ -23,5 +22,3 @@ TODO:
   %li Unsubscribe self as non-admin
   %li Create account
   %li Delete account
-  %li Authorization
-  %li Superadmin

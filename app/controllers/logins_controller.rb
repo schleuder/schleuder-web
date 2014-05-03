@@ -1,6 +1,7 @@
 class LoginsController < ApplicationController
   skip_before_filter :authenticate
-  skip_before_filter :load_resource
+  skip_load_and_authorize_resource
+  skip_authorization_check
 
   def cookiesrequired
     if session[:cookietest] == true
