@@ -6,16 +6,22 @@
   Change Password
 
 - if @subscribed_lists.present?
-  %h3 Lists subscribed to:
-  %ul
-    - @subscribed_lists.each do |list|
-      %li= link_to list, list
+  .col-lg-4
+    .panel.panel-info
+      .panel-heading Lists subscribed to
+      .panel-body
+        %ul
+          - @subscribed_lists.each do |list|
+            %li= link_to list, list
 
 - if @admin_lists.present?
-  %h3 Lists administrating:
-  %ul
-    - @admin_lists.each do |list|
-      %li= link_to list, list
+  .col-lg-4
+    .panel.panel-warning
+      .panel-heading Lists administrating
+      .panel-body
+        %ul
+          - @admin_lists.each do |list|
+            %li= link_to list, list
 
 .pull-right
   = link_to "Delete account", @account, method: :delete, data: { confirm: "Are you really sure? This does NOT unsubscribe you from any list!" }, class: 'btn btn-danger'
@@ -30,4 +36,5 @@ TODO:
   %li Edit subscriptions
   %li Edit own subscriptions as non-admin
   %li Unsubscribe self as non-admin
-  %li Fix cancan
+  %li Fix/replace cancan
+  %li Button: send key to all subscriptions
