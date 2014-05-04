@@ -20,6 +20,8 @@ class Subscription < ActiveRecord::Base
   end
 
   def key
+    # TODO: make key-related methods a concern, so we don't have to go
+    # through the list and neither re-implement the methods here.
     list.keys(self.fingerprint).first
   end
 

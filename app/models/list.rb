@@ -26,8 +26,17 @@ class List < ActiveRecord::Base
     keys(fingerprint).first
   end
 
+  def armored_key
+    GPGME::Key.export self.fingerprint, armor: true
+  end
+
   def keys(identifier='.')
     gpg.keys(identifier)
+  end
+
+  def self.by_recipient(recipient)
+    listname = recipient.gsub(/-(sendkey|request)@/, '@')
+    where(email: listname).first
   end
 
   def gpg

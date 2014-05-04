@@ -1,33 +1,71 @@
 class SchleuderRunner
   def initialize(msg, recipient)
-    # TODO: use custom logger
-    @list = List.where(email: recipient).first
-    if ! @list
-      return error('No such list.')
-    end
-    ENV['GNUPGHOME'] = @list.listdir
-
-    # TODO: decrypt+verify
-    # TODO: detect request- or list-message
-
+    # TODO: catch GPGME::Error::DecryptFailed
+    # TODO: write msg to file until runner ends in order to never loose a message?
     @mail = Mail.new(msg)
-    if @mail.encrypted?
-      begin
-        @mail = @mail.decrypt(verify: true)
-      rescue GPGME::Error::DecryptFailed
-        return error("Decrypting failed")
-      end
-    elsif @mail.signed?
-      # TODO: test/fix
-      @mail = @mail.verify?
+    # TODO: Fix strange errors about wrong number of arguments when overriding Message#initialize
+    @mail.setup recipient
+
+    # TODO: use custom logger
+    # TODO: implement forwarding messages to listname-owner@
+
+    setup_list
+
+    if @mail.sendkey_request?
+      send_key
     end
 
-    run_plugins
 
+    # TODO: implement receive_*
+    if @mail.validly_signed?
+      output = run_plugins
+
+      if @mail.request?
+        reply_to_sender(output)
+      else
+        send_to_subscriptions
+      end
+    else 
+      if ! @list.receive_signed_only?
+        send_to_subscriptions
+      else
+        return error(:msg_must_be_signed)
+      end
+    end
+  end
+
+  def send_key
+    # TODO: move this into Mail::Message, without breaking their supermetaleetprogramming...
+    @mail.reply_sendkey(@list).deliver
+    exit
+  end
+
+  def error(msg)
+    if msg.is_a?(Symbol)
+      msg = t(msg)
+    end
+    # TODO: logging
+    $stderr.puts msg
+    exit 1
+  end
+
+  def reply_to_sender(output)
+    @mail.reply_to_sender(output).deliver
+  end
+  
+  def send_to_subscriptions
     new = @mail.clean_copy(@list)
     @list.subscriptions.each do |subscription|
       out = subscription.send_mail(new)
     end
+  end
+
+  def setup_list
+    if ! @list = List.by_recipient(@mail.recipient)
+      error('No such list.')
+    end
+    # This cannot be put in List, as Mail wouldn't know it then.
+    ENV['GNUPGHOME'] = @list.listdir
   end
 
   def run_plugins

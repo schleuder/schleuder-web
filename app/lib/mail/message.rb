@@ -1,6 +1,48 @@
 module Mail
-  # TODO: maybe subclass? But maybe that breaks integration of mail-gpg?
+  # TODO: Test if subclassing breaks integration of mail-gpg.
   class Message
+    attr_reader :recipient
+
+    def setup(recipient)
+      @recipient = recipient
+      @orig_message = self.dup
+
+      if self.encrypted?
+        self.decrypt!(verify: true)
+      elsif self.signed?
+        # TODO: test/fix
+        self.verify!
+      end
+    end
+
+    def signature
+      verify_result.try(:signatures).try(:first)
+    end
+
+    def validly_signed?
+      signer.present?
+    end
+
+    def signer
+      fingerprint = self.signature.try(:fpr) && 
+        Subscription.where(fingerprint: fingerprint).first
+    end
+
+    def reply_to_signer(output)
+      # TODO: catch unknown signatures earlier, those are invalid requests
+      reply = self.reply
+      reply.body = output(output)
+      self.signer.send_mail(reply)
+    end
+
+    def sendkey_request?
+      @recipient.match(/-sendkey@/)
+    end
+
+    def request?
+      @recipient.match(/-request@/)
+    end
+
     def keywords
       @keywords ||= begin
         # Parse only plain text for keywords.
@@ -21,6 +63,23 @@ module Mail
           end
         end.compact.join("\n")
       end
+    end
+
+    def reply_sendkey(list)
+      out = self.reply
+      out.from = list.email
+      out.body = list.key.to_s
+      # TODO: clean this up, there must be an easier way to attach inline-disposited content.
+      filename = "#{list.email}.asc"
+      out.add_file({
+        filename: filename,
+        content: list.armored_key.to_s
+      })
+      out.attachments[filename].content_disposition = 'inline'
+      out.attachments[filename].content_description = 'OpenPGP public key'
+      # TODO: find out why the gpg-module puts all the headers into the first mime-part, too
+      out.gpg sign: true
+      out
     end
 
     def clean_copy(list)
