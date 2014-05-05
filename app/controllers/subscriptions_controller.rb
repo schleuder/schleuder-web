@@ -1,10 +1,14 @@
 class SubscriptionsController < ApplicationController
+  skip_load_and_authorize_resource only: [:create]
+
   def create
-    # TODO: use strong-parameters
+    # Load resource manually as cancan doesn't use strong-parameters (yet).
     @subscription = Subscription.new(subscription_params)
+    authorize! :create, @subscription
+
     if @subscription.save
-      redirect_to @subscription.list,
-          notice: "#{@subscription} subscribed."
+      redirect_to edit_list_path(@subscription.list),
+          notice: "✓ #{@subscription} subscribed."
     else
       redirect_to :back,
           error: "Failed to subscribe #{@subscription}."
@@ -13,8 +17,8 @@ class SubscriptionsController < ApplicationController
 
   def destroy
     if sub = @subscription.destroy
-      redirect_to sub.list,
-          notice: "#{sub} unsubscribed."
+      redirect_to edit_list_path(sub.list),
+          notice: "✓ #{sub} unsubscribed."
     else
       redirect_to @subscription.list,
           error: "Unsubscribing #{subscription} failed: #{@subscription.errors}."
@@ -24,7 +28,12 @@ class SubscriptionsController < ApplicationController
   private
 
   def subscription_params
-    # TODO: refine
-    params.require(:subscription).permit!
+    params.require(:subscription).permit(
+        :email,
+        :fingerprint,
+        :admin,
+        :delivery_disabled,
+        :list_id
+    )
   end
 end

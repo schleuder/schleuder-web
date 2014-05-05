@@ -26,5 +26,7 @@ module SchleuderRails
     Dir["./app/lib/**/*.rb"].each do |file|
       require file
     end
+
+    require 'openssl'
   end
 end

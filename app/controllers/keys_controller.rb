@@ -11,9 +11,6 @@ class KeysController < ApplicationController
     @key = @list.keys(params[:fingerprint]).first
   end
 
-  def destroy
-  end
-
   def create
     # TODO: file upload for binary encoded keys.
     import_result = GPGME::Key.import(params[:ascii])

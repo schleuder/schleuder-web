@@ -1,15 +1,10 @@
-require 'openssl'
 class AccountsController < ApplicationController
   skip_before_filter :authenticate, only: [:new, :verify, :setup, :create]
-  skip_load_and_authorize_resource only: [:new, :verify, :setup, :create]
-  skip_authorization_check only: [:new, :verify, :setup, :create]
-
-  def new
-    @account = Account.new
-  end
+  skip_load_resource only: [:verify, :setup, :create]
 
   def verify
-    @email = params.require(:account).permit(:email)[:email]
+    # TODO: check that input actually is a valid email address.
+    @email = params[:account][:email]
     if Account.where(email: @email).present?
       redirect_to new_account_path, alert: "Adress already registered for account."
       return
@@ -41,7 +36,7 @@ class AccountsController < ApplicationController
   end
 
   def create
-    @account = Account.new(params.require(:account).permit(:password))
+    @account = Account.new(account_params)
     ac_req = AccountRequest.where(token: params[:token]).first
     if ! ac_req
       render text: 'kaput'
@@ -57,18 +52,12 @@ class AccountsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
     if @account.update(account_params)
       redirect_to @account, notice: '✓ Password changed.'
     else
       render :edit
     end
-  end
-
-  def index
   end
 
   def show

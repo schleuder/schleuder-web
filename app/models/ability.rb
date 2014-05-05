@@ -5,14 +5,18 @@ class Ability
     if account.email == 'root@localhost'
       can :manage, :all
     else
+      # Setup+Create accounts
+      can [:create, :verify, :setup], Account
       # Own account
       can [:read, :update, :destroy], Account, id: account.id
       # Own subscriptions
       can [:read, :update, :destroy], Subscription, email: account.email
       # All subscriptions of lists it admins
-      can :manage, Subscription, account.lists.map(&:id).include?(:list_id)
-      # All lists it admins
-      can [:read, :update], List, account.admin_lists.map(&:id).include?(:id)
+      can :manage, Subscription, list_id: account.lists.map(&:id)
+      # Lists subscribed to
+      can [:read], List, id: account.subscriptions.map(&:list).map(&:id)
+      # Lists it admins
+      can [:read, :update], List, id: account.admin_lists.map(&:id)
     end
   end
 end
