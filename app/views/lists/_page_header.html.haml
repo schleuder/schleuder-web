@@ -1,0 +1,6 @@
+.page-header
+  %h1
+    = link_to_unless current_page?(@list), @list, @list
+    %span.small= @list.fingerprint
+
+

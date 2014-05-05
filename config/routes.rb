@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get  'accounts/setup/:token', to: 'accounts#setup',  as: :setup_account
   resources :accounts
 
+  get 'lists/:id/edit_subscriptions', to: 'lists#edit_subscriptions', as: :edit_list_subscriptions
   resources :lists do
     get    'keys',              to: 'keys#index'
     get    'keys/new',          to: 'keys#new'

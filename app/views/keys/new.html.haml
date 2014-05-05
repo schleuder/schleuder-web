@@ -1,5 +1,5 @@
 .page-header
-  %h1 Upload key to be used by #{@list}
+  %h1 Upload key to be used by #{link_to @list, @list}
 
 = form_tag(list_key_create_path(@list), method: 'post') do
   = text_area_tag 'ascii', '', rows: 20, cols: 80

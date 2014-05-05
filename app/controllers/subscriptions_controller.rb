@@ -1,23 +1,37 @@
 class SubscriptionsController < ApplicationController
   skip_load_and_authorize_resource only: [:create]
 
+  def edit
+    # Neccessary for the shared form.
+    @list = @subscription.list
+  end
+
+  def update
+    # Load resource manually as cancan doesn't use strong-parameters (yet).
+    if @subscription.update(subscription_params)
+      redirect_to edit_list_subscriptions_path(@subscription.list),
+          notice: "✓ Subscription of #{@subscription} updated."
+    else
+      render 'edit'
+    end
+  end
+
   def create
     # Load resource manually as cancan doesn't use strong-parameters (yet).
     @subscription = Subscription.new(subscription_params)
     authorize! :create, @subscription
-
     if @subscription.save
-      redirect_to edit_list_path(@subscription.list),
+      redirect_to edit_list_subscriptions_path(@subscription.list),
           notice: "✓ #{@subscription} subscribed."
     else
-      redirect_to :back,
-          error: "Failed to subscribe #{@subscription}."
+      render 'edit',
+          error: "Failed to save!"
     end
   end
 
   def destroy
     if sub = @subscription.destroy
-      redirect_to edit_list_path(sub.list),
+      redirect_to edit_list_subscriptions_path(sub.list),
           notice: "✓ #{sub} unsubscribed."
     else
       redirect_to @subscription.list,

@@ -1,54 +1,9 @@
-.page-header
-  %h1
-    = @list.email
-    %span.small= @list.fingerprint
-
-.col-lg-6.col-md-8
-  .panel.panel-info
-    .panel-heading Subscriptions
-    .panel-body
-      %table.table
-        %thead
-          %tr 
-            %th email
-            %th fingerprint
-            %th
-        %tbody
-          - @list.subscriptions.each do |subscription|
-            %tr{style: subscription.admin? && 'font-weight: bold', class: subscription.delivery_disabled? && 'text-warning'}
-              %td{title: table_row_title(subscription)}= subscription.email
-              %td
-                - if subscription.key.present?
-                  %tt= link_to subscription.fingerprint, list_key_path(@list, subscription.key)
-                - else
-                  %tt= subscription.fingerprint
-                  %span.text-danger Key not present!
-              %td
-                = link_to(subscription, method: :delete, data: { confirm: 'Are you sure?' }, title: 'Unsubscribe', class: 'text-danger') do
-                  %span.glyphicon.glyphicon-remove
-                - if subscription.key.blank?
-                  %span
-                    = link_to(list_keys_new_path(@list), title: 'Upload key', class: 'text-success') do
-                      .large.glyphicon.glyphicon-upload
-      .small.pull-right
-        .text-warning * Delivery is disabled
-        %div{style: 'font-weight: bold'} * Admin of list
-
-    .panel-heading New subscription
-    .panel-body
-      = simple_form_for(Subscription.new, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
-        = f.input :list_id, as: :hidden, input_html: { value: @list.id }
-        = f.input :email
-        = f.input :fingerprint
-        = f.input :admin, label: "Admin?", hint: "May she/he/it administer this list?"
-        = f.input :delivery_disabled, hint: "Helpful for people, that only administer the list and don't want to receive its traffic"
-        = f.button :submit, 'Subscribe', class: 'btn btn-primary'
+= render 'page_header'
 
 .col-lg-6.col-md-8
   .panel.panel-info
     .panel-heading List-Options
     .panel-body
-
       = simple_form_for(@list, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
         = f.input :log_level, collection: %w[ERROR WARN INFO DEBUG]
         = f.input :subject_prefix, hint: "If you want brackets, add them here, too."

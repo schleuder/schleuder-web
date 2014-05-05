@@ -1,0 +1,9 @@
+= simple_form_for(@subscription, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
+  = f.input :list_id, as: :hidden, input_html: { value: @list.id }
+  = f.input :email
+  = f.input :fingerprint
+  = f.input :admin, label: "Admin?", hint: "May she/he/it administer this list?"
+  = f.input :delivery_disabled, hint: "Helpful for people, that only administer the list and don't want to receive its traffic"
+  = f.button :submit, 'Save', class: 'btn btn-primary'
+
+
