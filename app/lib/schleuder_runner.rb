@@ -1,7 +1,6 @@
 class SchleuderRunner
   def initialize(msg, recipient)
     # TODO: catch GPGME::Error::DecryptFailed
-    # TODO: write msg to file until runner ends in order to never loose a message?
     @mail = Mail.new(msg)
     # TODO: Fix strange errors about wrong number of arguments when overriding Message#initialize
     @mail.setup recipient
@@ -15,6 +14,7 @@ class SchleuderRunner
       send_key
     end
 
+    # TODO: move strings into yaml-file.
 
     # TODO: implement receive_*
     if @mail.validly_signed?
@@ -35,7 +35,6 @@ class SchleuderRunner
   end
 
   def send_key
-    # TODO: move this into Mail::Message, without breaking their supermetaleetprogramming...
     @mail.reply_sendkey(@list).deliver
     exit
   end

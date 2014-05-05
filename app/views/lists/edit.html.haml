@@ -3,7 +3,7 @@
     = @list.email
     %span.small= @list.fingerprint
 
-.col-lg-8
+.col-lg-6.col-md-8
   .panel.panel-info
     .panel-heading Subscriptions
     .panel-body
@@ -34,8 +34,6 @@
         .text-warning * Delivery is disabled
         %div{style: 'font-weight: bold'} * Admin of list
 
-.col-lg-4
-  .panel.panel-info
     .panel-heading New subscription
     .panel-body
       = simple_form_for(Subscription.new, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
@@ -46,7 +44,7 @@
         = f.input :delivery_disabled, hint: "Helpful for people, that only administer the list and don't want to receive its traffic"
         = f.button :submit, 'Subscribe', class: 'btn btn-primary'
 
-.col-lg-8
+.col-lg-6.col-md-8
   .panel.panel-info
     .panel-heading List-Options
     .panel-body
