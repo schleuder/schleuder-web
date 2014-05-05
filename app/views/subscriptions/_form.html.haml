@@ -4,6 +4,9 @@
   = f.input :fingerprint
   = f.input :admin, label: "Admin?", hint: "May she/he/it administer this list?"
   = f.input :delivery_disabled, hint: "Helpful for people, that only administer the list and don't want to receive its traffic"
-  = f.button :submit, 'Save', class: 'btn btn-primary'
+  - if @subscription.persisted?
+    = f.button :submit, 'Update', class: 'btn btn-primary'
+  - else
+    = f.button :submit, 'Subscribe', class: 'btn btn-success'
 
 

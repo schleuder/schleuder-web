@@ -23,10 +23,17 @@
 
 - if @admin_lists.present?
   .col-lg-4
-    .panel.panel-warning
+    .panel.panel-info
       .panel-heading Lists administrating
       .panel-body
         %ul
           - @admin_lists.each do |list|
             %li= link_to list, list
 
+
+.clearfix
+
+- if can? :create, List
+  = link_to(new_list_path, class: 'btn btn-success') do
+    %span.glyphicon.glyphicon-plus
+    New list

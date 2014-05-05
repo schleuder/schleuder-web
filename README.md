@@ -38,6 +38,7 @@ Only tested with ruby 2.1 up to now.
    * Edit own subscriptions as non-admin.
    * Unsubscribe self as non-admin.
    * Button: send key to all subscribed addresses.
+   * I18n.
 
   * Schleuder:
 

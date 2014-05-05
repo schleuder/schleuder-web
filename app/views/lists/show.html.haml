@@ -1,5 +1,9 @@
 = render 'page_header'
 
+- if can? :destroy, @list
+  .pull-right
+    = link_to "Delete list", @account, method: :delete, data: { confirm: "Are you really sure? This does NOT remove any list-data from disk!" }, class: 'btn btn-danger'
+
 - if @list.is_admin?(current_account) || current_account.superadmin?
   = link_to(edit_list_subscriptions_path(@list), class: 'btn btn-default') do
     %span.glyphicon.glyphicon-th-list

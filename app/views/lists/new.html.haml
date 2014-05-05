@@ -1,0 +1,14 @@
+.page-header
+  %h1 New list
+
+.col-lg-6.col-md-8
+  .panel.panel-warning
+    .panel-heading Notice
+    .panel-body
+      Currently, these manual steps are neccessary to actually use the list by email:
+      %ol
+        %li Create list-directory (see schleuder.yml for basedir).
+        %li Create key-pair for list.
+        %li Save fingerprint into list-options if you did this after creating the list.
+
+= render 'form'

@@ -6,6 +6,11 @@ class List < ActiveRecord::Base
   serialize :keywords_admin_only, JSON
   serialize :keywords_admin_notify, JSON
 
+  # TODO: validate email to be a valid address
+  validates :email, presence: true, uniqueness: true
+  validates :fingerprint, presence: true
+  # TODO: more validations
+
   def to_s
     email
   end

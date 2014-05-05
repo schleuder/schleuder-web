@@ -1,32 +1,3 @@
 = render 'page_header'
 
-.col-lg-6.col-md-8
-  .panel.panel-info
-    .panel-heading List-Options
-    .panel-body
-      = simple_form_for(@list, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
-        = f.input :log_level, collection: %w[ERROR WARN INFO DEBUG]
-        = f.input :subject_prefix, hint: "If you want brackets, add them here, too."
-        = f.input :subject_prefix_in, label: 'Subject-prefix for incoming emails', hint: "If you want brackets, add them here, too."
-        = f.input :subject_prefix_out, hint: "If you want brackets, add them here, too."
-        = f.input :openpgp_header_preference, collection: %w[signencrypt encrypt sign]
-        = f.input :public_footer
-        = f.input :headers_to_meta, hint: 'One header-name per line, please.'
-        = f.input :bounces_drop_on_headers, placeholder: 'X-Spam-Flag: yes', hint: 'One match per line, please.'
-        = f.input :keywords_admin_only, as: :check_boxes, collection: ["subscribe", "unsubscribe", "delete-key"], input_html: { multiple: true }, hint: "Selected keywords may only be called by admins of this list."
-        = f.input :keywords_admin_notify, as: :check_boxes, collection: ["add-key"], input_html: { multiple: true }, hint: "Admins will be notified whenever one of these keywords is called."
-        = f.input :send_encrypted_only, hint: "Only send messages if they can be encrypted to their receiver."
-        = f.input :receive_encrypted_only, hint: "Only accept encrypted messages?"
-        = f.input :receive_signed_only, hint: "Only accept validly signed messages?"
-        = f.input :receive_authenticated_only, hint: "Only accept messages that are validly signed by a subscriber? (Determined by fingerprint.)"
-        = f.input :receive_from_subscribed_emailaddresses_only, hint: "Only accept messages with a subscribed address as From-header? (Warning: this is a very weak check!)"
-        = f.input :receive_admin_only, hint: "Only accept messages validly signed by an admin of this list? (Determined by fingerprint.)"
-        = f.input :keep_msgid, hint: "Pass incoming Message-IDs to outgoing messages? This enables threading in Mail-clients and helps to identify messages."
-        = f.input :bounces_drop_all, hint: "Don't bounce but drop all rejected messages."
-        = f.input :bounces_notify_admins, hint: "Notify admins of bounced messages."
-        = f.input :include_list_headers, hint: "Include List-headers (RFC XXXX) to outgoing messages."
-        = f.input :include_openpgp_header, hint: "Include OpenPGP-headers (RFC XXXX) to outgoing messages."
-        = f.input :max_message_size_kb, hint: "Emails bigger than this will be rejected."
-
-        = f.button :submit, 'Update options', class: 'btn btn-primary'
-
+= render 'form'
