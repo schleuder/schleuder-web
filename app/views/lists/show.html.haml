@@ -3,10 +3,13 @@
 - if @list.is_admin?(current_account) || current_account.superadmin?
   = link_to(edit_list_subscriptions_path(@list), class: 'btn btn-default') do
     %span.glyphicon.glyphicon-th-list
-    Edit subscriptions list
+    Edit subscriptions
   = link_to(edit_list_path(@list), class: 'btn btn-default') do
     %span.glyphicon.glyphicon-wrench
     Edit list options
+  = link_to(list_keys_path(@list), class: 'btn btn-default') do
+    %span.glyphicon.glyphicon-barcode
+    List keys
 
 - if @list.is_subscribed?(current_user) || current_account.superadmin?
   = link_to(list_keys_new_path(@list), class: 'btn btn-success') do

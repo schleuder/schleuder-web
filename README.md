@@ -30,11 +30,18 @@ Only tested with ruby 2.1 up to now.
 
 ## TODO
 
- * Create lists
- * superadmin-flag for Accounts
- * Edit own subscriptions as non-admin
- * Unsubscribe self as non-admin
- * Button: send key to all subscribed addresses
+ * Webschleuder:
+
+   * Create lists.
+   * superadmin-flag for Accounts.
+   * Highlight unusable keys in keys- and subscription-overview and -detail.
+   * Edit own subscriptions as non-admin.
+   * Unsubscribe self as non-admin.
+   * Button: send key to all subscribed addresses.
+
+  * Schleuder:
+
+    * Basically every feature but sendkey and sending encrypted messages to subscribers.
 
 See also `rake notes`
 

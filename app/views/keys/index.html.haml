@@ -1,5 +1,9 @@
 .page-header
-  %h1 Keys for #{@list}
+  %h1 Keys for #{link_to @list, @list}
+
+= link_to(list_keys_new_path(@list), class: 'btn btn-success') do
+  %span.glyphicon.glyphicon-upload
+  Upload key
 
 %table.table
   %thead
