@@ -23,5 +23,10 @@
 
 .clearfix
 %br
-%pre= @list.key
-%pre= @list.armored_key
+
+- if @list.key.blank?
+  .alert.alert-warning 
+    %strong No key present! This list is not functional!
+- else
+  %pre= @list.key
+  %pre= @list.armored_key
