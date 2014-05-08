@@ -1,20 +1,19 @@
 class SchleuderRunner
   def initialize(msg, recipient)
-    # TODO: catch GPGME::Error::DecryptFailed
+    setup_list(recipient)
     @mail = Mail.new(msg)
-    # TODO: Fix strange errors about wrong number of arguments when overriding Message#initialize
-    @mail.setup recipient
 
-    # TODO: use custom logger
-    # TODO: implement forwarding messages to listname-owner@
-
-    setup_list
-
-    if @mail.sendkey_request?
-      send_key
+    begin
+      # This decrypts, verifies, etc.
+      @mail.setup recipient
+    rescue GPGME::Error::DecryptFailed => exc
+      error(:decrypt_failed, key_str: list.key.to_s)
     end
 
-    # TODO: move strings into yaml-file.
+    # TODO: use custom logger
+
+    send_key if @mail.sendkey_request?
+    forward_to_owner if @mail.to_owner?
 
     # TODO: implement receive_*
     if @mail.validly_signed?
@@ -26,51 +25,45 @@ class SchleuderRunner
         send_to_subscriptions
       end
     else 
-      if ! @list.receive_signed_only?
+      if ! list.receive_signed_only?
         send_to_subscriptions
       else
-        return error(:msg_must_be_signed)
+        error(:msg_must_be_signed)
       end
     end
   end
 
-  def send_key
-    @mail.reply_sendkey(@list).deliver
+  private
+
+  def forward_to_owner
+    send_to_subscriptions(list.admins)
     exit
   end
 
-  def error(msg)
-    if msg.is_a?(Symbol)
-      msg = t(msg)
-    end
-    # TODO: logging
-    $stderr.puts msg
-    exit 1
+  def send_key
+    @mail.reply_sendkey(list).deliver
+    exit
   end
 
   def reply_to_sender(output)
     @mail.reply_to_sender(output).deliver
   end
   
-  def send_to_subscriptions
-    new = @mail.clean_copy(@list)
-    @list.subscriptions.each do |subscription|
+  def send_to_subscriptions(subscriptions=nil)
+    subscriptions ||= list.subscriptions
+    new = @mail.clean_copy(list)
+    subscriptions.each do |subscription|
       out = subscription.send_mail(new)
     end
   end
 
-  def setup_list
-    if ! @list = List.by_recipient(@mail.recipient)
-      error('No such list.')
-    end
-    # This cannot be put in List, as Mail wouldn't know it then.
-    ENV['GNUPGHOME'] = @list.listdir
+  def list
+    @list
   end
 
   def run_plugins
     setup_plugins
-    # TODO: handle responses if request-mail
-    # TODO: handle errors for request- (reply) and list-mails (reply or metadata[:error])
+    # TODO: move strings to locale-files
     output = []
     @mail.keywords.each do |keyword|
       if keyword_admin_only?(keyword) && ! mail_from_admin?
@@ -83,47 +76,58 @@ class SchleuderRunner
         output << Plugin.send(command, @mail)
       end
     end
-    if @mail.request?
-      sub = Subscription.find_by(fingerprint: @mail.signature.fingerprint)
-      if ! sub
-        raise "Invalid signer"
-      end
 
+    # Generate output to be sent back to the sender.
+    if @mail.request?
       msg = ["Result of your commands:"]
       if output.empty?
         msg << "There was no output."
       else 
         msg += output
       end
-
-      @mail.reply do
-        from @list.email
-        to   sub.email
-        body msg.join("\n\n")
-      end.deliver
-
-      exit
     end
-  rescue
-    # TODO: notify admin
+  rescue => exc
+    error(exc)
   end
 
   def keyword_admin_only?(keyword)
-    @list.keywords_admin_only.include?(keyword)
+    list.keywords_admin_only.include?(keyword)
   end
 
   def mail_from_admin?
-    @list.admins.find do |admin|
+    return false unless @mail.validly_signed?
+    list.admins.find do |admin|
       admin.fingerprint == @mail.signature.fingerprint
-    end
+    end.presence || false
   end
 
-  private
+  def error(msg, args={})
+    if msg.is_a?(Symbol)
+      msg = t(msg, args)
+    end
+    # TODO: logging
+    $stderr.puts "#{msg}\n#{t(:greetings)}\n"
+    exit 1
+  end
+
+  def t(sym, args={})
+    I18n.t(sym, {scope: [:schleuder]}.merge(args))
+  end
 
   def setup_plugins
     Dir["#{SchleuderConfig.plugins_dir}/*.rb"].each do |file|
       require file
     end
+  end
+
+  def setup_list(recipient)
+    return @list if @list
+
+    if ! @list = List.by_recipient(recipient)
+      error(:no_such_list)
+    end
+    # This cannot be put in List, as Mail wouldn't know it then.
+    ENV['GNUPGHOME'] = @list.listdir
   end
 
 end

@@ -1,0 +1,14 @@
+en:
+  schleuder:
+    decrypt_failed: |-
+      Decrypting your message failed. Please use this OpenPGP key:
+
+      %{key_str}
+    greetings: |-
+      Sincerely yours,
+        Schleuder
+    msg_must_be_signed: |-
+      This address accepts OpenPGP-signed messages only.
+    no_such_list:
+      No such list.
+

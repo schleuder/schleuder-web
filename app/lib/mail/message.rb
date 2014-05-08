@@ -3,12 +3,15 @@ module Mail
   class Message
     attr_reader :recipient
 
+    # TODO: Fix strange errors about wrong number of arguments when
+    # overriding Message#initialize.
     def setup(recipient)
       @recipient = recipient
       @orig_message = self.dup
 
       if self.encrypted?
-        self.decrypt!(verify: true)
+        # TODO: fix
+        self.decrypt(verify: true)
       elsif self.signed?
         # TODO: test/fix
         self.verify!
@@ -24,7 +27,7 @@ module Mail
     end
 
     def signer
-      fingerprint = self.signature.try(:fpr) && 
+      fingerprint = self.signature.try(:fpr) &&
         Subscription.where(fingerprint: fingerprint).first
     end
 
@@ -37,6 +40,10 @@ module Mail
 
     def sendkey_request?
       @recipient.match(/-sendkey@/)
+    end
+
+    def to_owner?
+      @recipient.match(/-owner@/)
     end
 
     def request?

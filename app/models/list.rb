@@ -1,3 +1,5 @@
+require 'fileutils'
+
 class List < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
 
@@ -37,6 +39,10 @@ class List < ActiveRecord::Base
 
   def keys(identifier='.')
     gpg.keys(identifier)
+  end
+
+  def import_key(importable)
+    GPGME::Key.import importable
   end
 
   def self.by_recipient(recipient)
@@ -86,6 +92,43 @@ class List < ActiveRecord::Base
     Open3.popen3(gppbin, '--preset', self.fingerprint) do |stdin, stdout, stderr|
       stdin.puts self.gpg_passphrase
     end
+  end
+
+  def subscribe(email)
+    Subscription.create(email: email, list_id: self.id)
+  end
+
+  # TODO: This is rather controller's work, but we need to access it from
+  # the web as well as from the runner.
+  def self.build(listname, adminemail=nil, adminkeypath=nil)
+    # TODO: decide if this ErrorsList-concept should be used all over.
+    errors = ErrorsList.new
+
+    if self.where(email: listname).present?
+      errors << ListExists.new(listname)
+    end
+
+    if ! File.exists?(@list.listdir)
+      FileUtils.mkdir_p(@list.listdir)
+    end
+
+    # TODO:
+    # * keyring.exists? || create
+    
+    list = List.create(email: listname, fingerprint: 'deadbeeff00')
+
+    if adminemail.present?
+      list.subscribe(adminemail)
+    end
+
+    if adminkeypath.present?
+      if ! File.readable?(adminkeypath)
+        errors << FileNotFound.new(adminkeypath)
+      end
+      list.import_key(File.read(adminkeypath))
+    end
+
+    [errors.presence, list.presence]
   end
 
 end
