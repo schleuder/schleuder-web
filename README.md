@@ -32,10 +32,11 @@ Only tested with ruby 2.1 so far.
 
 ## TODO
 
- * General:
+General:
+
    * Tests, Tests, Tests.
 
- * Webschleuder:
+Webschleuder:
 
    * superadmin-flag for Accounts.
    * Highlight unusable keys in keys- and subscription-overview and -detail.
@@ -44,7 +45,7 @@ Only tested with ruby 2.1 so far.
    * Button: send key to all subscribed addresses.
    * I18n.
 
-* Schleuder:
+Schleuder:
 
    * Most list-options aren't respected.
    * Plugins must be re-implemented.
