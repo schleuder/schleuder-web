@@ -1,9 +1,7 @@
-# Schleuder, rails-edition
+# Webschleuder, a web interface for Schleuder3
 
-This is an attempt to rewrite schleuder, the encrypted mailinglist manager and
+This is full features web interface to administrate Schleuder3-lists and subscriptions.
 group-gateway.
-
-The non-web-code resides in `app/lib`.
 
 ##  Installation
 
@@ -15,14 +13,8 @@ The non-web-code resides in `app/lib`.
 
 ## Usage
 
-Log into the webinterface with email root@localhost and password "slingit!".
-
-To create a list either use the webinterface or execute:
-`./bin/schleuder-newlist`
-
-Receive its public key by sending a sendkey-request: `./bin/schleuder listname-sendkey@hostname < email`.
-
-Send messages to the list as known: `./bin/schleuder listname@hostname < email`.
+1. `bundle exec rails server`
+1. Log into the webinterface with email root@localhost and password "slingit!".
 
 
 ## Limitations
