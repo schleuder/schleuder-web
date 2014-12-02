@@ -27,8 +27,9 @@ module Mail
     end
 
     def signer
-      fingerprint = self.signature.try(:fpr) &&
+      if fingerprint = self.signature.try(:fpr)
         Subscription.where(fingerprint: fingerprint).first
+      end
     end
 
     def reply_to_signer(output)

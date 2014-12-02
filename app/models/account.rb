@@ -13,6 +13,14 @@ class Account < ActiveRecord::Base
     self.email == 'root@localhost'
   end
 
+  def admin_of?(list)
+    admin_lists.include?(list)
+  end
+
+  def subscribed_to?(list)
+    lists.include?(list)
+  end
+
   def admin_lists
     subscriptions.where(admin: true).map(&:list)
   end

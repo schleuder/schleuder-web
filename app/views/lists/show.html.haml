@@ -4,7 +4,7 @@
   .pull-right
     = link_to "Delete list", @account, method: :delete, data: { confirm: "Are you really sure? This does NOT remove any list-data from disk!" }, class: 'btn btn-danger'
 
-- if @list.is_admin?(current_account) || current_account.superadmin?
+- if current_account.admin_of?(@list) || current_account.superadmin?
   = link_to(edit_list_subscriptions_path(@list), class: 'btn btn-default') do
     %span.glyphicon.glyphicon-th-list
     Edit subscriptions
@@ -15,7 +15,7 @@
     %span.glyphicon.glyphicon-barcode
     List keys
 
-- if @list.is_subscribed?(current_user) || current_account.superadmin?
+- if current_account.subscribed_to?(@list) || current_account.superadmin?
   = link_to(list_keys_new_path(@list), class: 'btn btn-success') do
     %span.glyphicon.glyphicon-upload
     Upload key
