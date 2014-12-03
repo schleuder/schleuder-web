@@ -1,3 +1,3 @@
 Mail.defaults do
-  delivery_method SchleuderConfig.delivery_method
+  delivery_method Conf.delivery_method
 end

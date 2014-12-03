@@ -1,4 +1,4 @@
-class SchleuderConfig
+class Conf
   include Squire::Base
 
   def self.config_file
