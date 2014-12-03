@@ -2,7 +2,7 @@ class SchleuderConfig
   include Squire::Base
 
   def self.config_file
-    file_name = 'schleuder.yml'
+    file_name = 'webschleuder.yml'
     global_config = File.join(base_dir, file_name)
     if File.readable?(global_config)
       global_config
