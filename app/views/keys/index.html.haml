@@ -17,4 +17,4 @@
     - @keys.each do |key|
       %tr 
         %td= link_to key.fingerprint, list_key_path(@list, key)
-        %td= key.uids.first.uid
+        %td= key.email

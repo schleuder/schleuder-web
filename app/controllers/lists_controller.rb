@@ -1,6 +1,10 @@
 class ListsController < ApplicationController
   skip_load_and_authorize_resource only: :create
 
+  def edit
+    @keywords = %w[subscribe unsubscribe list-subscriptions set-fingerprint resend resend-encrypted-only sign-this add-key delete-key list-keys get-key fetch-key]
+  end
+
   def edit_subscriptions
     # Neccessary for the shared form.
     @subscription = Subscription.new
@@ -17,7 +21,8 @@ class ListsController < ApplicationController
   end
 
   def update
-    if @list.update(list_params)
+    logger.info list_params.inspect
+    if @list.update_attributes(list_params)
       redirect_to edit_list_path(@list), notice: "✓ Options saved."
     else
       render 'edit'
@@ -36,6 +41,22 @@ class ListsController < ApplicationController
 
   def list_params
     # TODO: refine
-    params.require(:list).permit!
+    p = params.require(:list).permit!
+    if p['headers_to_meta'].is_a?(String)
+      p['headers_to_meta'] = p['headers_to_meta'].split("\n").map { |h| h.strip }
+    end
+    # TODO: find out where the empty values in these two values come from (some
+    # hidden-fields without a name?).
+    p['keywords_admin_only'] = p['keywords_admin_only'].map {|v| v.presence || nil }.compact
+    p['keywords_admin_notify'] = p['keywords_admin_notify'].map {|v| v.presence || nil }.compact
+    # Convert these into a hash.
+    p['bounces_drop_on_headers'] = p['bounces_drop_on_headers'].to_s.strip.split("\n").inject({}) do |memo, line|
+      name, value = line.split(':').map(&:strip)
+      if name.present? && value.present?
+        memo[name] = value
+      end
+      memo
+    end
+    p
   end
 end

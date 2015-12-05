@@ -8,14 +8,16 @@ class KeysController < ApplicationController
   end
 
   def show
-    @key = @list.keys(params[:fingerprint]).first
+    @key = @list.keys(params[:fingerprint])
   end
 
   def create
     # TODO: file upload for binary encoded keys.
-    import_result = GPGME::Key.import(params[:ascii])
+    # ActiveResource doesn't want to use query-params with create(), so here
+    # list_id is included in the request-body.
+    import_result = Key.create(ascii: params[:ascii], list_id: @list.id)
     # TODO: improve feedback
-    redirect_to @list, notice: import_result
+    redirect_to @list, notice: "#{import_result.considered} key(s) considered for import. Result: #{import_result.imports.inspect}"
   end
 
   private

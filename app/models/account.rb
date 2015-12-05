@@ -1,9 +1,5 @@
 class Account < ActiveRecord::Base
   has_secure_password
-  # Associate through email-addresses because with IDs we'd need an account for
-  # every subscription.
-  has_many :subscriptions, primary_key: :email, foreign_key: :email
-  has_many :lists, through: :subscriptions
 
   def to_s
     email
@@ -21,7 +17,15 @@ class Account < ActiveRecord::Base
     lists.include?(list)
   end
 
+  def subscriptions
+    @subscriptions ||= Subscription.where(email: self.email)
+  end
+
+  def lists
+    subscriptions.map(&:list)
+  end
+
   def admin_lists
-    subscriptions.where(admin: true).map(&:list)
+    Subscription.where(email: self.email, admin: true).map(&:list)
   end
 end
