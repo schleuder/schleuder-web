@@ -1,5 +1,5 @@
 class Conf
-  include Squire::Base
+  include ::Squire::Base
 
   def self.config_file
     file_name = 'webschleuder.yml'

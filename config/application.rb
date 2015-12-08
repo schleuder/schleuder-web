@@ -22,5 +22,15 @@ module Webschleuder
     # config.i18n.default_locale = :de
 
     require 'openssl'
+    require 'mail'
+
+    require 'bcrypt'
+    require 'active_resource'
+    require 'haml-rails'
+    require 'sass-rails'
+    require 'bootstrap-sass'
+    require 'simple_form'
+    require 'squire'
+    require 'cancancan'
   end
 end
