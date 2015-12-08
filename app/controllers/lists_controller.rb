@@ -7,7 +7,10 @@ class ListsController < ApplicationController
 
   def edit_subscriptions
     # Neccessary for the shared form.
-    @subscription = Subscription.new
+    @subscription = Subscription.build
+    # ActiveResource doesn't actually merge attributes given to build() (it's a
+    # bug fixed for versions requiring rails5), so we assign the list manually.
+    @subscription.list_id = @list.id
   end
 
   def create

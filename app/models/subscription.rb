@@ -8,6 +8,10 @@ class Subscription < ActiveResource::Base
 
   belongs_to :list
 
+  def to_s
+    email
+  end
+
   def key
     Key.find(fingerprint, params: { list_id: self.list_id })
   rescue ActiveResource::ResourceNotFound

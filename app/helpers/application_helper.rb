@@ -31,4 +31,9 @@ module ApplicationHelper
   def key_as_ascii(key)
     GPGME::Key.export key.fingerprint, armor: true
   end
+
+  def checkbox(form, field, hint)
+    label = "#{field.to_s.humanize}?"
+    form.input field, label: label, hint: hint, as: :boolean, boolean_style: :inline
+  end
 end

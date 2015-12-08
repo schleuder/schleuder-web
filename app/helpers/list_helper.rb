@@ -9,9 +9,4 @@ module ListHelper
     end
     title.join(', ')
   end
-
-  def checkbox(form, field, hint)
-    label = "#{field.to_s.humanize}?"
-    form.input field, label: label, hint: hint, as: :boolean, boolean_style: :inline
-  end
 end

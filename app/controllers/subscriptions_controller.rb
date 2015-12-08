@@ -8,8 +8,8 @@ class SubscriptionsController < ApplicationController
 
   def update
     # Load resource manually as cancan doesn't use strong-parameters (yet).
-    if @subscription.update(subscription_params)
-      redirect_to edit_list_subscriptions_path(@subscription.list),
+    if @subscription.update_attributes(subscription_params)
+      redirect_to edit_subscription_path(@subscription),
           notice: "✓ Subscription of #{@subscription} updated."
     else
       render 'edit'
@@ -30,7 +30,8 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
-    if sub = @subscription.destroy
+    sub = @subscription
+    if @subscription.destroy
       redirect_to edit_list_subscriptions_path(sub.list),
           notice: "✓ #{sub} unsubscribed."
     else
