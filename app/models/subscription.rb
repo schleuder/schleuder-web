@@ -3,7 +3,7 @@ class Subscription < ActiveResource::Base
   schema do
     string 'email', 'fingerprint'
     integer 'list_id'
-    boolean 'admin', 'delivery_disabled'
+    boolean 'admin', 'delivery_enabled'
   end
 
   belongs_to :list

@@ -4,7 +4,7 @@ module ListHelper
     if subscription.admin?
       title << 'Admin'
     end
-    if subscription.delivery_disabled?
+    if ! subscription.delivery_enabled?
       title << 'Delivery disabled'
     end
     title.join(', ')

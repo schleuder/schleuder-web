@@ -47,7 +47,7 @@ class SubscriptionsController < ApplicationController
         :email,
         :fingerprint,
         :admin,
-        :delivery_disabled,
+        :delivery_enabled,
         :list_id
     )
   end

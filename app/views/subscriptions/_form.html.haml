@@ -2,8 +2,8 @@
   = f.input :list_id, as: :hidden, input_html: { value: @subscription.list.id }
   = f.input :email
   = f.input :fingerprint
-  = f.input :delivery_disabled, collection: [true, false], label: 'Delivery disabled?', hint: "Helpful for people, that only administer the list and don't want to receive its traffic", selected: 'false', as: :boolean, boolean_style: :inline
   = checkbox f, :admin, "May s/he administer this list?"
+  = checkbox f, :delivery_enabled, "Helpful for people, that only administer the list and don't want to receive its traffic"
   - if @subscription.persisted?
     = f.button :submit, 'Update', class: 'btn btn-primary'
   - else

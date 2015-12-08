@@ -12,7 +12,7 @@
             %th
         %tbody
           - @list.subscriptions.each do |subscription|
-            %tr{style: subscription.admin? && 'font-weight: bold', class: subscription.delivery_disabled? && 'text-warning'}
+            %tr{style: subscription.admin? && 'font-weight: bold', class: subscription.delivery_enabled? || 'text-warning'}
               %td{title: table_row_title(subscription)}= subscription.email
               %td
                 - if subscription.key.present?
