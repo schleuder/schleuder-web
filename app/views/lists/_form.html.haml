@@ -13,8 +13,9 @@
         = f.input :public_footer
         = f.input :headers_to_meta, hint: "One header-name per line. Case-insensitive.", as: :text
         = f.input :bounces_drop_on_headers, placeholder: 'X-Spam-Flag: yes', hint: 'One match per line. Case-insensitive.', as: :text
-        = f.input :keywords_admin_only, as: :check_boxes, collection: @keywords, hint: "Selected keywords may only be called by admins of this list."
-        = f.input :keywords_admin_notify, as: :check_boxes, collection: @keywords, hint: "Admins will be notified whenever one of these keywords is called."
+        = f.input :keywords_admin_only, as: :check_boxes, collection: @keywords, hint: "Selected keywords may only be called by admins of this list.", wrapper: :horizontal_radio_and_checkboxes
+        = f.input :keywords_admin_notify, as: :check_boxes, collection: @keywords, hint: "Admins will be notified whenever one of these keywords is called.", wrapper: :horizontal_radio_and_checkboxes
+
         = checkbox f, :send_encrypted_only, "Only send messages if they can be encrypted to their receiver."
         = checkbox f, :receive_encrypted_only, "Only accept encrypted messages?"
         = checkbox f, :receive_signed_only, "Only accept validly signed messages?"

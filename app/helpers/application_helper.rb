@@ -34,6 +34,6 @@ module ApplicationHelper
 
   def checkbox(form, field, hint)
     label = "#{field.to_s.humanize}?"
-    form.input field, label: label, hint: hint, as: :boolean, boolean_style: :inline
+    form.input field, label: label, hint: hint, as: :boolean, wrapper: :horizontal_boolean
   end
 end
