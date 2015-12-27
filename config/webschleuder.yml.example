@@ -2,6 +2,7 @@ defaults: &defaults
   delivery_method: sendmail
   mailer_from: noreply@example.org
   web_hostname: example.org
+  schleuderd_uri: http://localhost:4567/
 
 test:
   <<: *defaults

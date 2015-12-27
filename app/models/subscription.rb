@@ -1,5 +1,6 @@
 class Subscription < ActiveResource::Base
-  self.site = 'http://localhost:4567/'
+  self.site = Conf.schleuderd_uri
+
   schema do
     string 'email', 'fingerprint'
     integer 'list_id'

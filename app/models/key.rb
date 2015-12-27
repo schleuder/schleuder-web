@@ -1,5 +1,5 @@
 class Key < ActiveResource::Base
-  self.site = 'http://localhost:4567/'
+  self.site = Conf.schleuderd_uri
 
   def to_s
     inspect

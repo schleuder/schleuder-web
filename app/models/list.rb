@@ -1,5 +1,5 @@
 class List < ActiveResource::Base
-  self.site = 'http://localhost:4567/'
+  self.site = Conf.schleuderd_uri
   has_many :subscriptions
 
   schema do
