@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
   def initialize(account)
     account ||= Account.new
-    if account.email == 'root@localhost'
+    if account.superadmin?
       can :manage, :all
     else
       # Setup+Create accounts
