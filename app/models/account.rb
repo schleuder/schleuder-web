@@ -21,6 +21,10 @@ class Account < ActiveRecord::Base
     @subscriptions ||= Subscription.where(email: self.email)
   end
 
+  def subscription(list)
+    Subscription.where(email: self.email, list_id: list.id).first
+  end
+
   def lists
     subscriptions.map(&:list)
   end

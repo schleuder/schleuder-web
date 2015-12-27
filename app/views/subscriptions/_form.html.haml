@@ -1,9 +1,13 @@
 = simple_form_for(@subscription, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
   = f.input :list_id, as: :hidden, input_html: { value: @subscription.list.id }
-  = f.input :email
+  - if @subscription.new?
+    = f.input :email
+  - else
+    = f.input :email, disabled: true
   = f.input :fingerprint
-  = checkbox f, :admin, "May s/he administer this list?"
-  = checkbox f, :delivery_enabled, "Helpful for people, that only administer the list and don't want to receive its traffic"
+  - if current_user.superadmin? || @subscription.admin?
+    = checkbox f, :admin, "May s/he administer this list?"
+  = checkbox f, :delivery_enabled, "Receive the emails sent over the list?"
   - if @subscription.persisted?
     = f.button :submit, 'Update', class: 'btn btn-primary'
   - else

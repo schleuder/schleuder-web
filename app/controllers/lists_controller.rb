@@ -5,6 +5,10 @@ class ListsController < ApplicationController
     @keywords = %w[subscribe unsubscribe list-subscriptions set-fingerprint resend resend-encrypted-only sign-this add-key delete-key list-keys get-key fetch-key]
   end
 
+  def show
+    @subscription = current_account.subscription(@list)
+  end
+
   def edit_subscriptions
     # Neccessary for the shared form.
     @subscription = Subscription.build

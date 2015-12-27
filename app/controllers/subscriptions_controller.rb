@@ -32,8 +32,12 @@ class SubscriptionsController < ApplicationController
   def destroy
     sub = @subscription
     if @subscription.destroy
-      redirect_to edit_list_subscriptions_path(sub.list),
-          notice: "✓ #{sub} unsubscribed."
+      msg = "✓ #{sub} unsubscribed from #{sub.list.email}."
+      if current_account.admin_of?(sub.list)
+        redirect_to edit_list_subscriptions_path(sub.list), notice: msg
+      else
+        redirect_to account_path(current_account), notice: msg
+      end
     else
       redirect_to @subscription.list,
           error: "Unsubscribing #{subscription} failed: #{@subscription.errors}."
@@ -43,6 +47,7 @@ class SubscriptionsController < ApplicationController
   private
 
   def subscription_params
+    # TODO: allow email only if request method is post (i.e. on creating a new record)
     params.require(:subscription).permit(
         :email,
         :fingerprint,

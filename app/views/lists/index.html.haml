@@ -1,3 +1,6 @@
 %h1 Lists
 
-= render @lists
+- if @lists.present?
+  = render @lists
+- else
+  None
