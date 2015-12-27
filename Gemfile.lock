@@ -63,6 +63,7 @@ GEM
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
     builder (3.2.2)
+    byebug (8.2.1)
     cancancan (1.13.1)
     concurrent-ruby (1.0.0)
     daemons (1.2.3)
@@ -163,6 +164,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  byebug
   spring
   sqlite3
   thin

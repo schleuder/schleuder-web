@@ -5,5 +5,8 @@ gemspec
 # Include some fixes
 #gem 'activeresource', require: 'active_resource', github: 'rails/activeresource', ref: 'd6a5186'
 gem 'sqlite3'
-gem 'spring',        group: :development
 gem 'thin'
+group :development do
+  gem 'spring'
+  gem 'byebug'
+end
