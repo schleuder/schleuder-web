@@ -14,6 +14,17 @@ class ApplicationController < ActionController::Base
     render404
   end
 
+  rescue_from ActiveResource::BadRequest do |exc|
+    logger.error "API response: #{exc.response}"
+    logger.error "API response headers: #{exc.response.to_hash.inspect}"
+    logger.error "API response body: #{exc.response.body}"
+    raise exc
+  end
+
+  rescue_from Errno::ECONNREFUSED do |exc|
+    render 'errors/missing_schleuderd', status: 500
+  end
+
   private
 
   def render404
