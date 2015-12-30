@@ -19,10 +19,7 @@
     %span.glyphicon.glyphicon-th-list
     Edit subscription
   .pull-right
-    -# TODO: fix confirmation
-    = button_to(@subscription, method: :delete, title: "Unsubscribe from this list", class: 'btn btn-danger') do
-      %span.glyphicon.glyphicon-remove
-      Unsubscribe
+    = render 'subscriptions/unsubscribe_button'
 
 - if current_account.subscribed_to?(@list) || current_account.superadmin?
   = link_to(list_keys_new_path(@list), class: 'btn btn-success') do
