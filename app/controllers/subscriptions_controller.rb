@@ -9,8 +9,12 @@ class SubscriptionsController < ApplicationController
   def update
     # Load resource manually as cancan doesn't use strong-parameters (yet).
     if @subscription.update_attributes(subscription_params)
-      redirect_to edit_subscription_path(@subscription),
-          notice: "✓ Subscription of #{@subscription} updated."
+      msg = "✓ Subscription of #{@subscription} updated."
+      if can?(:manage, @subscription.list)
+        redirect_to edit_list_subscriptions_path(@subscription.list), notice: msg
+      else
+        redirect_to edit_subscription_path(@subscription), notice: msg
+      end
     else
       render 'edit'
     end
