@@ -9,30 +9,27 @@
           %tr 
             %th email
             %th fingerprint
-            %th
         %tbody
           - @list.subscriptions.each do |subscription|
-            %tr{style: subscription.admin? && 'font-weight: bold', class: subscription.delivery_enabled? || 'text-warning'}
-              %td{title: table_row_title(subscription)}= subscription.email
+            %tr{style: subscription.admin? && 'font-weight: bold'}
+              %td{title: table_row_title(subscription)}
+                = link_to(edit_subscription_path(subscription), title: 'Edit') do
+                  - if subscription.delivery_enabled?
+                    = subscription.email
+                  - else
+                    - surround('(', ')') do
+                      = subscription.email
               %td
                 - if subscription.key.present?
                   %tt= link_to subscription.fingerprint, list_key_path(@list, subscription.key)
                 - else
                   %tt= subscription.fingerprint
                   %span.text-danger Key not present!
-              %td
-                .pull-right
-                  = link_to(subscription, method: :delete, data: { confirm: 'Are you sure?' }, title: 'Unsubscribe', class: 'text-danger') do
-                    %span.glyphicon.glyphicon-remove
-                %span
-                  = link_to(edit_subscription_path(subscription), title: 'Edit') do
-                    .glyphicon.glyphicon-edit
-                - if subscription.key.blank?
                   %span
                     = link_to(list_keys_new_path(@list), title: 'Upload key', class: 'text-success') do
                       .large.glyphicon.glyphicon-upload
       .small.pull-right
-        .text-warning * Delivery is disabled
+        * (Delivery is disabled)
         %div{style: 'font-weight: bold'} * Admin of list
 
 .col-lg-4.col-md-5
