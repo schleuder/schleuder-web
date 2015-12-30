@@ -20,10 +20,13 @@ class SubscriptionsController < ApplicationController
     # Load resource manually as cancan doesn't use strong-parameters (yet).
     @subscription = Subscription.new(subscription_params)
     authorize! :create, @subscription
+    logger.debug "Subscriptions to be saved: #{@subscription.inspect}"
     if @subscription.save
+      logger.debug "Saving successful"
       redirect_to edit_list_subscriptions_path(@subscription.list),
           notice: "✓ #{@subscription} subscribed."
     else
+      logger.debug "Saving failed. Errors: #{@subscription.errors.inspect}"
       render 'edit',
           error: "Failed to save!"
     end
@@ -48,12 +51,14 @@ class SubscriptionsController < ApplicationController
 
   def subscription_params
     # TODO: allow email only if request method is post (i.e. on creating a new record)
-    params.require(:subscription).permit(
+    p = params.require(:subscription).permit(
         :email,
         :fingerprint,
         :admin,
         :delivery_enabled,
         :list_id
     )
+    logger.debug "subscription_params: #{p.inspect}"
+    p
   end
 end
