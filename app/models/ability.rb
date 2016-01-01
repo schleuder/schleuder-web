@@ -5,18 +5,15 @@ class Ability
     if account.superadmin?
       can :manage, :all
     else
-      # Setup+Create accounts
+      # Everybody: Setup+Create accounts
       can [:create, :verify, :setup], Account
-      # Own account
+      # Mere subscriber
       can [:read, :update, :destroy], Account, id: account.id
-      # Own subscriptions
       can [:read, :update, :destroy], Subscription, email: account.email
-      # All subscriptions of lists it admins
-      can :manage, Subscription, list_id: account.lists.map(&:id)
-      # Lists subscribed to
       can [:read], List, id: account.subscriptions.map(&:list).map(&:id)
-      # Lists it admins
-      can [:read, :update], List, id: account.admin_lists.map(&:id)
+      # List-admins
+      can :manage, Subscription, list_id: account.admin_lists.map(&:id)
+      can [:read, :update, :edit_subscriptions], List, id: account.admin_lists.map(&:id)
     end
   end
 end

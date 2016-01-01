@@ -4,7 +4,7 @@
   .pull-right
     = link_to "Delete list", @list, method: :delete, data: { confirm: "Are you really sure? This does NOT remove any list-data from disk!" }, class: 'btn btn-danger'
 
-- if can?(:manage, @list)
+- if can?(:update, @list)
   = link_to(edit_list_subscriptions_path(@list), class: 'btn btn-default') do
     %span.glyphicon.glyphicon-th-list
     Edit subscriptions
