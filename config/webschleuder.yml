@@ -1,8 +1,16 @@
 defaults: &defaults
-  delivery_method: sendmail
-  mailer_from: noreply@example.org
   web_hostname: example.org
   schleuderd_uri: http://localhost:4567/
+  mailer_from: noreply@example.org
+  # For delivery_method, sendmail_settings and smtp_settings see
+  # <http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration>.
+  delivery_method: sendmail
+  sendmail_settings:
+    arguments: '-t -i -f'
+  smtp_settings:
+    address: localhost
+    port: 25
+    #openssl_verify_mode: none
 
 test:
   <<: *defaults
