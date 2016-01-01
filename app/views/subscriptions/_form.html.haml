@@ -5,7 +5,7 @@
   - else
     = f.input :email, disabled: true
   = f.input :fingerprint
-  - if current_user.superadmin? || @subscription.admin?
+  - if can?(:update, @subscription.list)
     = checkbox f, :admin, "May s/he administer this list?"
   = checkbox f, :delivery_enabled, "Receive the emails sent over the list?"
   - if @subscription.persisted?
