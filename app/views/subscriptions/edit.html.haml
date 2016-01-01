@@ -5,10 +5,11 @@
     to 
     = link_to @subscription.list, @subscription.list
 
-.pull-right
-  = render 'unsubscribe_button'
-
 .col-lg-6.col-md-8
   .panel.panel-info
     .panel-heading Edit
     .panel-body= render 'form'
+
+.col-lg-6.col-md-4
+  .pull-right
+    = render 'unsubscribe_button'
