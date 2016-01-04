@@ -1,0 +1,24 @@
+.col.col-lg-12.col-md-12
+  .well
+    - if can?(:update, @list)
+      = link_to(edit_list_subscriptions_path(@list), class: 'btn btn-default') do
+        %span.glyphicon.glyphicon-th-list
+        Edit subscriptions
+      = link_to(edit_list_path(@list), class: 'btn btn-default') do
+        %span.glyphicon.glyphicon-wrench
+        Edit list options
+      = link_to(list_keys_path(@list), class: 'btn btn-default') do
+        %span.glyphicon.glyphicon-barcode
+        List keys
+    - else
+      = link_to(edit_subscription_path(@subscription), class: 'btn btn-default') do
+        %span.glyphicon.glyphicon-th-list
+        Edit subscription
+      .pull-right
+        = render 'subscriptions/unsubscribe_button'
+
+    - if current_account.subscribed_to?(@list) || current_account.superadmin?
+      = link_to(list_keys_new_path(@list), class: 'btn btn-success') do
+        %span.glyphicon.glyphicon-upload
+        Upload key
+

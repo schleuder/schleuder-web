@@ -1,20 +1,16 @@
 .page-header
-  %h1 Keys for #{link_to @list, @list}
+  %h1 Keyring of #{link_to @list, @list}
 
-= link_to(list_keys_new_path(@list), class: 'btn btn-success') do
-  %span.glyphicon.glyphicon-upload
-  Upload key
+= render 'lists/list_menu'
 
-%br
-%br
-
-%table.table
-  %thead
-    %tr
-      %th Fingerprint
-      %th Primary UID
-  %tbody
-    - @keys.each do |key|
-      %tr 
-        %td= link_to key.fingerprint, list_key_path(@list, key)
-        %td= key.email
+.col.col-lg-6.col-md-8
+  %table.table
+    %thead
+      %tr
+        %th Fingerprint
+        %th Primary UID
+    %tbody
+      - @keys.each do |key|
+        %tr 
+          %td= link_to key.fingerprint, list_key_path(@list, key)
+          %td= key.email
