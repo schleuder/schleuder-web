@@ -1,5 +1,12 @@
 .page-header
   %h1= @key.fingerprint
 
-%pre= @key.ascii
+.col.col-lg-6.col-md-8
+  %pre= @key.ascii
+
+.col.col-lg-6.col-md-4
+  .pull-right
+    = button_to([@list, @key], method: :delete, title: "Delete key from list's keyring", class: 'btn btn-danger') do
+      %span.glyphicon.glyphicon-remove
+      Delete key
 
