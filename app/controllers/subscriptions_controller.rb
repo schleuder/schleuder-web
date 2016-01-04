@@ -40,7 +40,7 @@ class SubscriptionsController < ApplicationController
     sub = @subscription
     if @subscription.destroy
       msg = "✓ #{sub} unsubscribed from #{sub.list.email}."
-      if can?(:manage, sub.list)
+      if can?(:update, sub.list)
         redirect_to edit_list_subscriptions_path(sub.list), notice: msg
       else
         redirect_to account_path(current_account), notice: msg
