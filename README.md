@@ -3,7 +3,7 @@
 This is a full featured web interface to administrate [Schleuder3](https://git.codecoop.org/schleuder/schleuder3)-lists and subscriptions.
 
 <a href='doc/webschleuder-screenshot.png'>
-  <img src='doc/webschleuder-screenshot-thumb.png' alt='Screenshot of webschleuder' border=1>
+  <img src='doc/webschleuder-screenshot-thumb.png' alt='Screenshot of webschleuder'>
 </a>
 
 ##  Installation
