@@ -1,7 +1,10 @@
 # Webschleuder, a web interface for Schleuder3
 
-This is full features web interface to administrate Schleuder3-lists and subscriptions.
-group-gateway.
+This is a full featured web interface to administrate [Schleuder3](https://git.codecoop.org/schleuder/schleuder3)-lists and subscriptions.
+
+<a href='doc/webschleuder-screenshot.png'>
+  <img src='doc/webschleuder-screenshot-thumb.png' alt='Screenshot of webschleuder'>
+</a>
 
 ##  Installation
 
