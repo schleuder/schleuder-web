@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
     render 'errors/404', :status => :not_found
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+    render 'errors/403', :status => :forbidden
+  end
+
   rescue_from ActiveResource::BadRequest do |exc|
     logger.error "API response: #{exc.response}"
     logger.error "API response headers: #{exc.response.to_hash.inspect}"
