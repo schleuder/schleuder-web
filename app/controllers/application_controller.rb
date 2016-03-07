@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_account
   helper_method :current_user
 
-  rescue_from ActiveRecord::RecordNotFound do |exception|
-    render404
+  rescue_from ActiveRecord::RecordNotFound, ActiveResource::ResourceNotFound do |exception|
+    render 'errors/404', :status => :not_found
   end
 
   rescue_from ActiveResource::BadRequest do |exc|
@@ -26,10 +26,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-  def render404
-    render 'errors/404', :status => :not_found
-  end
 
   def current_account
     @current_account ||= session[:current_account_id] &&
