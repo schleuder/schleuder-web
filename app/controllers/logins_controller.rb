@@ -32,7 +32,7 @@ class LoginsController < ApplicationController
         redirect_to account
       end
     else
-      flash[:error] = 'Wrong email-address or password, please try again.'
+      flash.now[:error] = 'Wrong email-address or password, please try again.'
       render :new, :status => 401
     end
   end
