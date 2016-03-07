@@ -39,14 +39,17 @@ class AccountsController < ApplicationController
     @account = Account.new(account_params)
     ac_req = AccountRequest.where(token: params[:token]).first
     if ! ac_req
+      # TODO: Improve feedback
       render text: 'kaput'
       return
     end
 
     @account.email = ac_req.email
     if @account.save
+      # TODO: check if ac_req actually was destroyed.
       ac_req.destroy
-      redirect_to new_login_path, notice: 'Welcome! Please log in to your new account!'
+      # TODO: Improve feedback
+      redirect_to new_login_path, notice: 'Account creation successful! Please log in to your new account.'
     else
       render 'setup'
     end

@@ -1,8 +1,8 @@
 .page-header
-  %h1 Create webschleuder-account for #{@account}
+  %h1 Create account for #{@account}
 
 .col-lg-5
-  To complete the sign-up please choose a webschleuder-password for #{@account}.
+  To complete the sign-up please choose a password for #{@account}.
 
   = simple_form_for(@account, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
     .form-group
@@ -12,3 +12,4 @@
 
     = f.submit 'Create Account', class: 'btn btn-primary'
 
+  %em Note: this account and its passsword are only known to this web-interface, not to any mailing-list.
