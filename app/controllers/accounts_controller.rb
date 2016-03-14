@@ -15,18 +15,20 @@ class AccountsController < ApplicationController
     ac_req = AccountRequest.create(email: @email)
     mail = AccountMailer.send_verification_link(@email, ac_req.token)
     if ! res = mail.deliver
-      redirect_to new_account_path, error: res
+      redirect_to new_account_path, alert: res
     end
   end
 
+  def not_found(msg)
+    redirect_to root_url, alert: msg
+  end
+
   def setup
-    if ! ac_req = AccountRequest.where(token: params[:token]).first
-      render text: 'kaput'
-      return
-    end
+    ac_req = AccountRequest.find_by_token!(params[:token])
 
     if ! ac_req.still_valid?
-      render text: 'too late'
+      render text: 'This request-token is too old, please create a new account request'
+      ac_req.destroy
       return
     end
 
@@ -36,19 +38,16 @@ class AccountsController < ApplicationController
   end
 
   def create
-    @account = Account.new(account_params)
-    ac_req = AccountRequest.where(token: params[:token]).first
-    if ! ac_req
-      # TODO: Improve feedback
-      render text: 'kaput'
+    ac_req = AccountRequest.find_by_token!(params[:token])
+    if ! res = ac_req.destroy
+      logger.error "Deleting AccountRequest failed: #{res.inspect} —— AccountRequest: #{ac_req.inspect}"
+      redirect_to setup_account_path, alert: "Something went wrong, please try again"
       return
     end
 
+    @account = Account.new(account_params)
     @account.email = ac_req.email
     if @account.save
-      # TODO: check if ac_req actually was destroyed.
-      ac_req.destroy
-      # TODO: Improve feedback
       redirect_to new_login_path, notice: 'Account creation successful! Please log in to your new account.'
     else
       render 'setup'
@@ -76,11 +75,15 @@ class AccountsController < ApplicationController
     if account = @account.destroy
       log_out "You account was deleted. Have a nice day!"
     else
-      redirect_to account, error: "Deleting account failed!"
+      redirect_to account, alert: "Deleting account failed!"
     end
   end
 
   private
+
+  def render_404
+    render '404', :status => :not_found
+  end
 
   def account_params
     params.require(:account).permit(:password, :password_confirmation)
