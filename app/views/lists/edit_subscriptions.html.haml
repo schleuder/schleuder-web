@@ -21,14 +21,16 @@
                     - surround('(', ')') do
                       = subscription.email
               %td
-                - if subscription.key.present?
-                  %tt= link_to subscription.fingerprint, list_key_path(@list, subscription.key)
-                - else
+                - if subscription.fingerprint.blank?
+                  %span.text-danger No fingerprint stored!
+                - elsif subscription.key.blank?
                   %tt= subscription.fingerprint
                   %span.text-danger Key not present!
                   %span
                     = link_to(list_keys_new_path(@list), title: 'Upload key', class: 'text-success') do
                       .large.glyphicon.glyphicon-upload
+                - else
+                  %tt= link_to subscription.fingerprint, list_key_path(@list, subscription.key)
       .small.pull-right
         * (Delivery is disabled)
         %div{style: 'font-weight: bold'} * Admin of list
