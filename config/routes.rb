@@ -18,7 +18,6 @@ Rails.application.routes.draw do
     post   'keys',              to: 'keys#create', as: 'key_create'
   end
   resources  :subscriptions
-  resources  :accounts
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
