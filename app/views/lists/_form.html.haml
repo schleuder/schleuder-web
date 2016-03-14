@@ -3,7 +3,7 @@
     .panel-heading List-Options
     .panel-body
       = simple_form_for(@list, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
-        - if ! @list.persisted?
+        - if @list.new?
           = f.input :email, hint: "Email-address for this list."
           = f.input :fingerprint, hint: "Fingerprint of the OpenPGP public key for this list."
         = f.input :log_level, collection: %w[error warn info debug]
@@ -30,9 +30,9 @@
         = f.input :openpgp_header_preference, collection: %w[signencrypt encrypt sign], hint: "Only relevant if inclusion of OpenPGP-headers is active."
         = f.input :max_message_size_kb, hint: "Emails bigger than this will be rejected (measured in kilo-bytes.)"
 
-        - if @list.persisted?
-          = f.button :submit, 'Update', class: 'btn btn-primary'
-        - else
+        - if @list.new?
           = f.button :submit, 'Create', class: 'btn btn-success'
+        - else
+          = f.button :submit, 'Update', class: 'btn btn-primary'
 
 
