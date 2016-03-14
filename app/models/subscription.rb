@@ -1,12 +1,6 @@
 class Subscription < ActiveResource::Base
   self.site = Conf.schleuderd_uri
 
-  schema do
-    string 'email', 'fingerprint'
-    integer 'list_id'
-    boolean 'admin', 'delivery_enabled'
-  end
-
   belongs_to :list
 
   def to_s
