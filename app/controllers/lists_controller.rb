@@ -1,6 +1,10 @@
 class ListsController < ApplicationController
   skip_load_and_authorize_resource only: :create
 
+  def new
+    @list = List.build
+  end
+
   def edit
     @keywords = %w[subscribe unsubscribe list-subscriptions set-fingerprint resend resend-encrypted-only sign-this add-key delete-key list-keys get-key fetch-key]
   end
