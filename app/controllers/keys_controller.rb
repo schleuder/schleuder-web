@@ -13,8 +13,15 @@ class KeysController < ApplicationController
     # ActiveResource doesn't want to use query-params with create(), so here
     # list_id is included in the request-body.
     import_result = Key.create(ascii: params[:ascii], list_id: @list.id)
-    # TODO: improve feedback
-    redirect_to @list, notice: "#{import_result.considered} key(s) considered for import. Result: #{import_result.imports.inspect}"
+    if import_result.considered == 0
+      flash[:error] = 'No keys found in input'
+      redirect_to list_keys_new_path(@list)
+    else
+      msg = import_result.imports.map do |import_status|
+        [import_status.fpr, import_status.action].join(': ')
+      end.join(', ')
+      redirect_to @list, notice: msg
+    end
   end
 
   def destroy
