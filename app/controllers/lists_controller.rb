@@ -5,6 +5,10 @@ class ListsController < ApplicationController
     @list = List.build
   end
 
+  def index
+    redirect_to root_path
+  end
+
   def edit
     @keywords = %w[subscribe unsubscribe list-subscriptions set-fingerprint resend resend-encrypted-only sign-this add-key delete-key list-keys get-key fetch-key]
   end

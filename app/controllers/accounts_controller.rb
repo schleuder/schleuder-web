@@ -2,6 +2,16 @@ class AccountsController < ApplicationController
   skip_before_filter :authenticate, only: [:new, :verify, :setup, :create]
   skip_load_resource only: [:verify, :setup, :create]
 
+  def index
+    redirect_to root_path
+  end
+
+  def home
+    @account = current_account
+    show
+    render 'show'
+  end
+
   def verify
     # TODO: check that input actually is a valid email address.
     @email = params[:account][:email]
@@ -17,10 +27,6 @@ class AccountsController < ApplicationController
     if ! res = mail.deliver
       redirect_to new_account_path, alert: res
     end
-  end
-
-  def not_found(msg)
-    redirect_to root_url, alert: msg
   end
 
   def setup
@@ -83,7 +89,11 @@ class AccountsController < ApplicationController
   private
 
   def render_404
-    render '404', :status => :not_found
+    if params[:token].present?
+      render '404', :status => :not_found
+    else
+      super
+    end
   end
 
   def account_params

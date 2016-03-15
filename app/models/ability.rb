@@ -8,7 +8,7 @@ class Ability
       # Everybody: Setup+Create accounts
       can [:create, :verify, :setup, :delete], Account
       # Mere subscriber
-      can [:read, :update, :destroy], Account, id: account.id
+      can [:read, :update, :destroy, :home], Account, id: account.id
       can [:read, :update, :destroy], Subscription, email: account.email
       can [:read], List, id: account.subscriptions.map(&:list).map(&:id)
       # List-admins

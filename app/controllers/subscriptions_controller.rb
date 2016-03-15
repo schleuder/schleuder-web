@@ -1,6 +1,10 @@
 class SubscriptionsController < ApplicationController
   skip_load_and_authorize_resource only: [:create]
 
+  def index
+    redirect_to root_path
+  end
+
   def edit
     # Neccessary for the shared form.
     @list = @subscription.list
