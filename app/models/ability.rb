@@ -12,7 +12,10 @@ class Ability
       can [:read, :update, :destroy], Subscription, email: account.email
       can [:read], List, id: account.subscriptions.map(&:list).map(&:id)
       # List-admins
-      can :manage, Subscription, list_id: account.admin_lists.map(&:id)
+      # Use a block, else it doesn't work for :create.
+      can :manage, Subscription do |subscription|
+        account.admin_lists.map(&:id).include?(subscription.list_id.to_i)
+      end
       can [:read, :update, :edit_subscriptions], List, id: account.admin_lists.map(&:id)
     end
   end
