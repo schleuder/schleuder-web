@@ -10,7 +10,7 @@
         = f.input :subject_prefix, hint: "If you want brackets, add them here, too."
         = f.input :subject_prefix_in, label: 'Subject-prefix for incoming emails', hint: "If you want brackets, add them here, too."
         = f.input :subject_prefix_out, label: 'Subject-prefix for outgoing emails', hint: "If you want brackets, add them here, too."
-        = f.input :public_footer
+        = f.input :public_footer, as: :text
         = f.input :headers_to_meta, hint: "One header-name per line. Case-insensitive.", as: :text
         = f.input :bounces_drop_on_headers, placeholder: 'X-Spam-Flag: yes', hint: 'One match per line. Case-insensitive.', as: :text
         = f.input :keywords_admin_only, as: :check_boxes, collection: @keywords, hint: "Selected keywords may only be called by admins of this list.", wrapper: :horizontal_radio_and_checkboxes
