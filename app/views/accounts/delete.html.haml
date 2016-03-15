@@ -1,0 +1,12 @@
+
+%h1 Delete account for #{@account}
+
+%p{style: 'margin: 3em 0'}
+  %strong 
+    Are you really sure? This does 
+    %em NOT
+    unsubscribe you from any list!
+
+
+= button_to "Delete account now!", @account, method: :delete, class: 'btn btn-danger'
+

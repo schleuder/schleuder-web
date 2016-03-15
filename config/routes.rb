@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   post 'accounts/verify',       to: 'accounts#verify', as: :verify_account
   get  'accounts/setup/:token', to: 'accounts#setup',  as: :setup_account
+  get  'accounts/:id/delete', to: 'accounts#delete',  as: :delete_account
   resources :accounts
 
   get 'lists/:id/edit_subscriptions', to: 'lists#edit_subscriptions', as: :edit_list_subscriptions

@@ -6,7 +6,7 @@ class Ability
       can :manage, :all
     else
       # Everybody: Setup+Create accounts
-      can [:create, :verify, :setup], Account
+      can [:create, :verify, :setup, :delete], Account
       # Mere subscriber
       can [:read, :update, :destroy], Account, id: account.id
       can [:read, :update, :destroy], Subscription, email: account.email

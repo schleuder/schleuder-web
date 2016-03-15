@@ -7,7 +7,7 @@
     Change Password
 
 .pull-right
-  = link_to "Delete account", @account, method: :delete, data: { confirm: "Are you really sure? This does NOT unsubscribe you from any list!" }, class: 'btn btn-danger'
+  = link_to "Delete account", delete_account_path(@account), class: 'text-danger'
 .clearfix
 
 %br

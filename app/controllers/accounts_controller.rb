@@ -75,6 +75,7 @@ class AccountsController < ApplicationController
     if account = @account.destroy
       log_out "You account was deleted. Have a nice day!"
     else
+      logger.error "Deleting account failed: #{account.inspect}"
       redirect_to account, alert: "Deleting account failed!"
     end
   end
