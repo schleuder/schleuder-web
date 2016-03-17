@@ -11,5 +11,4 @@
 - if can? :destroy, @list
   .col.col-lg-6.col-md-4
     .pull-right
-      = link_to "Delete list", @list, method: :delete, data: { confirm: "Are you really sure? This does NOT remove any list-data from disk!" }, class: 'btn btn-danger'
-
+      = link_to "Delete list", delete_list_path(@list), class: 'text-danger'

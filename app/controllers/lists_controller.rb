@@ -46,7 +46,7 @@ class ListsController < ApplicationController
 
   def destroy
     if list = @list.destroy
-      redirect_to current_account, notice: "✓ List #{list} deleted."
+      redirect_to current_account, notice: "✓ List #{@list.email} deleted."
     else
       redirect_to list, error: "Deleting list failed!"
     end

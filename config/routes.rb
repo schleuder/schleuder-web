@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :accounts
 
   get 'lists/:id/edit_subscriptions', to: 'lists#edit_subscriptions', as: :edit_list_subscriptions
+  get 'lists/:id/delete', to: 'lists#delete',  as: :delete_list
   resources :lists do
     get    'keys',              to: 'keys#index'
     get    'keys/new',          to: 'keys#new'

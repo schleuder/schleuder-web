@@ -1,0 +1,9 @@
+
+%h1 Delete list #{@list}
+
+%p{style: 'margin: 3em 0'}
+  %strong 
+    Are you really sure?
+
+
+= button_to "Delete list now!", @list, method: :delete, class: 'btn btn-danger'
