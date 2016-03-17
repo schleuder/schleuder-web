@@ -6,8 +6,9 @@
     %span.glyphicon.glyphicon-wrench
     Change Password
 
-.pull-right
-  = link_to "Delete account", delete_account_path(@account), class: 'text-danger'
+- if ! @account.superadmin?
+  .pull-right
+    = link_to "Delete account", delete_account_path(@account), class: 'text-danger'
 .clearfix
 
 %br

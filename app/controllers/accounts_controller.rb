@@ -78,6 +78,11 @@ class AccountsController < ApplicationController
   end
 
   def destroy
+    if account.superadmin?
+      redirect_to account, alert: "You may not delete the super-admin account"
+      return
+    end
+
     if account = @account.destroy
       log_out "You account was deleted. Have a nice day!"
     else
