@@ -1,2 +1,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+$maincolor: #4D994D;
+#logo {
+  color: $maincolor;
+  a {
+    color: $maincolor;
+  }
+}
