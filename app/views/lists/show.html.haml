@@ -1,12 +1,34 @@
 = render 'page_header'
-= render 'list_menu'
+
+- if @list.key.blank?
+  .alert.alert-warning 
+    %strong No key present! This list is not functional!
 
 .col.col-lg-6.col-md-8
-  - if @list.key.blank?
-    .alert.alert-warning 
-      %strong No key present! This list is not functional!
-  - else
-    %pre= @list.key.ascii
+  .panel.panel-info
+    .panel-heading= @list
+    .panel-body
+      %table.table
+        %tr
+          %td Key of list
+          %td= link_to(@list.key.fingerprint, [@list, @list.key])
+        %tr
+          %td Admins
+          %td
+            - if @list.admins.blank?
+              .text-danger None
+            - else
+              - @list.admins.each do |subscription|
+                = link_to(subscription, edit_subscription_path(subscription))
+        %tr
+          %td # of subscriptions
+          %td= link_to @list.subscriptions.count, edit_list_subscriptions_path(@list)
+        %tr
+          %td Subscriptions without key
+          %td
+            - @list.subscriptions.select { |sub| sub.key.blank? }.each do |subscription|
+              = link_to(subscription, edit_subscription_path(subscription))
+            - end.join(', ')
 
 - if can? :destroy, @list
   .col.col-lg-6.col-md-4

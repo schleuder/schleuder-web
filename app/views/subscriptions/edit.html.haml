@@ -1,13 +1,8 @@
-.page-header
-  %h1
-    Subscription of
-    = @subscription
-    to 
-    = link_to @subscription.list, @subscription.list
+= render 'lists/page_header'
 
 .col-lg-6.col-md-8
   .panel.panel-info
-    .panel-heading Edit
+    .panel-heading Edit subscription
     .panel-body= render 'form'
 
 .col-lg-6.col-md-4

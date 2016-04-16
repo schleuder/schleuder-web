@@ -29,4 +29,10 @@ class List < ActiveResource::Base
       "#{k}: #{v}"
     end.join("\n")
   end
+
+  def admins
+    subscriptions.select do |subscription|
+      subscription.admin?
+    end
+  end
 end

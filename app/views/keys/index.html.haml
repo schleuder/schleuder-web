@@ -1,16 +1,27 @@
-.page-header
-  %h1 Keyring of #{link_to @list, @list}
+= render 'lists/page_header'
 
-= render 'lists/list_menu'
 
-.col.col-lg-6.col-md-8
-  %table.table
-    %thead
-      %tr
-        %th Fingerprint
-        %th Primary UID
-    %tbody
-      - @keys.each do |key|
-        %tr 
-          %td= link_to key.fingerprint, list_key_path(@list, key)
-          %td= key.email
+
+.col-lg-6.col-md-8
+  .panel.panel-info
+    .panel-heading Listing keys
+    .panel-body
+      %table.table
+        %thead
+          %tr
+            %th Fingerprint
+            %th Primary UID
+            %th
+        %tbody
+          - @keys.each do |key|
+            %tr 
+              %td= link_to key.fingerprint, list_key_path(@list, key)
+              %td= key.email
+              %td.text-danger= key.trust_issues
+
+- if current_account.subscribed_to?(@list) || current_account.superadmin?
+  .col-lg-6.col-md-8
+    .panel.panel-info
+      .panel-heading Upload key(s)
+      .panel-body
+        = render 'keys/form'

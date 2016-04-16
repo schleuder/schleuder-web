@@ -1,5 +1,4 @@
 = render 'page_header'
-= render 'list_menu'
 
 .col-lg-8.col-md-9
   .panel.panel-info
@@ -29,6 +28,9 @@
                   %span
                     = link_to(list_keys_new_path(@list), title: 'Upload key', class: 'text-success') do
                       .large.glyphicon.glyphicon-upload
+                - elsif subscription.key.trust_issues.present?
+                  %tt= link_to subscription.fingerprint, list_key_path(@list, subscription.key)
+                  %span.text-danger= subscription.key.trust_issues
                 - else
                   %tt= link_to subscription.fingerprint, list_key_path(@list, subscription.key)
       .small.pull-right

@@ -1,6 +1,4 @@
 - if current_user.present?
   %ul.nav.navbar-nav
-    %li= link_to current_user.email, root_path
+    %li= link_to current_user.email, root_path, accesskey: :h
     %li#logout= link_to('Logout', destroy_login_path)
-
-

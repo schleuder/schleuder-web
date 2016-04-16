@@ -1,24 +1,16 @@
-.col.col-lg-12.col-md-12
-  .well
-    - if can?(:update, @list)
-      = link_to(edit_list_subscriptions_path(@list), class: 'btn btn-default') do
-        %span.glyphicon.glyphicon-th-list
-        Edit subscriptions
-      = link_to(edit_list_path(@list), class: 'btn btn-default') do
-        %span.glyphicon.glyphicon-wrench
-        Edit list options
-      = link_to(list_keys_path(@list), class: 'btn btn-default') do
-        %span.glyphicon.glyphicon-barcode
-        List keys
-    - else
-      = link_to(edit_subscription_path(@subscription), class: 'btn btn-default') do
-        %span.glyphicon.glyphicon-th-list
-        Edit subscription
-      .pull-right
-        = render 'subscriptions/unsubscribe_button'
-
-    - if current_account.subscribed_to?(@list) || current_account.superadmin?
-      = link_to(list_keys_new_path(@list), class: 'btn btn-success') do
-        %span.glyphicon.glyphicon-upload
-        Upload key
-
+%ul#listmenu
+  - if can?(:update, @list)
+    %li
+      %span.glyphicon.glyphicon-th-list
+      = link_to_unless_current("Subscriptions", edit_list_subscriptions_path(@list), accesskey: :s)
+    %li
+      %span.glyphicon.glyphicon-wrench
+      = link_to_unless_current("List options", edit_list_path(@list), accesskey: :o)
+    %li
+      %span.glyphicon.glyphicon-barcode
+      = link_to_unless_current("Keys", list_keys_path(@list), accesskey: :k)
+  - else
+    %li
+      %span.glyphicon.glyphicon-th-list
+      = link_to_unless_current('Edit subscription', edit_subscription_path(@subscription))
+    %li= render 'subscriptions/unsubscribe_button'
