@@ -24,7 +24,7 @@ class AccountsController < ApplicationController
     # TODO: rate-limit sending these
     ac_req = AccountRequest.create(email: @email)
     mail = AccountMailer.send_verification_link(@email, ac_req.token)
-    if ! res = mail.deliver
+    if ! res = mail.deliver_now
       redirect_to new_account_path, alert: res
     end
   rescue Errno::ECONNREFUSED => exc
