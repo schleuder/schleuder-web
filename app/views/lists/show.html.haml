@@ -19,16 +19,25 @@
               .text-danger None
             - else
               - @list.admins.each do |subscription|
-                = link_to(subscription, edit_subscription_path(subscription))
+                - if can? :show, subscription
+                  = link_to(subscription, edit_subscription_path(subscription))
+                - else
+                  = subscription
         %tr
           %td # of subscriptions
-          %td= link_to @list.subscriptions.count, edit_list_subscriptions_path(@list)
-        %tr
-          %td Subscriptions without key
           %td
-            - @list.subscriptions.select { |sub| sub.key.blank? }.each do |subscription|
-              = link_to(subscription, edit_subscription_path(subscription))
-            - end.join(', ')
+            - if can? :index, @list.subscriptions
+              = link_to @list.subscriptions.count, edit_list_subscriptions_path(@list)
+            - else
+              = @list.subscriptions.count
+
+        - if can? :manage, @list
+          %tr
+            %td Subscriptions without key
+            %td
+              - @list.subscriptions.select { |sub| sub.key.blank? }.each do |subscription|
+                = link_to(subscription, edit_subscription_path(subscription))
+              - end.join(', ')
 
 - if can? :destroy, @list
   .col.col-lg-6.col-md-4
