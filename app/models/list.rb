@@ -1,5 +1,6 @@
 class List < ActiveResource::Base
   self.site = Conf.schleuderd_uri
+  self.timeout = 10
   has_many :subscriptions
 
   def to_s
