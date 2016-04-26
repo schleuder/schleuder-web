@@ -26,6 +26,8 @@ class ListsController < ApplicationController
   end
 
   def create
+    @old_timeout = List.timeout
+    List.timeout = 120
     @list = List.new(new_list_params)
     authorize! :create, @list
     if @list.save
@@ -33,6 +35,11 @@ class ListsController < ApplicationController
     else
       render 'new'
     end
+  rescue ActiveResource::TimeoutError => exc
+    logger.warn "Timeout while creating list: #{exc.inspect}"
+    render 'timeout_on_create'
+  ensure
+    List.timeout = @old_timeout
   end
 
   def update

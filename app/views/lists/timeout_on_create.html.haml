@@ -1,0 +1,7 @@
+%h1 Time out.
+
+%p We waited for a long time but schleuderd didn't answer. This happens sometimes when creating a new list because generating a new OpenPGP key-pair (for the new list) requires a lot of randomness — if that's not given, GnuPG just waits until there's more.
+
+%p
+  Unfortunately we can't see from here what the issue really is. But chances are that the list was created just fine and in a few minutes the new OpenPGP key-pair will have been generated, too. So please wait a little while and then
+  = link_to root_path, 'have a look if your list was created.'

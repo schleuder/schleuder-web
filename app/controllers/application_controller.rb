@@ -31,6 +31,12 @@ class ApplicationController < ActionController::Base
     render 'errors/missing_schleuderd', status: 500
   end
 
+  rescue_from ActiveResource::TimeoutError do |exc|
+    logger.error exc.inspect
+    logger.error exc.backtrace.join("\n")
+    render 'errors/timeout', status: 500
+  end
+
   private
 
   def render_404
