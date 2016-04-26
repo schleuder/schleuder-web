@@ -26,6 +26,8 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from Errno::ECONNREFUSED do |exc|
+    logger.error exc.inspect
+    logger.error exc.backtrace.join("\n")
     render 'errors/missing_schleuderd', status: 500
   end
 
