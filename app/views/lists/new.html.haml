@@ -2,13 +2,10 @@
   %h1 New list
 
 .col-lg-6.col-md-8
-  .panel.panel-warning
-    .panel-heading Notice
+  .panel.panel-info
+    .panel-heading Create a new list
     .panel-body
-      Currently, these manual steps are neccessary to actually use the list by email:
-      %ol
-        %li Create list-directory (see schleuder.yml for basedir).
-        %li Create key-pair for list.
-        %li Save fingerprint into list-options if you did this after creating the list.
-
-= render 'form'
+      = simple_form_for(@list, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
+        = f.input :email, hint: "Email-address for this list.", required: true
+        = f.input :fingerprint, hint: "Optional: fingerprint of the existing OpenPGP public key to use for this list. A new key-pair will be generated if this is blank or no matching key is found."
+        = f.button :submit, 'Create', class: 'btn btn-success'

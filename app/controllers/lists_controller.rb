@@ -26,7 +26,7 @@ class ListsController < ApplicationController
   end
 
   def create
-    @list = List.new(list_params)
+    @list = List.new(new_list_params)
     authorize! :create, @list
     if @list.save
       redirect_to @list, notice: "✓ List created."
@@ -53,6 +53,10 @@ class ListsController < ApplicationController
   end
 
   private 
+
+  def new_list_params
+    params.require(:list).permit(:email, :fingerprint)
+  end
 
   def list_params
     # TODO: refine
