@@ -27,6 +27,9 @@ class AccountsController < ApplicationController
     if ! res = mail.deliver
       redirect_to new_account_path, alert: res
     end
+  rescue Errno::ECONNREFUSED => exc
+    logger.error exc.message
+    flash[:alert] = "The configured SMTP-server refuses connections, we cannot send emails! (#{exc.message})"
   end
 
   def setup
