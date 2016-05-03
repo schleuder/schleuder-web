@@ -6,9 +6,9 @@
     = surround('<', '>') do
       = @key.email
   - if @key.trust_issues.present?
-    .error
+    .text-danger
       Key is
-      = append('!') do
+      = succeed('!') do
         = @key.trust_issues
   %p
     Expiry date:
