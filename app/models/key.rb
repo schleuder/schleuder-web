@@ -3,8 +3,7 @@ class Key < ActiveResource::Base
   self.timeout = 10
 
   def to_s
-    inspect
-    #fingerprint
+    "0x#{fingerprint} <#{email}>"
   end
 
   def to_param
