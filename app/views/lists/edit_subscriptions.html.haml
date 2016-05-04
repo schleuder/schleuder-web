@@ -8,7 +8,7 @@
         %thead
           %tr 
             %th email
-            %th fingerprint
+            %th key
         %tbody
           - @list.subscriptions.each do |subscription|
             %tr{style: subscription.admin? && 'font-weight: bold'}
@@ -21,18 +21,18 @@
                       = subscription.email
               %td
                 - if subscription.fingerprint.blank?
-                  %span.text-danger No fingerprint stored!
+                  %span.text-danger No key assigned!
                 - elsif subscription.key.blank?
-                  %tt= subscription.fingerprint
+                  .mono= subscription.fingerprint
                   %span.text-danger Key not present!
                   %span
                     = link_to(list_keys_new_path(@list), title: 'Upload key', class: 'text-success') do
                       .large.glyphicon.glyphicon-upload
                 - elsif subscription.key.trust_issues.present?
-                  %tt= link_to subscription.fingerprint, list_key_path(@list, subscription.key)
+                  .mono= link_to subscription.fingerprint, list_key_path(@list, subscription.key)
                   %span.text-danger= subscription.key.trust_issues
                 - else
-                  %tt= link_to subscription.fingerprint, list_key_path(@list, subscription.key)
+                  .mono= link_to subscription.key.to_s, list_key_path(@list, subscription.key)
       .small.pull-right
         * (Delivery is disabled)
         %div{style: 'font-weight: bold'} * Admin of list
