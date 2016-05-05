@@ -8,11 +8,13 @@
     = stylesheet_link_tag    "application", :media => "all"
     = csrf_meta_tags
   %body
-    .navbar
-      .container
-        .navbar-header
-          .navbar-brand#logo= link_to 'Schleuder', '/'
-          = render 'navbar'
     .container
-      = render 'flashes'
-      = yield
+      %nav.blog-nav
+        .container-fluid
+          .navbar-header
+            .navbar-brand#logo= link_to 'Schleuder', '/'
+          #navbar
+            = render 'navbar'
+      .container
+        = render 'flashes'
+        = yield
