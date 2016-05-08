@@ -24,6 +24,10 @@ class KeysController < ApplicationController
     redirect_to list_keys_path(@list), notice: msg
   end
 
+  def show
+    @subscription = current_account.subscription(@list)
+  end
+
   def destroy
     # destroy() doesn't read any params, but we need to give the list_id.
     if Key.delete(@key.fingerprint, {list_id: @list.id})
