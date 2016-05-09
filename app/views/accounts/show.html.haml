@@ -2,9 +2,6 @@
   %h1 Home
 
 #submenu
-  = link_to(edit_account_path(@account), class: 'btn btn-default') do
-    %span.glyphicon.glyphicon-wrench
-    Change Password
 
 - if ! @account.superadmin?
   .pull-right
