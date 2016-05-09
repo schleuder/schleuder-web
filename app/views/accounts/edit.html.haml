@@ -1,17 +1,18 @@
 .page-header
   %h1 My account
 
-.panel.panel-default
-  .panel-heading Change password
-  .panel-body
-    = simple_form_for(@account, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
-      = f.input :password, as: :password, required: true
-      = f.input :password_confirmation, as: :password, required: true
-
-      = f.submit 'Save', class: 'btn btn-primary'
-
-- if ! @account.superadmin?
-  .panel.panel-danger
-    .panel-heading Delete Account
+.col-lg-6.col-md-8.col-sm-12
+  .panel.panel-default
+    .panel-heading Change password
     .panel-body
-      = link_to "Delete account", delete_account_path(@account), class: 'btn btn-danger'
+      = simple_form_for(@account, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
+        = f.input :password, as: :password, required: true
+        = f.input :password_confirmation, as: :password, required: true
+
+        = f.submit 'Save', class: 'btn btn-primary'
+
+  - if ! @account.superadmin?
+    .panel.panel-danger
+      .panel-heading Delete Account
+      .panel-body
+        = link_to "Delete account", delete_account_path(@account), class: 'btn btn-danger'
