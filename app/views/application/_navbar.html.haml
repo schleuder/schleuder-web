@@ -1,4 +1,14 @@
 - if current_user.present?
-  %ul.nav.navbar-nav
-    %li= link_to current_user.email, root_path, accesskey: :h
-    %li#logout= link_to('Logout', destroy_login_path)
+  %ul.nav.navbar-nav.navbar-right
+    %li
+      = link_to(root_path, accesskey: :h) do
+        %span.glyphicon.glyphicon-user
+        =current_user.email
+    %li
+      = link_to(edit_account_path(current_user)) do
+        %span.glyphicon.glyphicon-wrench
+        Account Settings
+    %li
+      = link_to(destroy_login_path) do
+        %span.glyphicon.glyphicon-log-out
+        Logout
