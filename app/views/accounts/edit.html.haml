@@ -10,3 +10,9 @@
         = f.input :password_confirmation, as: :password, required: true
 
         = f.submit 'Save', class: 'btn btn-primary'
+
+  - if ! @account.superadmin?
+    .panel.panel-danger
+      .panel-heading Delete Account
+      .panel-body
+        = link_to "Delete account", delete_account_path(@account)
