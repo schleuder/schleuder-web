@@ -5,7 +5,7 @@
         %span.glyphicon.glyphicon-user
         =current_user.email
     %li
-      = link_to(edit_account_path(session[:current_account_id])) do
+      = link_to(edit_account_path(current_user)) do
         %span.glyphicon.glyphicon-wrench
         Account Settings
     %li
