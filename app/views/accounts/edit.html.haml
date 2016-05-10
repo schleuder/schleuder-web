@@ -11,7 +11,8 @@
 
         = f.submit 'Save', class: 'btn btn-primary'
 
-  - if ! @account.superadmin?
+- if ! @account.superadmin?
+  .col-lg-6.col-md-8
     .panel.panel-danger
       .panel-heading Delete Account
       .panel-body
