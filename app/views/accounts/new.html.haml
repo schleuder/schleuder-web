@@ -1,6 +1,6 @@
 - @title = 'New account'
 
-.col-lg-4
+.col-lg-6.col-md-8
   = simple_form_for(Account.new, url: verify_account_path, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
     = f.input :email, hint: "Please give us the address you want to control here. We'll send you an email to verify that you control the mailbox. Then you'll be able to pick a password."
 
