@@ -9,7 +9,7 @@
   - else
     %li
       %span.glyphicon.glyphicon-th-list
-      = link_to_unless_current('Edit subscription', edit_subscription_path(@subscription))
+      = link_to_unless_current('Edit subscription', edit_subscription_path(@subscription), accesskey: :s)
   %li
     %span.glyphicon.glyphicon-barcode
     = link_to_unless_current("Keys", list_keys_path(@list), accesskey: :k)
