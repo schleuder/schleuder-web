@@ -1,5 +1,4 @@
-.page-header
-  %h1 New account
+- @title = 'New account'
 
 .col-lg-4
   = simple_form_for(Account.new, url: verify_account_path, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
