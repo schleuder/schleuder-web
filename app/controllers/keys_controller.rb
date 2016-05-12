@@ -2,6 +2,7 @@ class KeysController < ApplicationController
   skip_load_and_authorize_resource
   skip_authorization_check
   before_filter :load_list_resource
+  before_filter :load_subscription_resource, only: [:index, :show]
   before_filter :load_key, only: [:show, :destroy]
 
   def index
@@ -24,10 +25,6 @@ class KeysController < ApplicationController
     redirect_to list_keys_path(@list), notice: msg
   end
 
-  def show
-    @subscription = current_account.subscription(@list)
-  end
-
   def destroy
     # destroy() doesn't read any params, but we need to give the list_id.
     if Key.delete(@key.fingerprint, {list_id: @list.id})
@@ -45,5 +42,9 @@ class KeysController < ApplicationController
 
   def load_list_resource
     @list = List.find(params[:list_id])
+  end
+
+  def load_subscription_resource
+    @subscription = current_account.subscription(@list)
   end
 end
