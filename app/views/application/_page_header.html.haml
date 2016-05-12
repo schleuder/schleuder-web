@@ -1,0 +1,7 @@
+.page-header
+  - if @list.present?
+    #pageheadline= link_to_unless current_page?(@list), @list, @list, accesskey: :l
+    = render 'list_menu'
+  - else
+    #pageheadline= @title
+
