@@ -20,6 +20,7 @@ class SubscriptionsController < ApplicationController
         redirect_to edit_subscription_path(@subscription), notice: msg
       end
     else
+      @list = @subscription.list
       render 'edit'
     end
   end
@@ -35,6 +36,7 @@ class SubscriptionsController < ApplicationController
           notice: "✓ #{@subscription} subscribed."
     else
       logger.debug "Saving failed. Errors: #{@subscription.errors.inspect}"
+      @list = @subscription.list
       render 'edit',
           error: "Failed to save!"
     end
