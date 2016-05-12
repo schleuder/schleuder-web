@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   get 'lists/:id/delete', to: 'lists#delete',  as: :delete_list
   resources :lists do
     get    'keys',              to: 'keys#index'
-    get    'keys/new',          to: 'keys#new'
     get    'keys/:fingerprint', to: 'keys#show', as: :key
     delete 'keys/:fingerprint', to: 'keys#destroy'
     post   'keys',              to: 'keys#create', as: 'key_create'
