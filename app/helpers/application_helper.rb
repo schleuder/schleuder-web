@@ -36,4 +36,15 @@ module ApplicationHelper
     label = "#{field.to_s.humanize}?"
     form.input field, label: label, hint: hint, as: :boolean, wrapper: :horizontal_boolean
   end
+
+  def generate_h1
+    t = "Schleuder"
+    if @title.present?
+      t << " ★ #{@title}"
+    end
+    if @list.present?
+      t << " ★ #{@list.email}"
+    end
+    t
+  end
 end
