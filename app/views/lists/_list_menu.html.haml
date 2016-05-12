@@ -6,10 +6,10 @@
     %li
       %span.glyphicon.glyphicon-wrench
       = link_to_unless_current("List options", edit_list_path(@list), accesskey: :o)
-    %li
-      %span.glyphicon.glyphicon-barcode
-      = link_to_unless_current("Keys", list_keys_path(@list), accesskey: :k)
   - else
     %li
       %span.glyphicon.glyphicon-th-list
       = link_to_unless_current('Edit subscription', edit_subscription_path(@subscription))
+  %li
+    %span.glyphicon.glyphicon-barcode
+    = link_to_unless_current("Keys", list_keys_path(@list), accesskey: :k)
