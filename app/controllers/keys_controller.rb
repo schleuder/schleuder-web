@@ -11,9 +11,23 @@ class KeysController < ApplicationController
 
   def create
     # TODO: file upload for binary encoded keys.
+    if params[:ascii].present?
+      input = params[:ascii]
+    elsif params[:keyfile].present?
+      input = params[:keyfile].read
+    else
+      redirect_to :index, alert: 'No input found'
+    end
+
+    if ! input.match('BEGIN PGP')
+      # Input appears to be binary
+      input = Base64.encode64(input)
+    end
+
+    logger.info "input: #{input.inspect}"
     # ActiveResource doesn't want to use query-params with create(), so here
     # list_id is included in the request-body.
-    import_result = Key.create(ascii: params[:ascii], list_id: @list.id)
+    import_result = Key.create(keymaterial: input, list_id: @list.id)
     if import_result.considered == 0
       flash[:error] = 'No keys found in input'
     else

@@ -54,3 +54,9 @@ h1 {
 .navbar-brand {
   padding-left: 0;
 }
+
+#keyupload {
+  input[type=file] {
+    display: inline-block;
+  }
+}
