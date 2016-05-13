@@ -18,6 +18,9 @@ class LoginsController < ApplicationController
       redirect_to cookiesrequired_login_url
       return
     end
+    if current_account
+      redirect_to '/'
+    end
   end
 
   def create
