@@ -11,6 +11,11 @@
     Expiry date:
     = @key.expiry || 'None'
 
+  .pull-right
+    .large.glyphicon.glyphicon-download-alt
+    = link_to "download", [@list, @key, format: :asc]
+  .clearfix
+
   %pre= @key.ascii
 
 - if @key.fingerprint != @list.fingerprint
