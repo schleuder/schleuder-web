@@ -78,6 +78,7 @@ class AccountsController < ApplicationController
                    else
                      @account.admin_lists
                    end
+    @lists = @subscribed_lists | @admin_lists
   end
 
   def destroy

@@ -1,23 +1,21 @@
 - @title = 'Home'
 
-- if @subscribed_lists.present?
+- if @lists.present?
   .col-lg-4
     .panel.panel-info
-      .panel-heading Lists subscribed to
+      .panel-heading Lists
       .panel-body
         %ul
-          - @subscribed_lists.each do |list|
-            %li= link_to list, list
-
-- if @admin_lists.present?
-  .col-lg-4
-    .panel.panel-info
-      .panel-heading Lists administrating
-      .panel-body
-        %ul
-          - @admin_lists.each do |list|
-            %li= link_to list, list
-
+          -@lists.each do |list|
+            - if @admin_lists.include?(list)
+              %li
+                %em= link_to list, list
+            -else
+              %li= link_to list, list
+      - if @admin_lists.any?
+        .panel-footer
+          Lists you are administrating are
+          %em emphasized
 
 .clearfix
 
