@@ -2,6 +2,7 @@ class List < ActiveResource::Base
   self.site = Conf.schleuderd_uri
   self.timeout = 10
   has_many :subscriptions
+  add_response_method :http_response
 
   def to_s
     email
@@ -17,7 +18,7 @@ class List < ActiveResource::Base
   end
 
   def key
-    Key.find(fingerprint, params: { list_id: self.id })
+    @key ||= Key.find(fingerprint, params: { list_id: self.id })
   end
 
   def headers_to_meta
