@@ -31,6 +31,9 @@ class ListsController < ApplicationController
     @list = List.new(new_list_params)
     authorize! :create, @list
     if @list.save
+      if messages = List.connection.http_response.headers[:x_messages]
+        flash[:error] = messages
+      end
       redirect_to @list, notice: "✓ List created."
     else
       render 'new'
