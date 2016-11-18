@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
   rescue_from Errno::ECONNREFUSED do |exc|
     logger.error exc.inspect
     logger.error exc.backtrace.join("\n")
-    render 'errors/missing_schleuderd', status: 500
+    render 'errors/missing_schleuder_api', status: 500
   end
 
   rescue_from ActiveResource::TimeoutError do |exc|

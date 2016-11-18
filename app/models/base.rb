@@ -3,12 +3,12 @@ require 'openssl_ssl_patch'
 
 class Base < ActiveResource::Base
   self.timeout = 10
-  self.site = Conf.schleuderd_uri
+  self.site = Conf.api_uri
   self.user = 'schleuder'
   self.password = Conf.api_key
   self.ssl_options = {
     verify_callback: lambda { |*a| self.ssl_verify_callback(*a) }
-    #ca_file: Conf.schleuderd_cert_file
+    #ca_file: Conf.api_cert_file
   }
 
   def self.ssl_verify_callback(pre_ok, cert_store)
@@ -18,6 +18,6 @@ class Base < ActiveResource::Base
       return true
     end
     fingerprint = OpenSSL::Digest::SHA256.new(cert.to_der).to_s
-    fingerprint == Conf.schleuderd.tls_fingerprint
+    fingerprint == Conf.api.tls_fingerprint
   end
 end

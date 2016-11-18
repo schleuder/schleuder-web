@@ -10,7 +10,7 @@ defaults: &defaults
     address: localhost
     port: 25
     #openssl_verify_mode: none
-  schleuderd:
+  api:
     host: localhost
     port: 4443
     use_tls: true

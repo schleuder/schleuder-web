@@ -5,13 +5,13 @@ class Conf
     File.join(Rails.root, 'config', 'webschleuder.yml')
   end
 
-  def self.schleuderd_uri
-    "#{schleuderd_protocol}://#{schleuderd.host}:#{schleuderd.port}/"
+  def self.api_uri
+    "#{api_protocol}://#{api.host}:#{api.port}/"
   end
 
-  def self.schleuderd_protocol
+  def self.api_protocol
     # Cast to String to catch the case when users write "true" into the config file.
-    if schleuderd.use_tls.to_s == "true"
+    if api.use_tls.to_s == "true"
       'https'
     else
       'http'
@@ -19,12 +19,12 @@ class Conf
   end
 
   # Disabled for now. Maybe we'll use this code some day, if we decide in favor of file-based verification.
-  #def self.schleuderd_cert_file
-  #  File.expand_path(schleuderd.remote_cert_file)
+  #def self.api_cert_file
+  #  File.expand_path(api.remote_cert_file)
   #end
 
-  def self.schleuderd_use_tls?
-    schleuderd.use_tls.to_s == "true"
+  def self.api_use_tls?
+    api.use_tls.to_s == "true"
   end
 
   squire.source self.config_file
