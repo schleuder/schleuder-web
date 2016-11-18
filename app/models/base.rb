@@ -1,4 +1,3 @@
-require 'schleuder_cert_manager'
 require 'openssl_ssl_patch'
 
 class Base < ActiveResource::Base
