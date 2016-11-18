@@ -18,6 +18,18 @@ class ApplicationController < ActionController::Base
     render 'errors/403', :status => :forbidden
   end
 
+  rescue_from ActiveResource::ForbiddenAccess do |exception|
+    logger.error "API denied access! Check if the fingerprint of your certificate has been added to the list of fingerprints at the schleuder-server."
+    render 'errors/api_denied', :status => :forbidden
+  end
+
+  # Happens when fingerprint verification failed.
+  rescue_from ActiveResource::SSLError do |exception|
+    logger.error "SSLError: #{exception.inspect}"
+    # TODO: provide received fingerprint to show.
+    render 'errors/ssl_error', :status => :forbidden
+  end
+
   rescue_from ActiveResource::BadRequest do |exc|
     logger.error "API response: #{exc.response}"
     logger.error "API response headers: #{exc.response.to_hash.inspect}"

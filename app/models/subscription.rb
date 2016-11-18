@@ -1,7 +1,4 @@
-class Subscription < ActiveResource::Base
-  self.site = Conf.schleuderd_uri
-  self.timeout = 10
-
+class Subscription < Base
   belongs_to :list
 
   def to_s

@@ -1,6 +1,4 @@
-class List < ActiveResource::Base
-  self.site = Conf.schleuderd_uri
-  self.timeout = 10
+class List < Base
   has_many :subscriptions
   add_response_method :http_response
 
