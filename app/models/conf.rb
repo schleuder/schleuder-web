@@ -2,7 +2,7 @@ class Conf
   include ::Squire::Base
 
   def self.config_file
-    File.join(Rails.root, 'config', 'webschleuder.yml')
+    File.join(Rails.root, 'config', 'schleuder-web.yml')
   end
 
   def self.api_uri

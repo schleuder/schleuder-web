@@ -1,9 +1,9 @@
-# Webschleuder, a web interface for Schleuder3
+# schleuder-web, a web interface for Schleuder3
 
 This is a full featured web interface to administrate [Schleuder3](https://git.codecoop.org/schleuder/schleuder3)-lists and subscriptions.
 
 <a href='doc/webschleuder-screenshot.png'>
-  <img src='doc/webschleuder-screenshot-thumb.png' alt='Screenshot of webschleuder'>
+  <img src='doc/webschleuder-screenshot-thumb.png' alt='Screenshot of schleuder-web'>
 </a>
 
 ##  Installation
@@ -18,7 +18,7 @@ This is a full featured web interface to administrate [Schleuder3](https://git.c
 
 1. Mandatory: edit `config/secrets.yml`.
 1. Optional: edit `config/database.yml`.
-1. Optional: edit `config/webschleuder.yml`.
+1. Optional: edit `config/schleuder-web.yml`.
 1. `bundle install --without development`.
 1. `bundle exec rake db:setup RAILS_ENV=production`.
 1. Setup mod_passenger, or a proxy + `bundle exec rails server -e production`.

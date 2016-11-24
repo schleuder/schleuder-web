@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 Gem::Specification.new do |s|
-  s.name         = "webschleuder"
+  s.name         = "schleuder-web"
   s.version      = '3.0.0.beta1'
   s.authors      = %w(paz)
   s.email        = "schleuder2@nadir.org"

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    webschleuder (3.0.0.beta1)
+    schleuder-web (3.0.0.beta1)
       activeresource (~> 4.0)
       bcrypt (~> 3.1)
       bootstrap-sass (~> 3.3)
@@ -168,10 +168,10 @@ PLATFORMS
 DEPENDENCIES
   activeresource-response
   byebug
+  schleuder-web!
   spring
   sqlite3
   thin
-  webschleuder!
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
