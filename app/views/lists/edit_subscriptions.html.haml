@@ -26,7 +26,7 @@
                   .mono= subscription.fingerprint
                   %span.text-danger Key not present!
                   %span
-                    = link_to(list_keys_new_path(@list), title: 'Upload key', class: 'text-success') do
+                    = link_to(list_keys_path(@list, anchor: 'upload'), title: 'Upload key', class: 'text-success') do
                       .large.glyphicon.glyphicon-upload
                 - elsif subscription.key.trust_issues.present?
                   .mono= link_to subscription.fingerprint, list_key_path(@list, subscription.key)
