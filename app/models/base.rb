@@ -5,10 +5,12 @@ class Base < ActiveResource::Base
   self.site = Conf.api_uri
   self.user = 'schleuder'
   self.password = Conf.api_key
-  self.ssl_options = {
-    verify_callback: lambda { |*a| self.ssl_verify_callback(*a) }
-    #ca_file: Conf.api_cert_file
-  }
+  if Conf.api_use_tls?
+    self.ssl_options = {
+      verify_callback: lambda { |*a| self.ssl_verify_callback(*a) }
+      #ca_file: Conf.api_cert_file
+    }
+  end
 
   def self.ssl_verify_callback(pre_ok, cert_store)
     cert = cert_store.chain[0]
