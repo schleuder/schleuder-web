@@ -11,7 +11,7 @@ class Conf
 
   def self.api_protocol
     # Cast to String to catch the case when users write "true" into the config file.
-    if api.use_tls.to_s == "true"
+    if api_use_tls?
       'https'
     else
       'http'
