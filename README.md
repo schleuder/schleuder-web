@@ -2,10 +2,6 @@
 
 This is a full featured web interface to administrate [Schleuder3](https://git.codecoop.org/schleuder/schleuder3)-lists and subscriptions.
 
-<kbd>
-![Screenshot of schleuder-web](doc/schleuder-web-screenshot.png)
-</kbd>
-
 ##  Installation
 
 ### To have a glimpse
@@ -53,3 +49,10 @@ See also `rake notes`
 ## License
 
 GNU GPL version 3.
+
+## Screenshot
+
+<kbd>
+![Screenshot of schleuder-web](doc/schleuder-web-screenshot.png)
+</kbd>
+
