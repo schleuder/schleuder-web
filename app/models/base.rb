@@ -7,6 +7,7 @@ class Base < ActiveResource::Base
   self.password = Conf.api_key
   if Conf.api_use_tls?
     self.ssl_options = {
+      verify_mode: OpenSSL::SSL::VERIFY_PEER,
       verify_callback: lambda { |*a| self.ssl_verify_callback(*a) }
       #ca_file: Conf.api_cert_file
     }
