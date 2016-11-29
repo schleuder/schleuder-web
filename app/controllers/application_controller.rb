@@ -26,6 +26,14 @@ class ApplicationController < ActionController::Base
   # Happens when fingerprint verification failed.
   rescue_from ActiveResource::SSLError do |exception|
     logger.error "SSLError: #{exception.inspect}"
+    case exception.message
+    when /certificate verify failed/
+      @reason = "The API sent different TLS-fingerprint than we expected, check your settings."
+    when /read server hello A: unknown protocol/
+      @reason = "Trying to connect via TLS but API is not served via TLS, check your settings."
+    else
+      @reason = exception.message
+    end
     # TODO: provide received fingerprint to show.
     render 'errors/ssl_error', :status => :forbidden
   end
