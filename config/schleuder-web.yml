@@ -13,7 +13,7 @@ defaults: &defaults
   api:
     host: localhost
     port: 4443
-    use_tls: true
+    use_tls: false
     tls_fingerprint:
   api_key:
 
