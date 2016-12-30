@@ -20,3 +20,7 @@ group :development do
   gem 'spring'
   gem 'byebug'
 end
+
+group :development, :test do
+    gem 'rspec-rails', '~> 3.5'
+end
