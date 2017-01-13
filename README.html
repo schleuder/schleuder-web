@@ -1,0 +1,60 @@
+<h1>schleuder-web, a web interface for Schleuder3</h1>
+
+<p>This is a full featured web interface to administrate <a href="https://0xacab.org/schleuder/schleuder">Schleuder v3</a>-lists and subscriptions.</p>
+
+<h2>Installation</h2>
+
+<h3>To have a glimpse</h3>
+
+<ol>
+<li>./bin/setup</li>
+<li>./bin/start</li>
+<li>Visit http://localhost:3000/</li>
+</ol>
+
+<h3>To run productively</h3>
+
+<ol>
+<li>Mandatory: edit <code>config/secrets.yml</code>.</li>
+<li>Optional: edit <code>config/database.yml</code>.</li>
+<li>Optional: edit <code>config/schleuder-web.yml</code>.</li>
+<li><code>bundle install --without development</code>.</li>
+<li><code>bundle exec rake db:setup RAILS_ENV=production</code>.</li>
+<li>Setup mod_passenger, or a proxy + <code>bundle exec rails server -e production</code>.</li>
+</ol>
+
+<h2>Usage</h2>
+
+<ol>
+<li>Log into the webinterface with email "root@localhost" and password "slingit!".</li>
+</ol>
+
+<h2>Limitations</h2>
+
+<p>Only tested with ruby 2.1 so far.</p>
+
+<h2>TODO</h2>
+
+<ul>
+<li>public subscription</li>
+<li>upload key at account-generation.</li>
+<li>only send encrypted account-verification emails?</li>
+<li>Tests, Tests, Tests.</li>
+<li>Prefix fingerprint with 0x to force GnuPG to only match fingerprints.</li>
+<li>superadmin-flag for Accounts.</li>
+<li>Highlight unusable keys in keys- and subscription-overview and -detail.</li>
+<li>Button: send key to all subscribed addresses.</li>
+<li>I18n.</li>
+</ul>
+
+<p>See also <code>rake notes</code></p>
+
+<h2>License</h2>
+
+<p>GNU GPL version 3.</p>
+
+<h2>Screenshot</h2>
+
+<p><kbd>
+<img src="doc/schleuder-web-screenshot.png" alt="Screenshot of schleuder-web" title="" />
+</kbd></p>

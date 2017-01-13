@@ -1,6 +1,6 @@
 # schleuder-web, a web interface for Schleuder3
 
-This is a full featured web interface to administrate [Schleuder3](https://git.codecoop.org/schleuder/schleuder3)-lists and subscriptions.
+This is a full featured web interface to administrate [Schleuder v3](https://0xacab.org/schleuder/schleuder)-lists and subscriptions.
 
 ##  Installation
 
