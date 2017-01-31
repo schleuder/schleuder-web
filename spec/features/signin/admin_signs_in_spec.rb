@@ -1,6 +1,14 @@
 require "rails_helper"
 
 feature "Admin signs in" do
+  scenario "with valid email and password" do
+    create(:account, email: "valid@example.com")
+
+    sign_in_with("valid@example.com", "password")
+
+    expect(page).to have_content "Logout"
+  end
+
   scenario "with invalid email and password" do
     sign_in_with("invalid@example.com", "password")
 
