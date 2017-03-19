@@ -10,7 +10,6 @@ class KeysController < ApplicationController
   end
 
   def create
-    # TODO: file upload for binary encoded keys.
     if params[:ascii].present?
       input = params[:ascii]
     elsif params[:keyfile].present?

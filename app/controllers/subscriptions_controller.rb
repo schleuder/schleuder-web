@@ -60,7 +60,6 @@ class SubscriptionsController < ApplicationController
   private
 
   def subscription_params
-    # TODO: allow email only if request method is post (i.e. on creating a new record)
     p = params.require(:subscription).permit(
         :email,
         :fingerprint,

@@ -13,15 +13,12 @@ class AccountsController < ApplicationController
   end
 
   def verify
-    # TODO: check that input actually is a valid email address.
     @email = params[:account][:email]
     if Account.where(email: @email).present?
       redirect_to new_account_path, alert: "Adress already registered for account."
       return
     end
-    # TODO: Deny registration if address isn't subscribed?
 
-    # TODO: rate-limit sending these
     ac_req = AccountRequest.create(email: @email)
     mail = AccountMailer.send_verification_link(@email, ac_req.token)
     if ! res = mail.deliver_now

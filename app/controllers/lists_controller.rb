@@ -69,13 +69,12 @@ class ListsController < ApplicationController
   end
 
   def list_params
-    # TODO: refine
+    # TODO: Improve readability of this code.
     p = params.require(:list).permit!
     if p['headers_to_meta'].is_a?(String)
       p['headers_to_meta'] = p['headers_to_meta'].split("\n").map { |h| h.strip }
     end
-    # TODO: find out where the empty values in these two values come from (some
-    # hidden-fields without a name?).
+    # TODO: Why are there sometimes empty values in these two keys?
     p['keywords_admin_only'] = p['keywords_admin_only'].map {|v| v.presence || nil }.compact
     p['keywords_admin_notify'] = p['keywords_admin_notify'].map {|v| v.presence || nil }.compact
     # Convert these into a hash.

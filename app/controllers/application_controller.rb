@@ -34,7 +34,6 @@ class ApplicationController < ActionController::Base
     else
       @reason = exception.message
     end
-    # TODO: provide received fingerprint to show.
     render 'errors/ssl_error', :status => :forbidden
   end
 
