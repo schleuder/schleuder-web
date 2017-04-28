@@ -10,4 +10,12 @@ class Key < Base
   def id
     fingerprint
   end
+
+  def expiry_date
+    if expiry
+      DateTime.parse(expiry)
+    else
+      expiry
+    end
+  end
 end

@@ -7,8 +7,8 @@
     %li
       = link_to(edit_account_path(current_user)) do
         %span.glyphicon.glyphicon-wrench
-        Account Settings
+        = t(".account_settings")
     %li
       = link_to(destroy_login_path) do
         %span.glyphicon.glyphicon-log-out
-        Logout
+        = t(".logout")

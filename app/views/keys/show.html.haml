@@ -1,19 +1,23 @@
-- @title = "Key #{@key}"
+- @title = "#{t('.key')} #{@key}"
 
 .col.col-lg-6.col-md-8
   %h3= @key.to_s
   - if @key.trust_issues.present?
     .text-danger
-      Key is
+      = t(".key_is_")
       = succeed('!') do
         = @key.trust_issues
   %p
-    Expiry date:
-    = @key.expiry || 'None'
+    = succeed(":") do
+      = t(".expiry_date")
+    - if @key.expiry_date.present?
+      = l(@key.expiry_date)
+    - else
+      = t(".none")
 
   .pull-right
     .large.glyphicon.glyphicon-download-alt
-    = link_to "download", [@list, @key, format: :asc]
+    = link_to t(".download"), [@list, @key, format: :asc]
   .clearfix
 
   %pre= @key.ascii
@@ -21,7 +25,6 @@
 - if @key.fingerprint != @list.fingerprint
   .col.col-lg-6.col-md-4
     .pull-right
-      = button_to([@list, @key], method: :delete, title: "Delete key from list's keyring", class: 'btn btn-danger') do
+      = button_to([@list, @key], method: :delete, title: t(".delete_this_key"), class: 'btn btn-danger') do
         %span.glyphicon.glyphicon-remove
-        Delete key
-
+        = t(".delete_key")

@@ -85,7 +85,7 @@ class ApplicationController < ActionController::Base
       update_session_expiry
     else
       session[:return_to] = request.fullpath
-      log_out "Please log in!"
+      log_out t("please_log_in")
     end
   rescue => e
     logger.error "Error: #{e}"

@@ -2,24 +2,26 @@
 
 .col-lg-6.col-md-8
   .panel.panel-info
-    .panel-heading Listing keys
+    .panel-heading= t('.listing_keys')
     .panel-body
       %table.table
         %thead
           %tr
-            %th Fingerprint
-            %th Primary UID
+            %th= t(".fingerprint")
+            %th= t(".primary_uid")
             %th
         %tbody
           - @keys.each do |key|
             %tr 
               %td= link_to key.fingerprint, list_key_path(@list, key)
               %td= key.email
-              %td.text-danger= key.trust_issues
+              %td.text-danger
+                - if key.trust_issues.present?
+                  = t(".#{key.trust_issues}")
 
 - if current_account.subscribed_to?(@list) || current_account.superadmin?
   .col-lg-6.col-md-8#upload
     .panel.panel-info
-      .panel-heading Upload keys
+      .panel-heading= t(".upload_keys")
       .panel-body
         = render 'keys/form'

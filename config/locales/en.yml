@@ -1,23 +1,38 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M %z"
+
+  please_log_in: "Please log in!"
+
+  application:
+    list_menu:
+      subscriptions: Subscriptions
+      list_options: List options
+      edit_subscription: Edit subscription
+      keys: Keys
+    navbar:
+      logout: Logout
+      account_settings: Account settings
+
+  keys:
+    index:
+      listing_keys: Listing keys
+      fingerprint: Fingerprint
+      primary_uid: Primary UID
+      expired: expired
+      upload_keys: Upload keys
+
+    form:
+      paste_as_text_here: "Paste as text here&hellip;"
+      or_select_a_file: Or select a file
+      upload: Upload
+
+    show:
+      key: Key
+      key_is_: Key is
+      expiry_date: Expiry date
+      none: None
+      download: download
+      delete_key: Delete key
+      delete_this_key: Delete key from list's keyring
