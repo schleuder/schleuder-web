@@ -20,5 +20,6 @@ Dir.chdir APP_ROOT do
   system "rm -rf tmp/cache"
 
   puts "\n== Manual tasks =="
-  puts "\n* Change config/secrets.yml"
+  puts "\n* In config/secrets.yml change secret_key_base"
+  puts "\n* config/schleuder-web.yml add tls_fingerprint and api_key (get them from the admins that run schleuder-api-daemon)."
 end

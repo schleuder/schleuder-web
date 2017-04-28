@@ -12,9 +12,9 @@ This is a full featured web interface to administrate [Schleuder v3](https://0xa
 
 ### To run productively
 
-1. Mandatory: edit `config/secrets.yml`.
+1. Mandatory: In `config/secrets.yml` change `secret_key_base`.
+1. Mandatory: In `config/schleuder-web.yml` add `tls_fingerprint` and `api_key` (get them from the admins that run Schleuder's api-daemon).
 1. Optional: edit `config/database.yml`.
-1. Optional: edit `config/schleuder-web.yml`.
 1. `bundle install --without development`.
 1. `bundle exec rake db:setup RAILS_ENV=production`.
 1. Setup mod_passenger, or a proxy + `bundle exec rails server -e production`.
