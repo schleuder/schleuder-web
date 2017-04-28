@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_filter :authenticate
+  before_filter :set_locale
   load_and_authorize_resource
   # ensure authorization is checked.
   check_authorization
@@ -90,6 +91,15 @@ class ApplicationController < ActionController::Base
   rescue => e
     logger.error "Error: #{e}"
     log_out "Error.", :error
+  end
+
+  def set_locale
+    if params['lang'].present?
+      lang_param = params['lang'].to_sym
+      if I18n.available_locales.include?(lang_param)
+        I18n.locale = lang_param
+      end
+    end
   end
 
   def log_out(msg, msg_type=:notice)
