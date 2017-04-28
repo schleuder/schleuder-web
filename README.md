@@ -32,17 +32,6 @@ Only tested with ruby 2.1 so far.
 
 ## TODO
 
-* public subscription
-* upload key at account-generation.
-* only send encrypted account-verification emails?
-* Tests, Tests, Tests.
-* Prefix fingerprint with 0x to force GnuPG to only match fingerprints.
-* superadmin-flag for Accounts.
-* Highlight unusable keys in keys- and subscription-overview and -detail.
-* Button: send key to all subscribed addresses.
-* I18n.
-
-
 See also `rake notes`
 
 
