@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'rake'
 gem 'rails', '~> 4.2'
 gem 'bcrypt', '~> 3.1'
 gem 'activeresource', '~> 4.0'
