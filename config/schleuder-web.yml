@@ -5,7 +5,7 @@ defaults: &defaults
   # <http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration>.
   delivery_method: sendmail
   sendmail_settings:
-    arguments: '-t -i -f'
+    arguments: '-i'
   smtp_settings:
     address: localhost
     port: 25
