@@ -8,12 +8,12 @@ de:
   application:
     list_menu:
       subscriptions: Abos
-      list_options: Listen-Optionen
+      list_options: Listen-Einstellungen
       edit_subscription: Abo bearbeiten
       keys: Schlüssel
     navbar:
       logout: Ausloggen
-      account_settings: Konto-Optionen
+      account_settings: Konto-Einstellungen
 
   keys:
     index:
