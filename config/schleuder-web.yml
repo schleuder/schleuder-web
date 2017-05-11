@@ -18,6 +18,9 @@ defaults: &defaults
 
 test:
   <<: *defaults
+  api:
+    tls_fingerprint: "6062f05f89384e5f2cda7ab3fc4f5af971d1c524187d90d8e3304e5e0ca6f853"
+  api_key: "ii123456789ii"
 development:
   <<: *defaults
   web_hostname: localhost:3000
