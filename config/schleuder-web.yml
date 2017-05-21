@@ -26,3 +26,8 @@ development:
   web_hostname: localhost:3000
 production:
   <<: *defaults
+  api:
+    host: <%= ENV["SCHLEUDER_API_HOST"] || 'localhost' %>
+    port: <%= ENV["SCHLEUDER_API_PORT"] || 4443 %>
+    tls_fingerprint: <%= ENV["SCHLEUDER_TLS_FINGERPRINT"] %>
+  api_key: <%= ENV["SCHLEUDER_API_KEY"] %>
