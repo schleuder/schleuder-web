@@ -11,23 +11,18 @@ defaults: &defaults
     port: 25
     #openssl_verify_mode: none
   api:
-    host: localhost
-    port: 4443
-    tls_fingerprint:
-  api_key:
+    host: <%= ENV["SCHLEUDER_API_HOST"] || 'localhost' %>
+    port: <%= ENV["SCHLEUDER_API_PORT"] || 4443 %>
+    tls_fingerprint: <%= ENV["SCHLEUDER_TLS_FINGERPRINT"] %>
+  api_key: <%= ENV["SCHLEUDER_API_KEY"] %>
 
 test:
   <<: *defaults
   api:
-    tls_fingerprint: "6062f05f89384e5f2cda7ab3fc4f5af971d1c524187d90d8e3304e5e0ca6f853"
-  api_key: "ii123456789ii"
+    tls_fingerprint: <%= ENV["SCHLEUDER_TLS_FINGERPRINT"] || "6062f05f89384e5f2cda7ab3fc4f5af971d1c524187d90d8e3304e5e0ca6f853" %>
+  api_key: <%= ENV["SCHLEUDER_API_KEY"] || "ii123456789ii" %>
 development:
   <<: *defaults
   web_hostname: localhost:3000
 production:
   <<: *defaults
-  api:
-    host: <%= ENV["SCHLEUDER_API_HOST"] || 'localhost' %>
-    port: <%= ENV["SCHLEUDER_API_PORT"] || 4443 %>
-    tls_fingerprint: <%= ENV["SCHLEUDER_TLS_FINGERPRINT"] %>
-  api_key: <%= ENV["SCHLEUDER_API_KEY"] %>
