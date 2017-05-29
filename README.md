@@ -43,6 +43,10 @@ bundle exec rspec
 
 We are working on extendig the test coverage.
 
+## Contributing
+
+Please see [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## License
 
 GNU GPL version 3.
