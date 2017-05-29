@@ -34,6 +34,14 @@ Only tested with ruby 2.1 so far.
 
 See also `rake notes`
 
+## Testing
+We use rspec to test our code. To execute the test suite run:
+
+```
+bundle exec rspec
+```
+
+We are working on extendig the test coverage.
 
 ## License
 
