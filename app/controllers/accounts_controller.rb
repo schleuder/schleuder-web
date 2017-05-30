@@ -1,6 +1,7 @@
 class AccountsController < ApplicationController
   skip_before_filter :authenticate, only: [:new, :verify, :setup, :create]
   skip_load_resource only: [:verify, :setup, :create]
+  before_filter :validate_turing_answer, only: :verify
 
   def index
     redirect_to root_path
@@ -10,6 +11,15 @@ class AccountsController < ApplicationController
     @account = current_account
     show
     render 'show'
+  end
+
+  def new
+    if TuringQuestion.available?
+      @turing_question = TuringQuestion.random
+      session[:turing_question_id] = @turing_question.id
+    end
+    @account = Account.new(email: session[:account_email])
+    session[:account_email] = nil
   end
 
   def verify
@@ -93,6 +103,27 @@ class AccountsController < ApplicationController
   end
 
   private
+
+  def validate_turing_answer
+    turing_question = TuringQuestion.find(session[:turing_question_id])
+    session[:turing_question_id] = nil
+    if turing_question.blank?
+      return redirect_to_new(t(".something_wrong"))
+    end
+
+    if turing_question.valid_answer?(params[:turing_answer])
+      true
+    else
+      redirect_to_new(t(".invalid_answer"))
+    end
+  end
+
+  def redirect_to_new(error_message)
+    flash[:error] = error_message
+    session[:account_email] = params[:account][:email]
+    redirect_to new_account_path
+    false
+  end
 
   def render_404
     if params[:token].present?

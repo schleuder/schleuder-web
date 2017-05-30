@@ -36,3 +36,10 @@ de:
       download: Runterladen
       delete_key: Schlüssel löschen
       delete_this_key: Diesen Schlüssel aus dem Schlüsselring der Liste löschen
+
+  accounts:
+    new:
+      turing_question_hint: Bitte beantworte diese Frage um zu beweisen, dass du kein Automat bist.
+    verify:
+      something_wrong: Irgendetwas ist schief gegangen, bitte versuche es noch mal.
+      invalid_answer: Ungültige Antwort, bitte versuche es noch mal.

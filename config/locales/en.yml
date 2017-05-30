@@ -36,3 +36,12 @@ en:
       download: download
       delete_key: Delete key
       delete_this_key: Delete key from list's keyring
+
+  accounts:
+    new:
+      turing_question_hint: Please answer this question to prove that you are not an automatic machine.
+    verify:
+      something_wrong: Something went wrong, please try again.
+      invalid_answer: Invalid turing-answer, please try again.
+
+

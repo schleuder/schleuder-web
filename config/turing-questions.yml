@@ -1,0 +1,82 @@
+development: &defaults
+  en:
+    - question: 22 plus twenty?
+      answers:
+        - 42
+        - fourtytwo
+    - question: 30 minus 7?
+      answers:
+        - 23
+    - question: 3 times 3?
+      answers:
+        - 9
+    - question: 10 plus 1 minus 1?
+      answers:
+        - 10
+    - question: two plus three?
+      answers:
+        - five
+        - 5
+    - question: Rock, paper, ...
+      answers:
+        - scissors
+    - question: The star that warms the earth?
+      answers:
+        - sun
+        - the sun
+    - question: How many hours make one day?
+      answers:
+        - 24
+        - twentyfour
+    - question: How many days make one week?
+      answers:
+        - 7
+        - seven
+    - question: Is the earth flat or a globe?
+      answers:
+        - globe
+        - a globe
+  de:
+    - question: 22 plus zwanzig?
+      answers:
+        - 42
+        - zweiundvierzig
+    - question: 30 minus 7?
+      answers:
+        - 23
+    - question: 3 mal 3?
+      answers:
+        - 9
+    - question: 10 plus 1 minus 1?
+      answers:
+        - 10
+    - question: zwei plus drei?
+      answers:
+        - fünf
+        - fuenf
+        - 5
+    - question: Stein, Schere, ...
+      answers:
+        - papier
+    - question: Der Stern, der die Erde wärmt?
+      answers:
+        - sonne
+        - die sonne
+    - question: Wie viele Stunden hat ein Tag?
+      answers:
+        - 24
+        - vierundzwanzig
+    - question: Wie viele Tage hat eine Woche?
+      answers:
+        - 7
+        - sieben
+    - question: Ist die Erde eine Scheibe oder eine Kugel?
+      answers:
+        - kugel
+        - eine kugel
+test:
+  <<: *defaults
+production:
+  <<: *defaults
+
+
