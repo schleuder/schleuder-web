@@ -4,6 +4,7 @@ de:
       default: "%d.%m.%Y %H:%M %z"
 
   please_log_in: "Bitte einloggen!"
+  something_went_wrong: Irgendetwas ist schief gegangen, bitte versuche es noch mal.
 
   application:
     list_menu:
@@ -39,7 +40,30 @@ de:
 
   accounts:
     new:
+      headline: Neuer Account
+      email_hint: Bitte trage hier die Adresse ein, für die der Account eingerichtet werden soll. Wir werden die eine Email schicken um zu prüfen, dass du diese Adresse kontrollierst. Danach wirst du ein Passwort eingeben können.
       turing_question_hint: Bitte beantworte diese Frage um zu beweisen, dass du kein Automat bist.
+      button: Account anfordern
     verify:
-      something_wrong: Irgendetwas ist schief gegangen, bitte versuche es noch mal.
       invalid_answer: Ungültige Antwort, bitte versuche es noch mal.
+      address_already_registered: Diese Adresse ist schon registriert.
+      smtp_connection_refused: Der konfigurierte SMTP-Server verweigert die Verbindung, die Email konnte nicht versandt werden! (%{exc.message})
+    setup:
+      token_too_old: Dieses Token ist abgelaufen, bitte fordere ein neues an.
+    create:
+      success: Der Account wurde erfolgreich angelegt! Bitte logge dich ein.
+    update:
+      password_changed: ✓ Password geändert.
+    destroy:
+      superadmin_not_deletable: Der Super-Admin-Account darf nicht gelöscht werden.
+      success: Dein Account wurde gelöscht. Einen schönen Tag noch!
+      failure: Der Account konnte nicht gelöscht werden!
+    error_404:
+      headline: Nicht gefunden
+      explanation: |
+        Das Token, dass du benutzt hast, existiert nicht (mehr). Eventuell wurde es schon eingelöst?
+
+        Vielleicht möchtest du %{link}?
+      link_text: ein neues anfordern
+
+
