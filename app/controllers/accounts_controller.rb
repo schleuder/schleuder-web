@@ -25,18 +25,17 @@ class AccountsController < ApplicationController
   def verify
     @email = params[:account][:email]
     if Account.where(email: @email).present?
-      redirect_to new_account_path, alert: "Adress already registered for account."
-      return
+      return redirect_to_new("Adress already registered for account.")
     end
 
     ac_req = AccountRequest.create(email: @email)
     mail = AccountMailer.send_verification_link(@email, ac_req.token)
     if ! res = mail.deliver_now
-      redirect_to new_account_path, alert: res
+      redirect_to_new(res)
     end
   rescue Errno::ECONNREFUSED => exc
     logger.error exc.message
-    flash[:alert] = "The configured SMTP-server refuses connections, we cannot send emails! (#{exc.message})"
+    redirect_to_new("The configured SMTP-server refuses connections, we cannot send emails! (#{exc.message})")
   end
 
   def setup
