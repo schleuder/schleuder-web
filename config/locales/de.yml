@@ -66,4 +66,5 @@ de:
         Vielleicht möchtest du %{link}?
       link_text: ein neues anfordern
 
-
+  errors:
+    invalid_email: "ist keine gültige Email-Adresse"

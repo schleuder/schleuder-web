@@ -67,3 +67,5 @@ en:
       link_text: request a new one
 
 
+  errors:
+    invalid_email: "is not a valid email address"
