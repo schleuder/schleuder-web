@@ -1,23 +1,26 @@
 - @title = "Keys"
 
-.col-lg-6.col-md-8
+.col-lg-7
   .panel.panel-info
     .panel-heading= t('.listing_keys')
     .panel-body
       %table.table
         %thead
           %tr
-            %th= t(".fingerprint")
+            %th= t(".key_description")
             %th= t(".primary_uid")
-            %th
+            %th= t(".used_by")
         %tbody
           - @keys.each do |key|
             %tr 
-              %td= link_to key.fingerprint, list_key_path(@list, key)
-              %td= key.email
-              %td.text-danger
+              %td
+                = link_to key.desc, list_key_path(@list, key), title: "Fingerprint: #{key.fingerprint}"
                 - if key.trust_issues.present?
-                  = t(".#{key.trust_issues}")
+                  .text-danger.glyphicon.glyphicon-warning-sign{title: t(".#{key.trust_issues}")}
+              %td= key.email
+              %td
+                - if sub = Subscription.where(fingerprint: key.fingerprint).first
+                  = link_to sub.email, subscription_path(sub)
 
 - if current_account.subscribed_to?(@list) || current_account.superadmin?
   .col-lg-6.col-md-8#upload

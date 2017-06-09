@@ -18,11 +18,11 @@ en:
 
   keys:
     index:
-      listing_keys: Listing keys
+      listing_keys: Keyring
       fingerprint: Fingerprint
       primary_uid: Primary UID
       expired: expired
-      upload_keys: Upload keys
+      upload_keys: Upload key
 
     form:
       paste_as_text_here: "Paste as text here&hellip;"

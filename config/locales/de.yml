@@ -18,7 +18,7 @@ de:
 
   keys:
     index:
-      listing_keys: Schlüsselliste
+      listing_keys: Schlüsselring
       fingerprint: Fingerabdruck
       primary_uid: Primäre ID
       expired: abgelaufen
