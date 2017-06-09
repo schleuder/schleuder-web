@@ -24,10 +24,11 @@ de:
       expired: abgelaufen
       upload_keys: Schlüssel hochladen
 
-    form:
-      paste_as_text_here: "Hier als Text reinkopieren&hellip;"
-      or_select_a_file: Oder eine Datei auswählen
+    new:
+      paste_as_text: "Als Text reinkopieren&hellip;"
+      select_a_file: Eine Datei auswählen
       upload: Hochladen
+      save: Speichern
 
     show:
       key: Schlüssel

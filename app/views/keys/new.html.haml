@@ -1,0 +1,24 @@
+- if current_account.subscribed_to?(@list) || current_account.superadmin?
+  .col-lg-7#keyupload
+    .panel.panel-info
+      .panel-heading= t(".upload_key")
+      .panel-body
+        = form_tag(list_key_create_path(@list), method: 'post',  multipart: true, id: :keyupload) do
+          #formtabs
+            #upload
+              = link_to 'Upload a file', '#upload'
+              .tabcontent
+                = t(".select_a_file") + ':'
+                = file_field_tag :keyfile, value: 'mykey.asc'
+                = submit_tag t(".upload"), class: 'btn btn-success'
+            #paste
+              = link_to 'Paste key material', '#paste'
+              .tabcontent
+                = t(".paste_as_text").html_safe
+                = text_area_tag 'ascii'
+                = submit_tag t(".save"), class: 'btn btn-success'
+            #selectfp
+              = link_to 'Select an already present key', '#selectfp'
+              .tabcontent
+                .mono= select_tag :fingerprint, options_for_select(@list.keys.map { |k| [k.to_s, k.fingerprint] }), label: :Key
+                = submit_tag t(".save"), class: 'btn btn-success'
