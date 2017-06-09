@@ -20,14 +20,14 @@
             - else
               - @list.admins.each do |subscription|
                 - if can? :show, subscription
-                  = link_to(subscription, edit_subscription_path(subscription))
+                  = link_to(subscription, subscription)
                 - else
                   = subscription
         %tr
           %td # of subscriptions
           %td
             - if can? :index, @list.subscriptions
-              = link_to @list.subscriptions.count, edit_list_subscriptions_path(@list)
+              = link_to @list.subscriptions.count, list_subscriptions_path(@list)
             - else
               = @list.subscriptions.count
 

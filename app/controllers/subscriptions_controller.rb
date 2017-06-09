@@ -4,6 +4,11 @@ class SubscriptionsController < ApplicationController
   def index
     redirect_to root_path
   end
+  
+  def show
+    @list = @subscription.list
+    @key = @subscription.key
+  end
 
   def edit
     # Neccessary for the shared form.
@@ -15,7 +20,7 @@ class SubscriptionsController < ApplicationController
     if @subscription.update_attributes(subscription_params)
       msg = "✓ Subscription of #{@subscription} updated."
       if can?(:manage, @subscription.list)
-        redirect_to edit_list_subscriptions_path(@subscription.list), notice: msg
+        redirect_to subscription_path(@subscription), notice: msg
       else
         redirect_to edit_subscription_path(@subscription), notice: msg
       end
@@ -32,7 +37,7 @@ class SubscriptionsController < ApplicationController
     logger.debug "Subscriptions to be saved: #{@subscription.inspect}"
     if @subscription.save
       logger.debug "Saving successful"
-      redirect_to edit_list_subscriptions_path(@subscription.list),
+      redirect_to subscription_path(@subscription.id),
           notice: "✓ #{@subscription} subscribed."
     else
       logger.debug "Saving failed. Errors: #{@subscription.errors.inspect}"
@@ -58,7 +63,7 @@ class SubscriptionsController < ApplicationController
     if @subscription.destroy
       msg = "✓ #{sub} unsubscribed from #{sub.list.email}."
       if can?(:update, sub.list)
-        redirect_to edit_list_subscriptions_path(sub.list), notice: msg
+        redirect_to list_subscriptions_path(sub.list), notice: msg
       else
         redirect_to account_path(current_account), notice: msg
       end

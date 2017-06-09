@@ -17,7 +17,10 @@ class ListsController < ApplicationController
     @subscription = current_account.subscription(@list)
   end
 
-  def edit_subscriptions
+  def subscriptions
+  end
+
+  def new_subscription
     # Neccessary for the shared form.
     @subscription = Subscription.build
     # ActiveResource doesn't actually merge attributes given to build() (it's a
