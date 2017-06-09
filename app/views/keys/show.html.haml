@@ -4,6 +4,7 @@
   %h3= @key.to_s
   - if @key.trust_issues.present?
     .text-danger
+      .large.glyphicon.glyphicon-warning-sign
       = t(".key_is_")
       = succeed('!') do
         = @key.trust_issues
