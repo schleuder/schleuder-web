@@ -4,7 +4,7 @@
     = f.input :email, required: true
   - else
     = f.input :email, disabled: true
-  .mono= f.input :fingerprint, collection: @list.keys.map { |k| [k.to_s, k.fingerprint] }, label: :Key, required: true
+  .mono= f.input :fingerprint, collection: @list.keys.map { |k| [k.to_s, k.fingerprint] }, label: :Key
   - if can?(:update, @subscription.list)
     = checkbox f, :admin, "May s/he administer this list?"
   = checkbox f, :delivery_enabled, "Receive the emails sent over the list?"
