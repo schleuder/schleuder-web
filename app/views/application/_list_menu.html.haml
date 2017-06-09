@@ -2,9 +2,6 @@
   - if can?(:update, @list)
     %li
       %span.glyphicon.glyphicon-th-list
-    %li
-      %span.glyphicon.glyphicon-wrench
-      = link_to_unless_current(t(".list_options"), edit_list_path(@list), accesskey: :o)
       = link_to_unless_current(t(".subscriptions"), list_subscriptions_path(@list), accesskey: :s)
   - else
     %li
@@ -13,3 +10,7 @@
   %li
     %span.glyphicon.glyphicon-barcode
     = link_to_unless_current(t(".keys"), list_keys_path(@list), accesskey: :k)
+  - if can?(:update, @list)
+    %li
+      %span.glyphicon.glyphicon-wrench
+      = link_to_unless_current(t(".list_options"), edit_list_path(@list), accesskey: :o)
