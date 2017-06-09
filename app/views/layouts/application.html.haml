@@ -8,6 +8,8 @@
     = stylesheet_link_tag    "application", :media => "all"
     = csrf_meta_tags
   %body
+    - if Rails.env.development?
+      #dev-watermark development
     .container
       .container#header
         .navbar-header
