@@ -1,9 +1,12 @@
 - if current_user.present?
   %ul.nav.navbar-nav.navbar-right
+    %li#current_user_email
+      = link_to(edit_account_path(current_user), title: "The account you're logged in with") do
+        = current_user.email
     %li
       = link_to(root_path, accesskey: :h) do
-        %span.glyphicon.glyphicon-user
-        =current_user.email
+        %span.glyphicon.glyphicon-home
+        My lists
     %li
       = link_to(edit_account_path(current_user)) do
         %span.glyphicon.glyphicon-wrench
