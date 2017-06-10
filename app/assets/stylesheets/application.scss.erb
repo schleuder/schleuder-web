@@ -119,48 +119,59 @@ h1 {
     min-height: 20em;
     position: relative;
     width: 100%;
-    & > div {
-      display: inline;
-      a {
-        margin-left: -1px;
-        position: relative;
-        left: 1px;
-        text-decoration: none;
-        color: black;
-        background: white;
-        display: block;
-        float: left;
-        padding: 5px 10px;
-        border: 1px solid #ccc;
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
-        z-index: 2;
-      }
-      .tabcontent {
-        background: white;
-        position: absolute;
-        z-index: -2;
-        left: 0;
-        top: 30px;
-        bottom: 0;
-        right: 0;
-        padding: 20px;
-        border: 1px solid #ccc;
-      }
+  }
+
+  .formtab {
+    display: inline;
+    .tablink {
+      margin-left: -1px;
+      position: relative;
+      left: 1px;
+      text-decoration: none;
+      color: black;
+      background: white;
+      display: block;
+      float: left;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      z-index: 1;
     }
-    & > div:not(:target) {
-      a {
-        background: -moz-linear-gradient(top, white, #eee);
-      }
+    .tabcontent {
+      background: white;
+      position: absolute;
+      z-index: -2;
+      left: 0;
+      top: 30px;
+      bottom: 0;
+      right: 0;
+      padding: 20px;
+      border: 1px solid #ccc;
     }
-    & > div:target {
-      a {
-        border-bottom: 1px solid white;
-        background: white;
-      }
-      .tabcontent {
-        z-index: 1;
-      }
+  }
+
+  // Show this tab's content by default.
+  // Use a class, not an ID, to not override the div:target definitions.
+  .default-tab {
+    .tablink {
+      // Force to show the tablink's border-definition, not the one of .tabcontent, but don't override the border of the targetted .tabcontent
+      z-index: 2;
+      border-bottom: 1px solid white;
+    }
+    .tabcontent {
+      z-index: 1;
+    }
+  }
+
+  .formtab:target {
+    .tablink {
+      // Force to show the tablink's border-definition, not the one of .tabcontent
+      z-index: 4;
+      border-bottom: 1px solid white;
+    }
+    .tabcontent {
+      z-index: 3;
     }
   }
 }

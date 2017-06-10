@@ -5,20 +5,20 @@
       .panel-body
         = form_tag(list_key_create_path(@list), method: 'post',  multipart: true, id: :keyupload) do
           #formtabs
-            #upload
-              = link_to 'Upload a file', '#upload'
+            .formtab#upload.default-tab
+              = link_to 'Upload a file', '#upload', class: 'tablink'
               .tabcontent
                 = t(".select_a_file") + ':'
                 = file_field_tag :keyfile, value: 'mykey.asc'
                 = submit_tag t(".upload"), class: 'btn btn-success'
-            #paste
-              = link_to 'Paste key material', '#paste'
+            .formtab#paste
+              = link_to 'Paste key material', '#paste', class: 'tablink'
               .tabcontent
                 = t(".paste_as_text").html_safe
                 = text_area_tag 'ascii'
                 = submit_tag t(".save"), class: 'btn btn-success'
-            #selectfp
-              = link_to 'Select an already present key', '#selectfp'
+            .formtab#selectfp
+              = link_to 'Select an already present key', '#selectfp', class: 'tablink'
               .tabcontent
                 .mono= select_tag :fingerprint, options_for_select(@list.keys.map { |k| [k.to_s, k.fingerprint] }), label: :Key
                 = submit_tag t(".save"), class: 'btn btn-success'
