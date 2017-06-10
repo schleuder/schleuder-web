@@ -24,12 +24,9 @@
                   %span
                     = link_to(list_keys_path(@list, anchor: 'upload'), title: 'Upload key', class: 'text-success') do
                       .large.glyphicon.glyphicon-upload
-                - else
+                - elsif subscription.key.trust_issues.present?
                   = link_to(list_key_path(@list, subscription.key.fingerprint)) do
-                    - if subscription.key.trust_issues.present?
-                      %span.large.text-danger.glyphicon.glyphicon-barcode{title: "Key is #{subscription.key.trust_issues}"}
-                    - else
-                      %span.large.text-success.glyphicon.glyphicon-barcode{title: "Fingerprint of key: #{subscription.fingerprint}"}
+                    %span.large.text-danger.glyphicon.glyphicon-barcode{title: "Key is #{subscription.key.trust_issues}"}
 
                 - if subscription.admin?
                   .text-success.glyphicon.glyphicon-user{title: 'Is an admin of this list'}
