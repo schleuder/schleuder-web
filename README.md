@@ -12,8 +12,8 @@ This is a full featured web interface to administrate [Schleuder v3](https://0xa
 
 ### To run productively
 
-1. Mandatory: In `config/secrets.yml` change `secret_key_base`.
-1. Mandatory: In `config/schleuder-web.yml` add `tls_fingerprint` and `api_key` (get them from the admins that run Schleuder's api-daemon).
+1. Mandatory: In `config/secrets.yml` change `secret_key_base` or set the environment variable SECRET_KEY_BASE.
+1. Mandatory: In `config/schleuder-web.yml` add `tls_fingerprint` and `api_key` (get them from the admins that run Schleuder's api-daemon). You can also set them through the environment variables SCHLEUDER_TLS_FINGERPRINT and SCHLEUDER_API_KEY.
 1. Optional: edit `config/database.yml`.
 1. `bundle install --without development`.
 1. `bundle exec rake db:setup RAILS_ENV=production`.
