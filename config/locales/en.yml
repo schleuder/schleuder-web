@@ -4,6 +4,7 @@ en:
       default: "%Y-%m-%d %H:%M %z"
 
   please_log_in: "Please log in!"
+  something_went_wrong: Something went wrong, please try again.
 
   application:
     list_menu:
@@ -36,3 +37,33 @@ en:
       download: download
       delete_key: Delete key
       delete_this_key: Delete key from list's keyring
+
+  accounts:
+    new:
+      headline: New account
+      email_hint: Please give us the address you want to control here. We'll send you an email to verify that you control the mailbox. Then you'll be able to pick a password.
+      turing_question_hint: Please answer this question to prove that you are not an automatic machine.
+      button: Request account
+    verify:
+      invalid_answer: Invalid turing-answer, please try again.
+      address_already_registered: This address is already registered.
+      smtp_connection_refused: The configured SMTP-server refuses connections, the email could not be sent! (%{exc.message})
+    setup:
+      token_too_old: This request-token is too old, please request a new one.
+    create:
+      success: Account creation successful! Please log in to your new account.
+    update:
+      password_changed: ✓ Password changed.
+    destroy:
+      superadmin_not_deletable: You may not delete the super-admin account.
+      success: Your account was deleted. Have a nice day!
+      failure: Deleting the account failed!
+    error_404:
+      headline: Not Found
+      explanation: |
+        The token you used doesn't exists here. Maybe it was redeemed already?
+
+        You might want to %{link}?
+      link_text: request a new one
+
+

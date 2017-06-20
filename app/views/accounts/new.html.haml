@@ -1,8 +1,14 @@
-- @title = 'New account'
+- @title = t(".headline")
 
 .col-lg-6.col-md-8
-  = simple_form_for(Account.new, url: verify_account_path, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
-    = f.input :email, hint: "Please give us the address you want to control here. We'll send you an email to verify that you control the mailbox. Then you'll be able to pick a password."
+  = simple_form_for(@account, url: verify_account_path, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
+    = f.input :email, hint: t(".email_hint")
+    - if @turing_question.present?
+      #turing-question.form-group
+        %label.control-label.col-sm-3{for: :turing_answer}= @turing_question.question
+        .col-sm-9
+          = text_field_tag :turing_answer, '', class: 'form-control'
+          %p.help-block= t(".turing_question_hint")
 
-    = f.submit 'Request account', class: 'btn btn-primary'
+    = f.submit t(".button"), class: 'btn btn-primary'
 
