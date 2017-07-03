@@ -1,0 +1,71 @@
+es:
+  time:
+    formats:
+      default: "%Y-%m-%d %H:%M %z"
+
+  please_log_in: "!Por favor ingresa!"
+  something_went_wrong: Algo salió mal, por favor intenta de nuevo.
+
+  application:
+    list_menu:
+      subscriptions: Suscripciones
+      list_options: Opciones de la lista
+      edit_subscription: Editar suscripción
+      keys: Llaves
+    navbar:
+      logout: Salir
+      account_settings: Opciones de cuenta
+
+  keys:
+    index:
+      listing_keys: Listando llaves
+      fingerprint: Huella
+      primary_uid: UID primaria
+      expired: expirada
+      upload_keys: Subir llaves
+
+    form:
+      paste_as_text_here: "Pegar como texto aquí&hellip;"
+      or_select_a_file: O selecciona un archivo
+      upload: Subir
+
+    show:
+      key: llave
+      key_is_: La llave es
+      expiry_date: Fecha de expiración
+      none: Ninguna
+      download: descargar
+      delete_key: Borrar llave
+      delete_this_key: Borrar la llave del llavero de la lista
+
+  accounts:
+    new:
+      headline: Nueva cuenta
+      email_hint: Por favor danos la dirección que quieres controlar. Te enviaremos un correo verificando que controlas esa casilla. Luego podrás elegir una contraseña.
+      turing_question_hint: Por favor responde esta pregunta para probar que no eres una máquina.
+      button: Solicita cuenta
+    verify:
+      invalid_answer: Respuesta de Turing inválida, reintenta por favor.
+      address_already_registered: Esta dirección ya se encuentra registrada.
+      smtp_connection_refused: "El servidor SMTP está rechazando conexiones, !no se pudo enviar el correo! (%{exc.message})"
+    setup:
+      token_too_old: Este código de verificación es muy viejo, por favor solicita uno nuevo.
+    create:
+      success: "!Cuenta creada con éxito! Por favor ingresa a tu nueva cuenta."
+    update:
+      password_changed: ✓ Contraseña cambiada.
+    destroy:
+      superadmin_not_deletable: No puedes borrar una cuenta de super-administración.
+      success: "Tu cuenta fue eliminada. !Que tengas un buen día!"
+      failure: "!La eliminación de la cuenta falló!"
+    error_404:
+      headline: No encontrada
+      explanation: |
+        "El código que usaste no existe. ¿Tal vez ya haya sido utilizado?"
+
+        "¿Tal vez quieras %{link}?"
+      link_text: "pedir uno nuevo"
+
+
+  errors:
+    invalid_email: "no es una dirección válida"
