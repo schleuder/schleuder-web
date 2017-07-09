@@ -1,4 +1,43 @@
 development: &defaults
+  es:
+    - question: "¿22 más veinte?"
+      answers:
+        - 42
+        - cuarenta y dos
+    - question: "¿30 menos 7?"
+      answers:
+        - 23
+    - question: "¿3 veces 3?"
+      answers:
+        - 9
+    - question: "¿10 más 1 menos 1?"
+      answers:
+        - 10
+    - question: "¿dos más tres?"
+      answers:
+        - cinco
+        - 5
+    - question: Piedra, papel o...
+      answers:
+        - tijera
+        - tijeras
+    - question: "¿Cuál es la estrella que calienta a la Tierra?"
+      answers:
+        - sol
+        - el sol
+    - question: "¿Cuántas horas tiene un día?"
+      answers:
+        - 24
+        - veinticuatro
+    - question: "¿Cuántos días tiene una semana?"
+      answers:
+        - 7
+        - siete
+    - question: "¿La Tierra es plana o es un globo?"
+      answers:
+        - globo
+        - es un globo
+        - un globo
   en:
     - question: 22 plus twenty?
       answers:
