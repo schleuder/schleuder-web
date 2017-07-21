@@ -43,6 +43,12 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
+    if @subscription.is_last_admin?
+      flash[:error] = "Can't delete the last list-admin!"
+      redirect_to edit_subscription_path(@subscription)
+      return
+    end
+
     sub = @subscription
     if @subscription.destroy
       msg = "✓ #{sub} unsubscribed from #{sub.list.email}."

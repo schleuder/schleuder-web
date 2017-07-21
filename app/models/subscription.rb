@@ -14,4 +14,8 @@ class Subscription < Base
   def account
     Account.find_by(email: self.email)
   end
+
+  def is_last_admin?
+    list.admins == [self]
+  end
 end
