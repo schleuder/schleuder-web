@@ -66,6 +66,9 @@ es:
         "¿Tal vez quieras %{link}?"
       link_text: "pedir uno nuevo"
 
+  subscriptions:
+    destroy:
+      cant_unsubscribe_last_admin: No puedes borrar la última suscripción de administración de la lista.
 
   errors:
     invalid_email: "no es una dirección válida"

@@ -66,6 +66,9 @@ en:
         You might want to %{link}?
       link_text: request a new one
 
+  subscriptions:
+    destroy:
+      cant_unsubscribe_last_admin: Can't unsubscribe the last admin of this list!
 
   errors:
     invalid_email: "is not a valid email address"

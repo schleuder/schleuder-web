@@ -66,5 +66,9 @@ de:
         Vielleicht möchtest du %{link}?
       link_text: ein neues anfordern
 
+  subscriptions:
+    destroy:
+      cant_unsubscribe_last_admin: Letztes Admin-Abo kann nicht gelöscht werden!
+
   errors:
     invalid_email: "ist keine gültige Email-Adresse"
