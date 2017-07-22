@@ -67,6 +67,14 @@ en:
       link_text: request a new one
 
   subscriptions:
+    edit:
+      unsubscribe: Unsubscribe
+      unsubscribe_from_list: Unsubscribe from this list
+    delete:
+      unsubscribe: Unsubscribe
+      unsubscribe_email_from_list: Really unsubscribe %{email} from %{list_email}?
+      unsubscribe_now: Unsubscribe now!
+      back_to_subscription: Back to subscription
     destroy:
       cant_unsubscribe_last_admin: Can't unsubscribe the last admin of this list!
 

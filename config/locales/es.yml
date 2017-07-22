@@ -67,6 +67,14 @@ es:
       link_text: "pedir uno nuevo"
 
   subscriptions:
+    edit:
+      unsubscribe: Borrar suscripción
+      unsubscribe_from_list: Borrar suscripción de la lista
+    delete:
+      unsubscribe: Borrar suscripción
+      unsubscribe_email_from_list: Realmente borrar la suscripción de %{email} de %{list_email}?
+      unsubscribe_now: Borrar suscripción!
+      back_to_subscription: Volver a la suscripción
     destroy:
       cant_unsubscribe_last_admin: No puedes borrar la última suscripción de administración de la lista.
 

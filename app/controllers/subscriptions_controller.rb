@@ -42,6 +42,11 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  def delete
+    # Assign list-variable to make the list-menu appear.
+    @list = @subscription.list
+  end
+
   def destroy
     if @subscription.is_last_admin?
       flash[:error] = t(".cant_unsubscribe_last_admin")

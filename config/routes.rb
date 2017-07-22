@@ -18,7 +18,12 @@ Rails.application.routes.draw do
     delete 'keys/:fingerprint', to: 'keys#destroy'
     post   'keys',              to: 'keys#create', as: 'key_create'
   end
-  resources  :subscriptions
+
+  resources  :subscriptions do
+    member do
+      get 'delete'
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

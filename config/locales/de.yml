@@ -67,6 +67,14 @@ de:
       link_text: ein neues anfordern
 
   subscriptions:
+    edit:
+      unsubscribe: Abo löschen
+      unsubscribe_from_list: Abo dieser Liste löschen
+    delete:
+      unsubscribe: Abo löschen
+      unsubscribe_email_from_list: Wirklich das Abo %{email} von %{list_email} löschen?
+      unsubscribe_now: Abo löschen!
+      back_to_subscription: Zurück zu Abo-Seite
     destroy:
       cant_unsubscribe_last_admin: Letztes Admin-Abo kann nicht gelöscht werden!
 
