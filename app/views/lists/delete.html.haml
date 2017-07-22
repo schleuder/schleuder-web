@@ -1,10 +1,16 @@
 - @title = "Delete list"
 
-%h3= @title
+.col-lg-6.col-md-6
 
-%p{style: 'margin: 3em 0'}
-  %strong 
-    Are you really sure?
+  %h3= @title
+
+  %p{style: 'margin: 3em 0'}
+    %strong 
+      Are you really sure?
 
 
-= button_to "Delete list now!", @list, method: :delete, class: 'btn btn-danger'
+  .pull-right
+    = button_to(@list, method: :get, class: 'btn btn-link') do
+      = t(".back_to_list")
+
+  = button_to "Delete list now!", @list, method: :delete, class: 'btn btn-danger'

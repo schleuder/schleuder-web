@@ -78,5 +78,9 @@ de:
     destroy:
       cant_unsubscribe_last_admin: Letztes Admin-Abo kann nicht gelöscht werden!
 
+  lists:
+    delete:
+      back_to_list: Zurück zur Listen-Seite
+
   errors:
     invalid_email: "ist keine gültige Email-Adresse"

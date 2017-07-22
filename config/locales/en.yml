@@ -78,5 +78,9 @@ en:
     destroy:
       cant_unsubscribe_last_admin: Can't unsubscribe the last admin of this list!
 
+  lists:
+    delete:
+      back_to_list: Back to list
+
   errors:
     invalid_email: "is not a valid email address"

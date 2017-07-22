@@ -78,5 +78,9 @@ es:
     destroy:
       cant_unsubscribe_last_admin: No puedes borrar la última suscripción de administración de la lista.
 
+  lists:
+    delete:
+      back_to_list: Volver a la lista
+
   errors:
     invalid_email: "no es una dirección válida"
