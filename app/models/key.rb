@@ -18,4 +18,8 @@ class Key < Base
       expiry
     end
   end
+
+  def desc
+    "#{fingerprint} #{email}"
+  end
 end
