@@ -7,7 +7,8 @@ class KeysController < ApplicationController
 
   def index
     all_keys = @list.keys
-    sub_fingerprints = @list.subscriptions.map(&:fingerprint)
+    @subscriptions = @list.subscriptions
+    sub_fingerprints = @subscriptions.map(&:fingerprint)
     @assigned_keys = all_keys.select do |key|
       sub_fingerprints.include?(key.fingerprint)
     end

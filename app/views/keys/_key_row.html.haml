@@ -2,6 +2,6 @@
   %td
     = render "key_oneline", key: key
   %td
-    = @list.subscriptions.select { |s| s.fingerprint == key.fingerprint }.map do |subscription|
+    = @subscriptions.select { |s| s.fingerprint == key.fingerprint }.map do |subscription|
       - link_to subscription.email, subscription_path(subscription)
     - end.join(', ').html_safe
