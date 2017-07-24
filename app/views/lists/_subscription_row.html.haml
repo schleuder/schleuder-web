@@ -1,0 +1,20 @@
+%tr
+  %td{style: 'padding-right: 1.3em'}
+    = link_to(subscription.email, subscription_path(subscription))
+
+  %td{style: 'width: 100%;'}
+    - if subscription.fingerprint.blank?
+      = link_to(edit_subscription_path(subscription)) do
+        = image_tag 'key-missing.svg', width: '20px', title: 'No key assigned!'
+    - elsif subscription.key.blank?
+      = image_tag 'key-problem.svg', width: '20px', title: "Assigned key not in keyring!"
+      %span
+        = link_to(list_keys_path(@list, anchor: 'upload'), title: 'Upload key', class: 'text-success') do
+          .large.glyphicon.glyphicon-upload
+    - elsif subscription.key.trust_issues.present?
+      = link_to(list_key_path(@list, subscription.key.fingerprint)) do
+        = image_tag 'key-problem.svg', width: '20px', title: "Key is #{subscription.key.trust_issues}"
+    - if subscription.admin?
+      .glyphicon.glyphicon-star.admin-star-colour{title: 'Is an admin of this list'}
+    - if ! subscription.delivery_enabled?
+      .glyphicon.glyphicon-volume-off{title: 'Does not receive list-messages (delivery disabled)'}
