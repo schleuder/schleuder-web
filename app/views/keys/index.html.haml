@@ -10,16 +10,10 @@
             %th= t(".key_description")
             %th= t(".used_by")
         %tbody
-          - @keys.each do |key|
-            %tr 
-              %td{style: 'font-family: monospace'}
-                = link_to key.desc, list_key_path(@list, key)
-                - if key.trust_issues.present?
-                  .text-danger.glyphicon.glyphicon-warning-sign{title: t(".#{key.trust_issues}")}
-              %td
-                = @list.subscriptions.select { |s| s.fingerprint == key.fingerprint }.map do |subscription|
-                  - link_to subscription.email, subscription_path(subscription)
-                - end.join(', ').html_safe
+          - @assigned_keys.each do |key|
+            = render "key_row", key: key
+          - @unassigned_keys.each do |key|
+            = render "key_row", key: key
 
 - if current_account.subscribed_to?(@list) || current_account.superadmin?
   .col-lg-6.col-md-8#upload

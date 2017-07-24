@@ -6,7 +6,12 @@ class KeysController < ApplicationController
   before_filter :load_key, only: [:show, :destroy]
 
   def index
-    @keys = @list.keys
+    all_keys = @list.keys
+    sub_fingerprints = @list.subscriptions.map(&:fingerprint)
+    @assigned_keys = all_keys.select do |key|
+      sub_fingerprints.include?(key.fingerprint)
+    end
+    @unassigned_keys = all_keys - @assigned_keys
   end
 
   def create
