@@ -31,7 +31,7 @@ es:
 
     show:
       key: llave
-      key_is_: La llave es
+      key_is_: "La llave es %{status}!"
       expiry_date: Fecha de expiración
       none: Ninguna
       download: descargar
@@ -43,6 +43,7 @@ es:
       revoked: revoked
       invalid: invalid
       disabled: disabled
+      "not capable of encryption": not capable of encryption
 
   accounts:
     new:

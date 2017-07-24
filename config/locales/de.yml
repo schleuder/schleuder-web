@@ -31,7 +31,7 @@ de:
 
     show:
       key: Schlüssel
-      key_is_: Schlüssel ist
+      key_is_: "Schlüssel ist %{status}!"
       expiry_date: Ablaufdatum
       none: keins
       download: Runterladen
@@ -43,6 +43,7 @@ de:
       revoked: zurückgezogen
       invalid: ungültig
       disabled: deaktiviert
+      "not capable of encryption": nicht zur Verschlüsselung verwendbar
 
   accounts:
     new:

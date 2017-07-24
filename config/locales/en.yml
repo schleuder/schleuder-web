@@ -23,14 +23,15 @@ en:
       primary_uid: Primary UID
       upload_keys: Upload key
 
-    form:
-      paste_as_text_here: "Paste as text here&hellip;"
-      or_select_a_file: Or select a file
+    new:
+      paste_as_text: "Paste key as text:"
+      select_a_file: Select a file
       upload: Upload
+      save: Save
 
     show:
       key: Key
-      key_is_: Key is
+      key_is_: "Key is %{status}!"
       expiry_date: Expiry date
       none: None
       download: download
@@ -42,6 +43,7 @@ en:
       revoked: revoked
       invalid: invalid
       disabled: disabled
+      "not capable of encryption": not capable of encryption
 
   accounts:
     new:

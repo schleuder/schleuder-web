@@ -5,9 +5,7 @@
   - if @key.trust_issues.present?
     .text-danger
       .large.glyphicon.glyphicon-warning-sign
-      = t(".key_is_")
-      = succeed('!') do
-        = @key.trust_issues
+      = key_trust_title(@key)
   %p
     = succeed(":") do
       = t(".expiry_date")

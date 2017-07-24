@@ -49,9 +49,6 @@ module ApplicationHelper
   end
 
   def key_trust_title(key)
-    trust_issues = key.trust_issues.map do |trust_issue|
-      t("keys.stati.#{trust_issue}")
-    end
-    t('keys.stati.key_is', status: trust_issues.to_sentence)
+    t('keys.show.key_is_', status: t("keys.stati.#{key.trust_issues}"))
   end
 end
