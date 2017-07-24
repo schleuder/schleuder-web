@@ -28,7 +28,7 @@
                   = link_to(list_key_path(@list, subscription.key.fingerprint)) do
                     = image_tag 'key-problem.svg', width: '20px', title: "Key is #{subscription.key.trust_issues}"
                 - if subscription.admin?
-                  .text-success.glyphicon.glyphicon-user{title: 'Is an admin of this list'}
+                  .glyphicon.glyphicon-star.admin-star-colour{title: 'Is an admin of this list'}
                 - if ! subscription.delivery_enabled?
                   .glyphicon.glyphicon-volume-off{title: 'Does not receive list-messages (delivery disabled)'}
 
