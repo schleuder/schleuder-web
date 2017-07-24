@@ -2,17 +2,39 @@
 
 .col-lg-7
   .panel.panel-info
-    .panel-heading= t('.listing_keys')
+    .panel-heading List's key
     .panel-body
       %table.table
         %thead
           %tr
-            %th= t(".key")
-            %th= t(".used_by")
+            %th
+            %th
         %tbody
           = render "key_row", key: @list.key
+
+.col-lg-7
+  .panel.panel-info
+    .panel-heading Subscription keys
+    .panel-body
+      %table.table
+        %thead
+          %tr
+            %th
+            %th= t(".used_by")
+        %tbody
           - @assigned_keys.each do |key|
             = render "key_row", key: key
+
+.col-lg-7
+  .panel.panel-info
+    .panel-heading Other keys
+    .panel-body
+      %table.table
+        %thead
+          %tr
+            %th
+            %th
+        %tbody
           - @unassigned_keys.each do |key|
             = render "key_row", key: key
 
