@@ -1,8 +1,11 @@
 %tr 
   %td{style: 'font-family: monospace'}
-    = link_to key.desc, list_key_path(@list, key)
-    - if key.trust_issues.present?
-      .text-danger.glyphicon.glyphicon-warning-sign{title: t("keys.index.#{key.trust_issues}")}
+    - if key.trust_issues.blank?
+      = link_to key.desc, list_key_path(@list, key)
+    - else
+      = link_to list_key_path(@list, key), class: 'text-danger' do
+        = key.desc
+        .glyphicon.glyphicon-warning-sign{title: t("keys.index.#{key.trust_issues}")}
   %td
     = @list.subscriptions.select { |s| s.fingerprint == key.fingerprint }.map do |subscription|
       - link_to subscription.email, subscription_path(subscription)
