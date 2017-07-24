@@ -18,6 +18,8 @@ class ListsController < ApplicationController
   end
 
   def subscriptions
+    @admins = @list.admins
+    @non_admins = @list.subscriptions - @list.admins
   end
 
   def new_subscription
