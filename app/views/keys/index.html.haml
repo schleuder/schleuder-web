@@ -8,16 +8,14 @@
         %thead
           %tr
             %th= t(".key_description")
-            %th= t(".primary_uid")
             %th= t(".used_by")
         %tbody
           - @keys.each do |key|
             %tr 
               %td
-                = link_to key.desc, list_key_path(@list, key), title: "Fingerprint: #{key.fingerprint}"
+                = link_to key.desc, list_key_path(@list, key)
                 - if key.trust_issues.present?
                   .text-danger.glyphicon.glyphicon-warning-sign{title: t(".#{key.trust_issues}")}
-              %td= key.email
               %td
                 - if sub = Subscription.where(fingerprint: key.fingerprint).first
                   = link_to sub.email, subscription_path(sub)
