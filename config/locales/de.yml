@@ -67,9 +67,10 @@ de:
       link_text: ein neues anfordern
 
   subscriptions:
+    show:
+      unsubscribe_from_list: Abo dieser Liste löschen
     edit:
       unsubscribe: Abo löschen
-      unsubscribe_from_list: Abo dieser Liste löschen
     delete:
       unsubscribe: Abo löschen
       unsubscribe_email_from_list: Wirklich das Abo %{email} von %{list_email} löschen?

@@ -67,9 +67,10 @@ en:
       link_text: request a new one
 
   subscriptions:
+    show:
+      unsubscribe_from_list: Unsubscribe from this list
     edit:
       unsubscribe: Unsubscribe
-      unsubscribe_from_list: Unsubscribe from this list
     delete:
       unsubscribe: Unsubscribe
       unsubscribe_email_from_list: Really unsubscribe %{email} from %{list_email}?

@@ -67,9 +67,10 @@ es:
       link_text: "pedir uno nuevo"
 
   subscriptions:
+    show:
+      unsubscribe_from_list: Borrar suscripción de la lista
     edit:
       unsubscribe: Borrar suscripción
-      unsubscribe_from_list: Borrar suscripción de la lista
     delete:
       unsubscribe: Borrar suscripción
       unsubscribe_email_from_list: Realmente borrar la suscripción de %{email} de %{list_email}?

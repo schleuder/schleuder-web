@@ -5,9 +5,3 @@
     .panel-heading Edit subscription
     .panel-body= render 'form'
 
-.col-lg-6.col-md-4
-  .pull-right
-    - if @subscription.is_last_admin?
-      .text-muted= t("subscriptions.destroy.cant_unsubscribe_last_admin")
-    - else
-      = link_to t(".unsubscribe_from_list"), delete_subscription_path(@subscription), class: 'text-danger'
