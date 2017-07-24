@@ -7,7 +7,8 @@
       = link_to(edit_subscription_path(subscription)) do
         = image_tag 'key-missing.svg', width: '20px', title: 'No key assigned!'
     - elsif subscription.key.blank?
-      = image_tag 'key-problem.svg', width: '20px', title: "Assigned key not in keyring!"
+      = link_to(edit_subscription_path(subscription)) do
+        = image_tag 'key-missing.svg', width: '20px', title: "Assigned key not in keyring!"
       %span
         = link_to(list_keys_path(@list, anchor: 'upload'), title: 'Upload key', class: 'text-success') do
           .large.glyphicon.glyphicon-upload
