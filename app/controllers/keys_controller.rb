@@ -12,7 +12,7 @@ class KeysController < ApplicationController
     @assigned_keys = all_keys.select do |key|
       sub_fingerprints.include?(key.fingerprint)
     end
-    @unassigned_keys = all_keys - @assigned_keys
+    @unassigned_keys = all_keys - @assigned_keys - [@list.key]
   end
 
   def create

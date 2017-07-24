@@ -10,6 +10,7 @@
             %th= t(".key")
             %th= t(".used_by")
         %tbody
+          = render "key_row", key: @list.key
           - @assigned_keys.each do |key|
             = render "key_row", key: key
           - @unassigned_keys.each do |key|
