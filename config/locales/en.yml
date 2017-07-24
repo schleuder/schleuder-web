@@ -21,7 +21,6 @@ en:
       listing_keys: Keyring
       fingerprint: Fingerprint
       primary_uid: Primary UID
-      expired: expired
       upload_keys: Upload key
 
     form:
@@ -37,6 +36,12 @@ en:
       download: download
       delete_key: Delete key
       delete_this_key: Delete key from list's keyring
+
+    stati:
+      expired: expired
+      revoked: revoked
+      invalid: invalid
+      disabled: disabled
 
   accounts:
     new:

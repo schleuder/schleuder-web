@@ -38,6 +38,12 @@ es:
       delete_key: Borrar llave
       delete_this_key: Borrar la llave del llavero de la lista
 
+    stati:
+      expired: expired
+      revoked: revoked
+      invalid: invalid
+      disabled: disabled
+
   accounts:
     new:
       headline: Nueva cuenta
@@ -87,3 +93,8 @@ es:
 
   errors:
     invalid_email: "no es una dirección válida"
+
+  support:
+    array:
+      two_words_connector: ' y '
+      last_word_connector: ' y '

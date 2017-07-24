@@ -1,0 +1,6 @@
+- if key.trust_issues.blank?
+  = link_to key.desc, list_key_path(@list, key), class: :mono
+- else
+  = link_to list_key_path(@list, key), title: key_trust_title(key.trust_issues), class: 'mono text-danger' do
+    = key.desc
+    .glyphicon.glyphicon-warning-sign

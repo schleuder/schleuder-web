@@ -38,6 +38,12 @@ de:
       delete_key: Schlüssel löschen
       delete_this_key: Diesen Schlüssel aus dem Schlüsselring der Liste löschen
 
+    stati:
+      expired: abgelaufen
+      revoked: zurückgezogen
+      invalid: ungültig
+      disabled: deaktiviert
+
   accounts:
     new:
       headline: Neuer Account
@@ -87,3 +93,8 @@ de:
 
   errors:
     invalid_email: "ist keine gültige Email-Adresse"
+
+  support:
+    array:
+      two_words_connector: ' und '
+      last_word_connector: ' und '

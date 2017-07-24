@@ -13,7 +13,7 @@
           .large.glyphicon.glyphicon-upload
     - elsif subscription.key.trust_issues.present?
       = link_to(list_key_path(@list, subscription.key.fingerprint)) do
-        = image_tag 'key-problem.svg', width: '20px', title: "Key is #{subscription.key.trust_issues}"
+        = image_tag 'key-problem.svg', width: '20px', title: key_trust_title(subscription.key)
     - if subscription.admin?
       .glyphicon.glyphicon-star.admin-star-colour{title: 'Is an admin of this list'}
     - if ! subscription.delivery_enabled?
