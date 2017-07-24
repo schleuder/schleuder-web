@@ -12,7 +12,7 @@
         %tbody
           - @keys.each do |key|
             %tr 
-              %td
+              %td{style: 'font-family: monospace'}
                 = link_to key.desc, list_key_path(@list, key)
                 - if key.trust_issues.present?
                   .text-danger.glyphicon.glyphicon-warning-sign{title: t(".#{key.trust_issues}")}
