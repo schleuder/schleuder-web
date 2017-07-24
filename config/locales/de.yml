@@ -82,6 +82,8 @@ de:
   lists:
     delete:
       back_to_list: Zurück zur Listen-Seite
+    subscriptions:
+      new_subscription: Neues Abo
 
   errors:
     invalid_email: "ist keine gültige Email-Adresse"

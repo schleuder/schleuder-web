@@ -82,6 +82,8 @@ es:
   lists:
     delete:
       back_to_list: Volver a la lista
+    subscriptions:
+      new_subscription: Nueva suscripción
 
   errors:
     invalid_email: "no es una dirección válida"

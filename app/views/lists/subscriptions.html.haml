@@ -35,6 +35,6 @@
 
 .col.col-lg-7
   .pull-right
-    = button_to(new_list_subscription_path(@list), method: :get, title: t(".new_subscription"), class: 'btn btn-success') do
+    = button_to(new_list_subscription_path(@list), method: :get, class: 'btn btn-success') do
       %span.glyphicon.glyphicon-plus
       = t(".new_subscription")

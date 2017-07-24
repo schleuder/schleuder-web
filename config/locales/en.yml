@@ -82,6 +82,8 @@ en:
   lists:
     delete:
       back_to_list: Back to list
+    subscriptions:
+      new_subscription: New subscription
 
   errors:
     invalid_email: "is not a valid email address"
