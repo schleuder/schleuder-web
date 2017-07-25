@@ -3,7 +3,7 @@
 .col-sm-12
   - if current_account.subscribed_to?(@list) || current_account.superadmin?
     .pull-right
-      = button_to(list_key_new_path(@list), method: :get, title: t(".upload_keys"), class: 'btn btn-success') do
+      = link_to(list_key_new_path(@list), method: :get, title: t(".upload_keys"), class: 'text-success') do
         %span.glyphicon.glyphicon-plus
         = t(".upload_keys")
 
