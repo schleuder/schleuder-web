@@ -24,7 +24,9 @@ en:
       upload_keys: Upload key
 
     new:
-      paste_as_text: "Paste key as text:"
+      upload_key: Upload key
+      paste_as_text: "Paste key as text"
+      or: or
       select_a_file: Select a file
       upload: Upload
       save: Save

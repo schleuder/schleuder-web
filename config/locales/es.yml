@@ -24,10 +24,13 @@ es:
       expired: expirada
       upload_keys: Subir llaves
 
-    form:
-      paste_as_text_here: "Pegar como texto aquí&hellip;"
-      or_select_a_file: O selecciona un archivo
+    new:
+      upload_key: Subir llave
+      paste_as_text: "Pegar como texto"
+      or: o
+      select_a_file: Selecciona un archivo
       upload: Subir
+      save: Guardar
 
     show:
       key: llave

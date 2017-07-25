@@ -3,13 +3,24 @@
 .col-sm-12
   %h2= @title
 
-  = form_tag(list_key_create_path(@list), method: 'post',  multipart: true, id: :keyupload) do
-    .form-group
-      = text_area_tag 'ascii', '', style: 'width: 100%; min-height: 15em;', placeholder: t(".paste_as_text_here").html_safe
+  .col.col-sm-5
+    = form_tag(list_key_create_path(@list), method: 'post',  multipart: true, id: :keyupload) do
+      %fieldset
+        %legend= t(".select_a_file")
+        .form-group
+          = file_field_tag :keyfile
+        = submit_tag t(".upload"), class: 'btn btn-success'
 
-    .form-group
-      %span.text-muted= t(".or_select_a_file") + ':'
-      = file_field_tag :keyfile
+  .col.col-sm-2
+    %div{style: 'margin-top: 5em; text-align: center; font-size: 1.2em'}
+      %div= t(".or")
+      = image_tag 'double-arrow', width: '60px'
 
-    = submit_tag t(".upload"), class: 'btn btn-success'
+  .col.col-sm-5
+    = form_tag(list_key_create_path(@list), method: 'post',  multipart: true, id: :keyupload) do
+      %fieldset
+        %legend= t(".paste_as_text")
+        .form-group
+          = text_area_tag 'ascii', '', style: 'width: 100%; min-height: 10em;'
+        = submit_tag t(".save"), class: 'btn btn-success'
 
