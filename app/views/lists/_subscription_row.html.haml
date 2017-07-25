@@ -10,7 +10,7 @@
       = link_to(edit_subscription_path(subscription)) do
         = image_tag 'key-missing.svg', width: '20px', title: "Assigned key not in keyring!"
       %span
-        = link_to(list_keys_path(@list, anchor: 'upload'), title: 'Upload key', class: 'text-success') do
+        = link_to(list_key_new_path(@list), title: 'Upload key', class: 'text-success') do
           .large.glyphicon.glyphicon-upload
     - elsif subscription.key.trust_issues.present?
       = link_to(list_key_path(@list, subscription.key.fingerprint)) do

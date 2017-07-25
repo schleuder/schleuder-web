@@ -34,14 +34,15 @@ class KeysController < ApplicationController
     # list_id is included in the request-body.
     import_result = Key.create(keymaterial: input, list_id: @list.id)
     if import_result.considered == 0
+      # Can't use :error as argument to redirect_to()
       flash[:error] = 'No keys found in input'
+      redirect_to list_key_new_path(@list)
     else
       msg = import_result.imports.map do |import_status|
         [import_status.fpr, import_status.action].join(': ')
       end.join(', ')
-      flash[:notice] = msg
+      redirect_to list_keys_path(@list), notice: msg
     end
-    redirect_to list_keys_path(@list), notice: msg
   end
 
   def destroy
