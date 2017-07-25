@@ -61,6 +61,19 @@ h1 {
   font-size: 1.5em;
 }
 
+h2 {
+  margin: 0em 0em 0.5em 0;
+  font-weight: 600;
+}
+
+<% # A bigger top-margin for the first fieldset %>
+fieldset {
+  margin-top: 2em;
+  & + fieldset {
+    margin-top: 1em;
+  }
+}
+
 .mono {
   font-family: monospace;
 }
