@@ -1,22 +1,23 @@
 - @title = 'Subscriptions'
 
-.col-lg-7
-  .panel.panel-info
-    .panel-heading Subscriptions
-    .panel-body
-      %table.table
-        %thead
-          %tr 
-            %th email
-            %th
-        %tbody
-          - @admins.each do |subscription|
-            = render "subscription_row", subscription: subscription
-          - @non_admins.each do |subscription|
-            = render "subscription_row", subscription: subscription
+.col.col-sm-12
 
-.col.col-lg-7
   .pull-right
     = button_to(new_list_subscription_path(@list), method: :get, class: 'btn btn-success') do
       %span.glyphicon.glyphicon-plus
       = t(".new_subscription")
+
+  %h2= @title
+
+  %fieldset
+    %legend Admins
+    %table.table
+      - @admins.each do |subscription|
+        = render "subscription_row", subscription: subscription
+
+  %fieldset
+    %legend Other subscriptions
+    %table.table
+      - @non_admins.each do |subscription|
+        = render "subscription_row", subscription: subscription
+
