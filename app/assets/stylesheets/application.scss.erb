@@ -117,6 +117,7 @@ table tr:first-child > td {
 
 .listing {
   td:first-child {
+    width: 15em;
     text-align: right;
   }
   td {
@@ -145,4 +146,18 @@ table tr:first-child > td {
 
 .listkey { 
   font-style: italic;
+}
+
+ul.subscriptions-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  li {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+  }
+  li:not(:last-child):after {
+    content: ',';
+  }
 }

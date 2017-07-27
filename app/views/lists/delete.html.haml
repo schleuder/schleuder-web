@@ -2,15 +2,20 @@
 
 .col-lg-6.col-md-6
 
-  %h3= @title
+  %h2 #{@title} #{@list.email}?
 
   %p{style: 'margin: 3em 0'}
     %strong 
       Are you really sure?
+      This can
+      %em not
+      be undone!
 
 
   .pull-right
     = button_to(@list, method: :get, class: 'btn btn-link') do
       = t(".back_to_list")
 
-  = button_to "Delete list now!", @list, method: :delete, class: 'btn btn-danger'
+  = button_to @list, method: :delete, class: 'btn btn-danger' do
+    .glyphicon.glyphicon-remove
+    Delete list now! 

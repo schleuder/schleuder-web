@@ -1,7 +1,7 @@
 - @title = "#{t('.key')} #{@key}"
 
 .col.col-lg-6.col-md-8
-  %h3= @key.to_s
+  %h2= @key.to_s
   - if @key.trust_issues.present?
     .text-danger
       .large.glyphicon.glyphicon-warning-sign

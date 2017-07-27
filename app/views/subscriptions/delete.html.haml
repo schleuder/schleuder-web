@@ -1,7 +1,8 @@
 - @title = t(".unsubscribe")
 
 .col-lg-6.col-md-6
-  %h3= @title
+  %h2 #{@title} #{@subscription.email}?
+
   %p{style: 'margin: 3em 0'}
     %strong= t(".unsubscribe_email_from_list", email: @subscription.email, list_email: @subscription.list.email)
 

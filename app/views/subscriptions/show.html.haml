@@ -1,47 +1,48 @@
 - @title = @subscription.email
 
-.col-lg-7.clear
-  .panel.panel-info
-    .panel-heading= @subscription.email
-    .panel-body
-
-      .pull-right
-        = button_to(edit_subscription_path(@subscription), method: :get, title: "Edit this subscription", class: 'btn btn-action') do
-          %span.glyphicon.glyphicon-edit
-          Edit
-
-      %table.listing
-        %tr
-          %td Delivery enabled?
-          %td.large
-            - if @subscription.delivery_enabled?
-              .text-success ✓
-            - else
-              .text-danger ⨯
-        %tr
-          %td Admin of this list?
-          %td.large
-            - if @subscription.admin?
-              .text-success ✓
-            - else
-              .text-danger ⨯
-        %tr
-          %td Key
-          %td
-            - if @key.blank?
-              = link_to(edit_subscription_path(@subscription)) do
-                .text-danger
-                  .glyphicon.glyphicon-warning-sign
-                  No key assigned!
-            - else
-              = render 'keys/key_oneline', key: @key
-              = link_to [@list, @key, format: :asc] do
-                .black.glyphicon.glyphicon-download-alt{style: 'margin-left: 2em'}
-                = t(".download")
-
-.col-lg-7.clear
+.col.col-sm-12
   .pull-right
-    - if @subscription.is_last_admin?
-      .text-muted= t("subscriptions.destroy.cant_unsubscribe_last_admin")
-    - else
-      = link_to t(".unsubscribe_from_list"), delete_subscription_path(@subscription), class: 'text-danger'
+    = link_to(edit_subscription_path(@subscription), method: :get, title: "Edit this subscription", class: 'text-action') do
+      %span.glyphicon.glyphicon-edit
+      Edit
+
+  %h2= @title
+
+  %table.table.listing
+    %tr
+      %td Delivery enabled?
+      %td.large
+        - if @subscription.delivery_enabled?
+          .text-success ✓
+        - else
+          .text-danger ⨯
+    %tr
+      %td Admin of this list?
+      %td.large
+        - if @subscription.admin?
+          .text-success ✓
+        - else
+          .text-danger ⨯
+    %tr
+      %td Key
+      %td
+        - if @key.blank?
+          = link_to(edit_subscription_path(@subscription)) do
+            .text-danger
+              .glyphicon.glyphicon-warning-sign
+              No key assigned!
+        - else
+          = render 'keys/key_oneline', key: @key
+          = link_to [@list, @key, format: :asc] do
+            .black.glyphicon.glyphicon-download-alt{style: 'margin-left: 2em'}
+            = t(".download")
+
+  .pull-right
+    - if can? :delete, @subscription
+      - if @subscription.is_last_admin?
+        .text-muted= t("subscriptions.destroy.cant_unsubscribe_last_admin")
+      - else
+        = link_to(delete_subscription_path(@subscription), class: 'text-danger') do
+          %span.glyphicon.glyphicon-remove
+          = t(".unsubscribe_from_list")
+

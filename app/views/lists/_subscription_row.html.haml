@@ -1,8 +1,6 @@
 %tr
-  %td{style: 'padding-right: 1.3em'}
-    = link_to(subscription.email, subscription_path(subscription))
-
-  %td{style: 'width: 100%;'}
+  %td
+    = render "subscriptions/subscription", subscription: subscription
     - if subscription.fingerprint.blank?
       = link_to(edit_subscription_path(subscription)) do
         = image_tag 'key-missing.svg', width: '20px', title: 'No key assigned!'

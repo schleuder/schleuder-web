@@ -1,0 +1,3 @@
+%ul.subscriptions-list
+  - subscriptions.each do |subscription|
+    %li<= render "subscriptions/subscription", subscription: subscription

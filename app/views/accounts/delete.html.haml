@@ -1,13 +1,21 @@
-- @title = "Delete account #{@account}"
+- @title = "Delete account"
 
-%h3= @title
+.col.col-sm-6
+  %h2 Delete account #{@account}?
 
-%p{style: 'margin: 3em 0'}
-  %strong 
-    Are you really sure? This does 
-    %em NOT
-    unsubscribe you from any list!
+  %p{style: 'margin: 3em 0'}
+    %strong 
+      Are you really sure? This does 
+      %em NOT
+      unsubscribe you from any list!
+
+  .pull-right
+    = button_to(@account, method: :get, class: 'btn btn-link') do
+      = t(".back_to_account")
 
 
-= button_to "Delete account now!", @account, method: :delete, class: 'btn btn-danger'
+  = button_to @account, method: :delete, class: 'btn btn-danger' do
+    .glyphicon.glyphicon-remove
+    Delete account now!
+
 

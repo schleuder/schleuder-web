@@ -1,9 +1,5 @@
 %tr 
   %td
     = render "key_oneline", key: key
-  %td
-    = @subscriptions.select { |s| s.fingerprint == key.fingerprint }.map do |subscription|
-      - link_to subscription_path(subscription) do
-        = image_tag 'person.svg', width: '10px', style: 'margin: 0 3px 0 5px;' 
-        %span>= subscription.email
-    - end.join(', ').html_safe
+  %td{style: 'text-align: right'}
+    = render "subscriptions/subscriptions", subscriptions: @subscriptions.select { |s| s.fingerprint == key.fingerprint }
