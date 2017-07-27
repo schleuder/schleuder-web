@@ -10,6 +10,10 @@ class Base < ActiveResource::Base
     verify_callback: lambda { |*a| self.ssl_verify_callback(*a) }
     #ca_file: Conf.api_cert_file
   }
+  # A little hack to enable requesting URLs from the root of the API (e.g.
+  # </version.json> — actually <//version.json> is requested, but
+  # schleuder-api-daemon is ok with that).
+  self.element_name = ""
 
   def self.ssl_verify_callback(pre_ok, cert_store)
     cert = cert_store.chain[0]
@@ -19,5 +23,9 @@ class Base < ActiveResource::Base
     end
     fingerprint = OpenSSL::Digest::SHA256.new(cert.to_der).to_s
     fingerprint == Conf.api.tls_fingerprint
+  end
+
+  def self.api_version
+    get(:version)
   end
 end
