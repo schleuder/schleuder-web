@@ -110,4 +110,10 @@ class ApplicationController < ActionController::Base
     var = controller_name.classify.constantize.find(params[:id])
     instance_variable_set("@#{var_name}", var)
   end
+
+  def put_api_messages_as_flash_error
+    if messages = Base.connection.http_response.headers[:x_messages]
+      flash[:error] = messages
+    end
+  end
 end

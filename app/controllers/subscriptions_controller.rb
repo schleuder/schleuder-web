@@ -18,6 +18,7 @@ class SubscriptionsController < ApplicationController
   def update
     # Load resource manually as cancan doesn't use strong-parameters (yet).
     if @subscription.update_attributes(subscription_params)
+      put_api_messages_as_flash_error
       msg = "✓ Subscription of #{@subscription} updated."
       if can?(:manage, @subscription.list)
         redirect_to subscription_path(@subscription), notice: msg
@@ -36,6 +37,7 @@ class SubscriptionsController < ApplicationController
     authorize! :create, @subscription
     logger.debug "Subscriptions to be saved: #{@subscription.inspect}"
     if @subscription.save
+      put_api_messages_as_flash_error
       logger.debug "Saving successful"
       redirect_to subscription_path(@subscription.id),
           notice: "✓ #{@subscription} subscribed."
