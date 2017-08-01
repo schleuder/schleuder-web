@@ -1,4 +1,5 @@
 class SubscriptionsController < ApplicationController
+  include KeyUpload
   skip_load_and_authorize_resource only: [:create]
 
   def index
@@ -16,8 +17,9 @@ class SubscriptionsController < ApplicationController
   end
 
   def update
-    # Load resource manually as cancan doesn't use strong-parameters (yet).
-    if @subscription.update_attributes(subscription_params)
+    args = subscription_params
+    args[:key_material] = select_key_material
+    if @subscription.update_attributes(args)
       put_api_messages_as_flash_error
       msg = "✓ Subscription of #{@subscription} updated."
       if can?(:manage, @subscription.list)
@@ -32,8 +34,10 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
+    args = subscription_params
+    args[:key_material] = select_key_material
     # Load resource manually as cancan doesn't use strong-parameters (yet).
-    @subscription = Subscription.new(subscription_params)
+    @subscription = Subscription.new(args)
     authorize! :create, @subscription
     logger.debug "Subscriptions to be saved: #{@subscription.inspect}"
     if @subscription.save
@@ -78,14 +82,12 @@ class SubscriptionsController < ApplicationController
   private
 
   def subscription_params
-    p = params.require(:subscription).permit(
+    params.require(:subscription).permit(
         :email,
         :fingerprint,
         :admin,
         :delivery_enabled,
         :list_id
     )
-    logger.debug "subscription_params: #{p.inspect}"
-    p
   end
 end
