@@ -2,7 +2,7 @@
 
 .col.col-sm-12
   .pull-right
-    = link_to(edit_subscription_path(@subscription), method: :get, title: "Edit this subscription", class: 'text-action') do
+    = link_to(edit_subscription_path(@subscription), method: :get, title: "Edit this subscription", class: 'text-action', accesskey: :e) do
       %span.glyphicon.glyphicon-edit
       Edit
 

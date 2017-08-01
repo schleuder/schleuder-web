@@ -20,8 +20,8 @@
   %fieldset
     %legend Submit
     - if @subscription.persisted?
-      = f.button :submit, 'Update', class: 'btn btn-primary'
+      = f.button :submit, 'Update', class: 'btn btn-primary', accesskey: :e
     - else
-      = f.button :submit, 'Subscribe', class: 'btn btn-success'
+      = f.button :submit, 'Subscribe', class: 'btn btn-success', accesskey: :e
 
 
