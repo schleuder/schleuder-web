@@ -4,6 +4,7 @@ class KeysController < ApplicationController
   before_filter :load_list_resource
   before_filter :load_subscription_resource, only: [:index, :show]
   before_filter :load_key, only: [:show, :destroy]
+  # TODO: authorize if current_account.subscribed_to?(@list) || current_account.superadmin?
 
   def index
     all_keys = @list.keys
