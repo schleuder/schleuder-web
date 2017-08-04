@@ -14,7 +14,7 @@
   .col.col-sm-2
     %div{style: 'margin-top: 5em; text-align: center; font-size: 1.2em'}
       %div= t(".or")
-      = image_tag 'double-arrow', width: '60px'
+      = image_tag 'double-arrow.svg', width: '60px'
 
   .col.col-sm-5
     = form_tag(list_key_create_path(@list), method: 'post',  multipart: true, id: :keyupload) do
