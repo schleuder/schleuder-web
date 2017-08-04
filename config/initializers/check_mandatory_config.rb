@@ -1,3 +1,5 @@
+return if ! API_REQUIRED
+
 def fatal(msg)
   $stderr.puts "Error: #{msg}"
   exit 1

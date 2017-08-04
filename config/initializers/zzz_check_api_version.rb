@@ -1,3 +1,5 @@
+return if ! API_REQUIRED
+
 REQUIRED_API_VERSION = '3.0'
 
 begin
