@@ -16,7 +16,7 @@ class Ability
       can :manage, Subscription do |subscription|
         account.admin_lists.map(&:id).include?(subscription.list_id.to_i)
       end
-      can [:read, :update, :new_subscription], List, id: account.admin_lists.map(&:id)
+      can [:read, :update, :new_subscription, :subscriptions], List, id: account.admin_lists.map(&:id)
     end
   end
 end
