@@ -1,0 +1,9 @@
+.form-group
+  %label.control-label.col-sm-3{for: :keyfile}= t(".select_a_file")
+  .col-sm-9= file_field_tag :keyfile, class: 'file'
+
+= render "keys/upload_spacer"
+
+.form-group
+  %label.control-label.col-sm-3{for: :ascii}= t(".paste_as_text")
+  .col-sm-9= text_area_tag 'ascii', '', style: 'width: 100%; min-height: 10em;', class: 'form-control'

@@ -26,11 +26,15 @@ en:
 
     new:
       upload_key: Upload key
-      paste_as_text: "Paste key as text"
-      or: or
-      select_a_file: Select a file
       upload: Upload
       save: Save
+
+    upload_fields:
+      paste_as_text: Paste a new key as text
+      select_a_file: Upload a new key file
+
+    upload_spacer:
+      or: or
 
     show:
       key: Key
@@ -102,6 +106,8 @@ en:
       back_to_subscription: Back to subscription
     destroy:
       cant_unsubscribe_last_admin: Can't unsubscribe the last admin of this list!
+    form:
+      select_a_key: Select a present key
 
   lists:
     delete:

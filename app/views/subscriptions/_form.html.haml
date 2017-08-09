@@ -1,16 +1,27 @@
-= simple_form_for(@subscription, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
+= simple_form_for(@subscription, html: { multipart: true, class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
   = f.input :list_id, as: :hidden, input_html: { value: @subscription.list.id }
-  - if @subscription.new?
-    = f.input :email, required: true
-  - else
-    = f.input :email, disabled: true
-  .mono= f.input :fingerprint, collection: @list.keys.map { |k| [k.to_s, k.fingerprint] }, label: :Key
-  - if can?(:update, @subscription.list)
-    = checkbox f, :admin, "May s/he administer this list?"
-  = checkbox f, :delivery_enabled, "Receive the emails sent over the list?"
-  - if @subscription.persisted?
-    = f.button :submit, 'Update', class: 'btn btn-primary'
-  - else
-    = f.button :submit, 'Subscribe', class: 'btn btn-success'
+
+  %fieldset
+    %legend Email
+    - if @subscription.new?
+      = f.input :email, required: true
+    - else
+      = f.input :email, disabled: true
+    = checkbox f, :delivery_enabled, "Receive the emails sent over the list?"
+    - if can?(:update, @subscription.list)
+      = checkbox f, :admin, "May s/he administer this list?"
+
+  %fieldset
+    %legend= t(".key")
+    = f.input :fingerprint, collection: @list.keys.map { |k| [k.to_s, k.fingerprint] }, label: t(".select_a_key"), class: :mono
+    = render "keys/upload_spacer"
+    = render "keys/upload_fields"
+
+  %fieldset
+    %legend Submit
+    - if @subscription.persisted?
+      = f.button :submit, 'Update', class: 'btn btn-primary'
+    - else
+      = f.button :submit, 'Subscribe', class: 'btn btn-success'
 
 

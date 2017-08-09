@@ -1,8 +1,6 @@
 - @title = t("lists.subscriptions.new_subscription")
 
-.col-lg-12
-  .panel.panel-info
-    .panel-heading New subscription
-    .panel-body
-      = render 'subscriptions/form'
+.col-sm-12
+  %h2= @title
 
+  = render "subscriptions/form"

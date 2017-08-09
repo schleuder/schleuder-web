@@ -27,11 +27,15 @@ de:
 
     new:
       upload_key: Schlüssel hochladen
-      paste_as_text: Als Text einfügen
-      or: oder
-      select_a_file: Eine Datei auswählen
       upload: Hochladen
       save: Speichern
+
+    upload_fields:
+      paste_as_text: Einen neuen Schlüssel als Text einfügen
+      select_a_file: Eine neue Schlüssel-Datei hochladen
+
+    upload_spacer:
+      or: oder
 
     show:
       key: Schlüssel
@@ -103,6 +107,8 @@ de:
       back_to_subscription: Zurück zu Abo-Seite
     destroy:
       cant_unsubscribe_last_admin: Letztes Admin-Abo kann nicht gelöscht werden!
+    form:
+      select_a_key: Einen vorhanden Schlüssel auswählen
 
   lists:
     delete:

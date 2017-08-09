@@ -27,11 +27,15 @@ es:
 
     new:
       upload_key: Subir llave
-      paste_as_text: "Pegar como texto"
-      or: o
-      select_a_file: Selecciona un archivo
       upload: Subir
       save: Guardar
+
+    upload_fields:
+      paste_as_text: Pegar una nueva llave como texto
+      select_a_file: Subir un nuevo archivo
+
+    upload_spacer:
+      or: o
 
     show:
       key: llave
@@ -103,6 +107,8 @@ es:
       back_to_subscription: Volver a la suscripción
     destroy:
       cant_unsubscribe_last_admin: No puedes borrar la última suscripción de administración de la lista.
+    form: 
+      select_a_key: Select a present key
 
   lists:
     delete:
