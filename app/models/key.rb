@@ -19,7 +19,4 @@ class Key < Base
     end
   end
 
-  def desc
-    "#{fingerprint} #{email}"
-  end
 end
