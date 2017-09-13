@@ -21,6 +21,7 @@
     %legend Submit
     - if @subscription.persisted?
       = f.button :submit, 'Update', class: 'btn btn-primary', accesskey: :e
+      = link_to "Cancel", subscription_path(@subscription), style: "margin-left: 2em"
     - else
       = f.button :submit, 'Subscribe', class: 'btn btn-success', accesskey: :e
 
