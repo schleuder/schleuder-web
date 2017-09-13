@@ -32,10 +32,3 @@
         %td Subscriptions without key
         %td
           = render 'subscriptions/subscriptions', subscriptions: @list.subscriptions.select { |sub| sub.key.blank? }
-
-  - if can? :destroy, @list
-    .pull-right
-      = link_to delete_list_path(@list), class: 'text-danger' do
-        .glyphicon.glyphicon-remove
-        Delete list 
-
