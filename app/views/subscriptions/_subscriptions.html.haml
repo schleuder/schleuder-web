@@ -1,3 +1,5 @@
-%ul.subscriptions-list
+%ul.subscriptions-list{style: "display: inline-block;"}
   - subscriptions.each do |subscription|
-    %li<= render "subscriptions/subscription", subscription: subscription
+    %li<
+      = image_tag 'person.svg', style: 'width: 10px; margin: 0 2px;'
+      = render "subscriptions/subscription", subscription: subscription

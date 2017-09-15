@@ -8,13 +8,17 @@ class KeysController < ApplicationController
   # TODO: authorize if current_account.subscribed_to?(@list) || current_account.superadmin?
 
   def index
-    all_keys = @list.keys
-    @subscriptions = @list.subscriptions
-    sub_fingerprints = @subscriptions.map(&:fingerprint)
-    @assigned_keys = all_keys.select do |key|
-      sub_fingerprints.include?(key.fingerprint)
+    @assigned_keys = {}
+    @unassigned_keys = []
+    subs_by_fingerprint = @list.subscriptions.group_by(&:fingerprint)
+    all_keys = @list.keys - [@list.key]
+    all_keys.each do |key|
+      if subs_by_fingerprint[key.fingerprint].present?
+        @assigned_keys[key] = subs_by_fingerprint[key.fingerprint]
+      else
+        @unassigned_keys << key
+      end
     end
-    @unassigned_keys = all_keys - @assigned_keys - [@list.key]
   end
 
   def create

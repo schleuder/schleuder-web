@@ -19,4 +19,7 @@ class Key < Base
     end
   end
 
+  def generation_date
+    @generation_date ||= DateTime.parse(generated_at)
+  end
 end

@@ -190,3 +190,93 @@ input#keyfile {
   @extend .form-control;
   height: auto;
 }
+
+.card_listing {
+  margin: 3em 0;
+  width: 50em;
+}
+
+.keys_index .card_listing {
+  width: auto;
+}
+
+.list_key {
+  .card {
+    border-style: dashed;
+  }
+}
+
+.card {
+  display: flex;
+  border: solid thin #ccc;
+  border-radius: 1px;
+  box-shadow: 1px 1px 0px rgba(120,120,120,0.2);
+  padding: 0.7em 1em;
+  margin: 1em;
+}
+
+.card_text {
+  flex-grow: 100;
+  margin: 7px 0 0 0.5em;
+}
+
+.popup_icon:hover ~ .popup_text,
+.popup_icon:focus ~ .popup_text,
+.popup_text:hover,
+.popup_text:focus {
+  display: block;
+}
+
+.popup {
+  display: inline-block;
+  margin: 0 0 0 .5em;
+  position: relative;
+  width: auto;
+  img.icon_person {
+    width: 25px;
+  }
+}
+
+img.popup_icon {
+  width: 30px;
+}
+
+
+.popup_text {
+  display: none;
+  position: absolute;
+  top: -1.5em;
+  right: 1.5em;
+  width: auto;
+  white-space: nowrap;
+  border: solid thin silver;
+  border-radius: 5px;
+  box-shadow: 1px 1px 0px rgba(120,120,120,0.2);
+  background: rgba(252, 252, 252, 0.9);
+  padding: 1em;
+  text-align: right;
+}
+
+.warn {
+  color: #e0872e;
+}
+
+.attribute-container {
+  margin: 1em 0;
+  display: flex;
+  & > *:first-child {
+    margin-right: 1em;
+  }
+  img:first-child {
+    width: 30px;
+  }
+  .text {
+    flex-grow: 100;
+    * {
+      display: inline-block;
+    }
+    .key-oneline {
+      margin-right: 0.5em;
+    }
+  }
+}

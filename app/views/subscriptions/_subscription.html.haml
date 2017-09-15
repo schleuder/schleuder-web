@@ -1,5 +1,1 @@
-- if can? :show, subscription
-  = link_to subscription_path(subscription) do
-    = render "subscriptions/subscription_atom", subscription: subscription
-- else
-  = render "subscriptions/subscription_atom", subscription: subscription
+= link_to subscription.email, subscription_path(subscription)

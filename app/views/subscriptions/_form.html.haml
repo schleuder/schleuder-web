@@ -11,7 +11,7 @@
     - if can?(:update, @subscription.list)
       = checkbox f, :admin, "May s/he administer this list?"
 
-  %fieldset
+  %fieldset#keyselection
     %legend= t(".key")
     = f.input :fingerprint, collection: @list.keys.map { |k| [k.to_s, k.fingerprint] }, label: t(".select_a_key"), class: :mono
     = render "keys/upload_spacer"

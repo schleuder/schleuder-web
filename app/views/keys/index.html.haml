@@ -1,6 +1,6 @@
-- @title = "Keys"
+- @title = "Known keys"
 
-.col-sm-12
+.col-sm-12.keys_index
   - if current_account.subscribed_to?(@list) || current_account.superadmin?
     .pull-right
       = link_to(list_key_new_path(@list), method: :get, title: t(".upload_keys"), class: 'text-success') do
@@ -9,21 +9,15 @@
 
   %h2= @title
 
-  %fieldset
-    %legend The list's key
-    %table.table
-      = render "key_row", key: @list.key
+  .card_listing.list_key
+    = render "key_row", key: @list.key, with_list_key_info: true
 
-  %fieldset
-    %legend Subscription keys
-    %table.table
-      - @assigned_keys.each do |key|
-        = render "key_row", key: key
+  .card_listing
+    - @assigned_keys.each do |key, subscriptions|
+      = render "key_row", key: key, subscriptions: subscriptions
 
-  %fieldset
-    %legend Other keys
-    %table.table
-      - @unassigned_keys.each do |key|
-        = render "key_row", key: key
+  .card_listing
+    - @unassigned_keys.each do |key|
+      = render "key_row", key: key
 
 
