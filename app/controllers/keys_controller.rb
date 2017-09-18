@@ -22,7 +22,8 @@ class KeysController < ApplicationController
     elsif params[:keyfile].present?
       input = params[:keyfile].read
     else
-      redirect_to :index, alert: 'No input found'
+      flash[:alert] = 'No input found'
+      return redirect_to action: 'index'
     end
 
     if ! input.match('BEGIN PGP')
