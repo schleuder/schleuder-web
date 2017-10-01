@@ -13,6 +13,7 @@ en:
       edit_subscription: Edit subscription
       keys: Keys
     navbar:
+      my_lists: My Lists
       logout: Logout
       account_settings: Account settings
 
@@ -61,6 +62,12 @@ en:
       token_too_old: This request-token is too old, please request a new one.
     create:
       success: Account creation successful! Please log in to your new account.
+    show:
+      title: My Lists
+      new_list: New List
+      headline: Lists
+      administrating: Lists you are administrating are
+      em: emphasized
     update:
       password_changed: ✓ Password changed.
     destroy:

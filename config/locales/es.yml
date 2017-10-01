@@ -13,6 +13,7 @@ es:
       edit_subscription: Editar suscripción
       keys: Llaves
     navbar:
+      my_lists: 
       logout: Salir
       account_settings: Opciones de cuenta
 
@@ -60,6 +61,12 @@ es:
       smtp_connection_refused: "El servidor SMTP está rechazando conexiones, !no se pudo enviar el correo! (%{exc.message})"
     setup:
       token_too_old: Este código de verificación es muy viejo, por favor solicita uno nuevo.
+    show:
+      title:
+      new_list:
+      headline:
+      administrating:
+      em:
     create:
       success: "!Cuenta creada con éxito! Por favor ingresa a tu nueva cuenta."
     update:

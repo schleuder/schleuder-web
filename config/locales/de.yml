@@ -13,6 +13,7 @@ de:
       edit_subscription: Abo bearbeiten
       keys: Schlüssel
     navbar:
+      my_lists: Meine Listen
       logout: Ausloggen
       account_settings: Konto-Einstellungen
 
@@ -60,6 +61,12 @@ de:
       smtp_connection_refused: Der konfigurierte SMTP-Server verweigert die Verbindung, die Email konnte nicht versandt werden! (%{exc.message})
     setup:
       token_too_old: Dieses Token ist abgelaufen, bitte fordere ein neues an.
+    show:
+      title: Meine Listen
+      new_list: Neue Liste erstellen
+      headline: Listen
+      hint: Listen, die du verwaltest sind
+      em: kursiv
     create:
       success: Der Account wurde erfolgreich angelegt! Bitte logge dich ein.
     update:

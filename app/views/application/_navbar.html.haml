@@ -6,7 +6,7 @@
     %li
       = link_to(root_path, accesskey: :h) do
         %span.glyphicon.glyphicon-home
-        My lists
+        = t(".my_lists")
     %li
       = link_to(edit_account_path(current_user)) do
         %span.glyphicon.glyphicon-wrench
