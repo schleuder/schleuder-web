@@ -70,11 +70,11 @@ es:
     setup:
       token_too_old: Este código de verificación es muy viejo, por favor solicita uno nuevo.
     show:
-      title:
-      new_list:
-      headline:
-      administrating:
-      em:
+      title: mía listas
+      new_list: Nueva lista
+      headline: listas
+      administrating: Listas que tu administras estar escrito
+      em: en cursiva
     create:
       success: "!Cuenta creada con éxito! Por favor ingresa a tu nueva cuenta."
     update:
