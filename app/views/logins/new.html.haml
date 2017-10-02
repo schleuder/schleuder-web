@@ -1,12 +1,12 @@
-- @title = 'Login'
+- @title = t(".title")
 
 .col-lg-6
   = form_tag(create_login_path, { class: 'form-horizontal', role: 'form' }) do
     .form-group
-      = label_tag :email, 'Email', class: 'col-sm-2 control-label'
+      = label_tag :email, t(".email"), class: 'col-sm-2 control-label'
       .col-sm-6= text_field_tag :email, '', class: 'form-control'
     .form-group
-      = label_tag :password, 'Password', class: 'col-sm-2 control-label'
+      = label_tag :password, t(".password"), class: 'col-sm-2 control-label'
       .col-sm-6= password_field_tag :password, '', class: 'form-control'
-    = button_tag 'Login', class: 'btn btn-primary'
-    = link_to 'Create account', new_account_path
+    = button_tag t(".login"), class: 'btn btn-primary'
+    = link_to t(".create_account"), new_account_path

@@ -49,6 +49,14 @@ es:
       disabled: disabled
       "not capable of encryption": not capable of encryption
 
+  logins:
+    new:
+      title: Acceder
+      email: Email
+      password: Password
+      login: Acceder
+      create_account: Nueva cuenta
+
   accounts:
     new:
       headline: Nueva cuenta

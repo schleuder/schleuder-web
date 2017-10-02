@@ -48,6 +48,14 @@ en:
       disabled: disabled
       "not capable of encryption": not capable of encryption
 
+  logins:
+    new:
+      title: Login
+      email: Email
+      password: Password
+      login: Login
+      create_account: Create Account
+
   accounts:
     new:
       headline: New account

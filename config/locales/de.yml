@@ -49,6 +49,14 @@ de:
       disabled: deaktiviert
       "not capable of encryption": nicht zur Verschlüsselung verwendbar
 
+  logins:
+    new:
+      title: Anmelden
+      email: Email
+      password: Passwort
+      login: Anmelden
+      create_account: Konto erstellen
+
   accounts:
     new:
       headline: Neuer Account
