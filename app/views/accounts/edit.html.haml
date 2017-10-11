@@ -9,7 +9,7 @@
 
       = f.submit 'Save', class: 'btn btn-primary'
 
-  - if @account.superadmin?
+  - if ! @account.superadmin?
     .pull-right
       = link_to delete_account_path(@account), class: 'text-danger' do
         .glyphicon.glyphicon-remove
