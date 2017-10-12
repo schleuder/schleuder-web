@@ -114,6 +114,13 @@ en:
       back_to_list: Back to list
     subscriptions:
       new_subscription: New subscription
+    new:
+      title: New List
+      create_list: Create a new list
+      hint_email: Email-address for this list.
+      fingerprint: Fingerprint
+      hint_fingerprint: "Optional: fingerprint of the existing OpenPGP public key to use for this list. A new key-pair will be generated if this is blank or no matching key is found."
+      create: Create
 
   errors:
     invalid_email: "is not a valid email address"

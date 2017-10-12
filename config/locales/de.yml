@@ -115,6 +115,12 @@ de:
       back_to_list: Zurück zur Listen-Seite
     subscriptions:
       new_subscription: Neues Abo
+    new:
+      title: Neue Liste
+      create_list: Eine neue Liste anlegen
+      hint_email: Email-Adresse der Liste
+      fingerprint: Fingerabdruck
+      hint_fingerprint: "Optional: Fingerabdruck eines existierenden öffentlichten OpenPGP-Schlüssels, der für diese Liste genutzt werden soll. Bleibt das Feld leer oder wird kein passender Schlüssel gefunden, wird ein neues Schlüsselpaar erstellt."
 
   errors:
     invalid_email: "ist keine gültige Email-Adresse"

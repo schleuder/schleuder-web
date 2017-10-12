@@ -115,6 +115,13 @@ es:
       back_to_list: Volver a la lista
     subscriptions:
       new_subscription: Nueva suscripción
+    new:
+      title: Nueva lista
+      create_list: Crear una nueva lista
+      hint_email: Dirección de correo electrónico de la lista
+      fingerprint: Huella
+      hint_fingerprint: # TODO
+      create: Crear
 
   errors:
     invalid_email: "no es una dirección válida"
