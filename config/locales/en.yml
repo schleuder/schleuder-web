@@ -93,6 +93,10 @@ en:
 
         You might want to %{link}?
       link_text: request a new one
+    edit:
+      title: My Account
+      change_password: Change password
+      save: Save
 
   subscriptions:
     show:
@@ -124,3 +128,9 @@ en:
 
   errors:
     invalid_email: "is not a valid email address"
+
+  simple_form:
+    labels:
+      defaults:
+        password: Password
+        password_confirmation: Password confirmation

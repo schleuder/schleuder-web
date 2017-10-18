@@ -94,6 +94,10 @@ es:
 
         "¿Tal vez quieras %{link}?"
       link_text: "pedir uno nuevo"
+    edit:
+      title: Opciones des cuenta
+      change_password: Altera la contraseña
+      save: Guardar
 
   subscriptions:
     show:
@@ -130,3 +134,9 @@ es:
     array:
       two_words_connector: ' y '
       last_word_connector: ' y '
+
+  simple_form:
+    labels:
+      defaults:
+        password: Contraseña
+        password_confirmation: Repetir la contraseña 

@@ -94,6 +94,10 @@ de:
 
         Vielleicht möchtest du %{link}?
       link_text: ein neues anfordern
+    edit:
+      title: Konto-Einstellungen
+      change_password: Passwort ändern
+      save: Speichern
 
   subscriptions:
     show:
@@ -129,3 +133,9 @@ de:
     array:
       two_words_connector: ' und '
       last_word_connector: ' und '
+
+  simple_form:
+    labels:
+      defaults:
+        password: Passwort
+        password_confirmation: Passwort wiederholen
