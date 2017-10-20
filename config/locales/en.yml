@@ -55,8 +55,11 @@ en:
   logins:
     new:
       title: Login
+      hint: Please login with your Schleuder user account.
       email: Email
+      hint_email: Enter your email
       password: Password
+      hint_password: Enter your password
       login: Login
       create_account: Create Account
 

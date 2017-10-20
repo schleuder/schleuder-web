@@ -56,8 +56,11 @@ de:
   logins:
     new:
       title: Anmelden
+      hint: Bitte melde dich mit deinem Schleuder-Konto an.
       email: Email
+      hint_email: Gib deine Email-Adresse ein
       password: Passwort
+      hint_password: Gib dein Passwort ein
       login: Anmelden
       create_account: Konto erstellen
 

@@ -52,6 +52,17 @@ es:
       invalid: invalid
       disabled: disabled
       "not capable of encryption": not capable of encryption
+  
+  logins:
+    new:
+      title: Acceder
+      hint: #TODO
+      email: Dirección
+      hint_email: Escribe tu dirección
+      password: Contraseña
+      hint_password: Escribe tu contraseña
+      login: Acceder
+      create_account: Crear una cuenta
 
   logins:
     new:
