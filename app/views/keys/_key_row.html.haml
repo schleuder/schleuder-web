@@ -1,5 +1,14 @@
-%tr 
-  %td
+.card
+  .card_icon= image_tag 'key.svg', style: 'width: 45px; margin: 5px 3px 0 0'
+  .card_text
     = render "key_oneline", key: key
-  %td{style: 'text-align: right'}
-    = render "subscriptions/subscriptions", subscriptions: @subscriptions.select { |s| s.fingerprint == key.fingerprint }
+  .card_info
+    - if defined?(with_list_key_info)
+      = popup("robot.svg") do
+        This key belongs to this schleuder-list.
+
+    - else
+      - if defined?(subscriptions) && subscriptions.any?
+        = popup("person.svg") do
+          Used by
+          = render "subscriptions/subscriptions", subscriptions: subscriptions

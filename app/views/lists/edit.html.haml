@@ -1,3 +1,10 @@
 - @title = 'List options'
 
 = render 'form'
+
+- if can? :destroy, @list
+  .pull-right{style: 'margin-top: 3em'}
+    = link_to delete_list_path(@list), class: 'text-danger' do
+      .glyphicon.glyphicon-remove
+      Delete list 
+

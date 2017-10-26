@@ -1,17 +1,24 @@
-%tr
-  %td
+.card
+  .card_icon= image_tag 'person.svg', width: '30px'
+  .card_text
     = render "subscriptions/subscription", subscription: subscription
+  .card_info
     - if subscription.fingerprint.blank?
-      = link_to(edit_subscription_path(subscription)) do
-        = image_tag 'key-missing.svg', width: '20px', title: 'No key assigned!'
+      = popup('key-missing.svg') do
+        .warn Warning: This address has no key selected!
+        = link_to("Fix this", edit_subscription_path(subscription))
     - elsif subscription.key.blank?
-      = link_to(edit_subscription_path(subscription)) do
-        = image_tag 'key-missing.svg', width: '20px', title: "Assigned key not in keyring!"
-      %span
-        = link_to(list_key_new_path(@list), title: 'Upload key', class: 'text-success') do
-          .large.glyphicon.glyphicon-upload
+      = popup('key-missing.svg') do
+        .warn Warning: The key that is selected for this address is not available!
+        = link_to("Fix this", edit_subscription_path(subscription))
     - elsif subscription.key.trust_issues.present?
-      = link_to(list_key_path(@list, subscription.key.fingerprint)) do
-        = image_tag 'key-problem.svg', width: '20px', title: key_trust_title(subscription.key)
+      = popup('key-missing.svg') do
+        .warn= key_trust_title(subscription.key)
+        = link_to("Fix this", edit_subscription_path(subscription))
+
     - if ! subscription.delivery_enabled?
-      .glyphicon.glyphicon-volume-off{title: 'Does not receive list-messages (delivery disabled)'}
+      = popup('delivery-disabled.svg') do
+        This person currently does not receive emails from this list ("delivery disabled").
+    - if subscription.admin?
+      = popup('heart.svg') do
+        This person is an admin of this list.

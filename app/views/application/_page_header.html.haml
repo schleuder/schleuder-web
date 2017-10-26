@@ -1,6 +1,6 @@
 .page-header
   - if @list.present? && @list.persisted?
-    #pageheadline= link_to_unless current_page?(@list), @list, @list, accesskey: :l
+    #pageheadline= link_to @list.email, list_subscriptions_path(@list)
     = render 'list_menu'
   - else
     #pageheadline= @title

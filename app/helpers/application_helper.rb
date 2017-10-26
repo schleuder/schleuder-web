@@ -51,4 +51,12 @@ module ApplicationHelper
   def key_trust_title(key)
     t('keys.show.key_is_', status: t("keys.stati.#{key.trust_issues}"))
   end
+
+  def popup(icon, &block)
+    render('popup', icon: icon, text: capture { block.call })
+  end
+
+  def class_for_icon(name)
+    "icon_#{File.basename(name, ".*")}"
+  end
 end

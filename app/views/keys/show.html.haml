@@ -1,18 +1,32 @@
 - @title = "#{t('.key')} #{@key}"
 
 .col.col-lg-6.col-md-8
-  %h2= @key.to_s
+  %h2= @key.fingerprint
   - if @key.trust_issues.present?
-    .text-danger
-      .large.glyphicon.glyphicon-warning-sign
-      = key_trust_title(@key)
-  %p
-    = succeed(":") do
-      = t(".expiry_date")
-    - if @key.expiry_date.present?
-      = l(@key.expiry_date)
-    - else
-      = t(".none")
+    .warn{style: 'margin: 1em 0'}
+      .large
+        .large
+          .large
+            .glyphicon.glyphicon-warning-sign
+            = key_trust_title(@key)
+
+  %table.table.listing
+    %tr
+      %td Primary user ID:
+      %td= @key.primary_uid
+
+    %tr
+      %td   #{t(".expiry_date")}:
+      %td
+        - if @key.expiry_date.present?
+          = l(@key.expiry_date)
+        - else
+          = t(".none")
+
+    %tr
+      %td Generation date:
+      %td= l @key.generation_date
+
 
   .pull-right
     .large.glyphicon.glyphicon-download-alt

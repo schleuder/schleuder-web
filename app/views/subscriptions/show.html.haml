@@ -2,47 +2,72 @@
 
 .col.col-sm-12
   .pull-right
-    = link_to(edit_subscription_path(@subscription), method: :get, title: "Edit this subscription", class: 'text-action') do
+    = link_to(edit_subscription_path(@subscription), method: :get, title: "Edit this subscription", class: 'text-action', accesskey: :e) do
       %span.glyphicon.glyphicon-edit
       Edit
 
   %h2= @title
 
-  %table.table.listing
-    %tr
-      %td Delivery enabled?
-      %td.large
-        - if @subscription.delivery_enabled?
-          .text-success ✓
-        - else
-          .text-danger ⨯
-    %tr
-      %td Admin of this list?
-      %td.large
-        - if @subscription.admin?
-          .text-success ✓
-        - else
-          .text-danger ⨯
-    %tr
-      %td Key
-      %td
-        - if @key.blank?
-          = link_to(edit_subscription_path(@subscription)) do
-            .text-danger
-              .glyphicon.glyphicon-warning-sign
-              No key assigned!
-        - else
-          = render 'keys/key_oneline', key: @key
-          = link_to [@list, @key, format: :asc] do
-            .black.glyphicon.glyphicon-download-alt{style: 'margin-left: 2em'}
-            = t(".download")
+  
+  .col.col-sm-12.subscription-attributes
+    - if @subscription.admin?
+      .attribute-container
+        = image_tag "heart.svg"
+        .text This person is an admin of this list
 
-  .pull-right
-    - if can? :delete, @subscription
-      - if @subscription.is_last_admin?
-        .text-muted= t("subscriptions.destroy.cant_unsubscribe_last_admin")
+    - if @subscription.delivery_enabled?
+      .attribute-container{title: "This person receives emails from the list"}
+        = image_tag "delivery.svg"
+        .text Email-delivery is enabled.
+    - else
+      .attribute-container{title: "This person does currently not receive emails from this list"}
+        = image_tag "delivery-disabled.svg"
+        .text Email-delivery is disabled.
+
+    - if @key.blank?
+      - if @list.send_encrypted_only?
+        - title = "No key is selected for this person, they will not receive any emails!"
       - else
-        = link_to(delete_subscription_path(@subscription), class: 'text-danger') do
-          %span.glyphicon.glyphicon-remove
-          = t(".unsubscribe_from_list")
+        - title = "No key is selected for this person, they will receive unencrypted emails."
+      .attribute-container{title: title}
+        = image_tag "key-missing.svg"
+        .text
+          = link_to(edit_subscription_path(@subscription)) do
+            .warn No key selected!
+          .foo
+            = link_to edit_subscription_path(@subscription, anchor: :keyselection) do
+              %span.glyphicon.glyphicon-edit
+              Fix this
+
+    - else
+      - if @key.trust_issues.present?
+        - if @list.send_encrypted_only?
+          - title = "An unusable key is selected for this person, they will not receive any emails!"
+        - else
+          - title = "An unusable key is selected for this person, they will receive unencrypted emails."
+        .attribute-container
+          = image_tag "key-missing.svg", title: title
+          .text
+            Selected key:
+            = render 'keys/key_oneline', key: @key
+            .foo
+              = link_to edit_subscription_path(@subscription, anchor: :keyselection) do
+                %span.glyphicon.glyphicon-edit
+                Fix this
+
+      - else
+        .attribute-container
+          = image_tag "key-outlined.svg"
+          .text
+            Selected key:
+            = render 'keys/key_oneline', key: @key
+
+    .pull-right{style: 'margin-top: 5em'}
+      - if can? :delete, @subscription
+        - if @subscription.is_last_admin?
+          .text-muted= t("subscriptions.destroy.cant_unsubscribe_last_admin")
+        - else
+          = link_to(delete_subscription_path(@subscription), class: 'text-danger') do
+            %span.glyphicon.glyphicon-remove
+            = t(".unsubscribe_from_list")
 

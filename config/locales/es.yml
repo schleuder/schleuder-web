@@ -27,11 +27,15 @@ es:
 
     new:
       upload_key: Subir llave
-      paste_as_text: "Pegar como texto"
-      or: o
-      select_a_file: Selecciona un archivo
       upload: Subir
       save: Guardar
+
+    upload_fields:
+      paste_as_text: Pegar una nueva llave como texto
+      select_a_file: Subir un nuevo archivo
+
+    upload_spacer:
+      or: o
 
     show:
       key: llave
@@ -48,6 +52,17 @@ es:
       invalid: invalid
       disabled: disabled
       "not capable of encryption": not capable of encryption
+  
+  logins:
+    new:
+      title: Acceder
+      hint: #TODO
+      email: Dirección
+      hint_email: Escribe tu dirección
+      password: Contraseña
+      hint_password: Escribe tu contraseña
+      login: Acceder
+      create_account: Crear una cuenta
 
   logins:
     new:
@@ -90,6 +105,10 @@ es:
 
         "¿Tal vez quieras %{link}?"
       link_text: "pedir uno nuevo"
+    edit:
+      title: Opciones des cuenta
+      change_password: Altera la contraseña
+      save: Guardar
 
   subscriptions:
     show:
@@ -103,12 +122,21 @@ es:
       back_to_subscription: Volver a la suscripción
     destroy:
       cant_unsubscribe_last_admin: No puedes borrar la última suscripción de administración de la lista.
+    form: 
+      select_a_key: Select a present key
 
   lists:
     delete:
       back_to_list: Volver a la lista
     subscriptions:
       new_subscription: Nueva suscripción
+    new:
+      title: Nueva lista
+      create_list: Crear una nueva lista
+      hint_email: Dirección de correo electrónico de la lista
+      fingerprint: Huella
+      hint_fingerprint: # TODO
+      create: Crear
 
   errors:
     invalid_email: "no es una dirección válida"
@@ -117,3 +145,9 @@ es:
     array:
       two_words_connector: ' y '
       last_word_connector: ' y '
+
+  simple_form:
+    labels:
+      defaults:
+        password: Contraseña
+        password_confirmation: Repetir la contraseña 

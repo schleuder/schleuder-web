@@ -19,7 +19,7 @@ class Key < Base
     end
   end
 
-  def desc
-    "#{fingerprint} #{email}"
+  def generation_date
+    @generation_date ||= DateTime.parse(generated_at)
   end
 end

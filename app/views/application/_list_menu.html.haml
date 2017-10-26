@@ -1,3 +1,17 @@
+- if @list.key.blank?
+  .alert.alert-warning 
+    %strong
+      This list is not functional!
+    %p Please contact the people that run this service and tell them about this problem: "No list-key present for #{@list.email}".
+
+- if @list.admins.blank?
+  .alert.alert-warning 
+    %strong
+      This list is not functional!
+    %p 
+      It needs at least one list-admin! 
+      = link_to "Please subscribe one.", new_list_subscription_path(@list)
+
 %ul#listmenu
   - if can?(:update, @list)
     %li

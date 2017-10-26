@@ -1,12 +1,13 @@
 - @title = t(".title")
 
 .col-lg-6
+  %p{style: 'margin-bottom: 3em'}= t(".hint")
   = form_tag(create_login_path, { class: 'form-horizontal', role: 'form' }) do
     .form-group
       = label_tag :email, t(".email"), class: 'col-sm-2 control-label'
-      .col-sm-6= text_field_tag :email, '', class: 'form-control'
+      .col-sm-6= text_field_tag :email, '', placeholder: t(".hint_email"), class: 'form-control'
     .form-group
       = label_tag :password, t(".password"), class: 'col-sm-2 control-label'
-      .col-sm-6= password_field_tag :password, '', class: 'form-control'
+      .col-sm-6= password_field_tag :password, '', placeholder: t(".hint_password"), class: 'form-control'
     = button_tag t(".login"), class: 'btn btn-primary'
     = link_to t(".create_account"), new_account_path

@@ -14,7 +14,7 @@ class ListsController < ApplicationController
   end
 
   def show
-    @subscription = current_account.subscription(@list)
+    redirect_to list_subscriptions_path
   end
 
   def subscriptions

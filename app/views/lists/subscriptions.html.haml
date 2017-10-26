@@ -1,4 +1,4 @@
-- @title = 'Subscriptions'
+- @title = 'Subscribed addresses'
 
 .col.col-sm-12
 
@@ -9,15 +9,12 @@
 
   %h2= @title
 
-  %fieldset
-    %legend Admins
-    %table.table
-      - @admins.each do |subscription|
-        = render "subscription_row", subscription: subscription
+  .card_listing
+    - @admins.each do |subscription|
+      = render "subscription_row", subscription: subscription
 
-  %fieldset
-    %legend Other subscriptions
-    %table.table
-      - @non_admins.each do |subscription|
-        = render "subscription_row", subscription: subscription
+  .card_listing
+    - @non_admins.each do |subscription|
+      = render "subscription_row", subscription: subscription
+
 

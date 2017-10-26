@@ -88,8 +88,8 @@ class AccountsController < ApplicationController
   end
 
   def destroy
-    if account.superadmin?
-      redirect_to account, alert: t(".superadmin_not_deletable")
+    if @account.superadmin?
+      redirect_to @account, alert: t(".superadmin_not_deletable")
       return
     end
 

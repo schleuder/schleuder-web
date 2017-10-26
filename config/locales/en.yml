@@ -26,11 +26,15 @@ en:
 
     new:
       upload_key: Upload key
-      paste_as_text: "Paste key as text"
-      or: or
-      select_a_file: Select a file
       upload: Upload
       save: Save
+
+    upload_fields:
+      paste_as_text: Paste a new key as text
+      select_a_file: Upload a new key file
+
+    upload_spacer:
+      or: or
 
     show:
       key: Key
@@ -51,8 +55,11 @@ en:
   logins:
     new:
       title: Login
+      hint: Please login with your Schleuder user account.
       email: Email
+      hint_email: Enter your email
       password: Password
+      hint_password: Enter your password
       login: Login
       create_account: Create Account
 
@@ -89,6 +96,10 @@ en:
 
         You might want to %{link}?
       link_text: request a new one
+    edit:
+      title: My Account
+      change_password: Change password
+      save: Save
 
   subscriptions:
     show:
@@ -102,12 +113,27 @@ en:
       back_to_subscription: Back to subscription
     destroy:
       cant_unsubscribe_last_admin: Can't unsubscribe the last admin of this list!
+    form:
+      select_a_key: Select a present key
 
   lists:
     delete:
       back_to_list: Back to list
     subscriptions:
       new_subscription: New subscription
+    new:
+      title: New List
+      create_list: Create a new list
+      hint_email: Email-address for this list.
+      fingerprint: Fingerprint
+      hint_fingerprint: "Optional: fingerprint of the existing OpenPGP public key to use for this list. A new key-pair will be generated if this is blank or no matching key is found."
+      create: Create
 
   errors:
     invalid_email: "is not a valid email address"
+
+  simple_form:
+    labels:
+      defaults:
+        password: Password
+        password_confirmation: Password confirmation

@@ -1,4 +1,5 @@
 class KeysController < ApplicationController
+  include KeyUpload
   skip_load_and_authorize_resource
   skip_authorization_check
   before_filter :load_list_resource
@@ -7,34 +8,32 @@ class KeysController < ApplicationController
   # TODO: authorize if current_account.subscribed_to?(@list) || current_account.superadmin?
 
   def index
-    all_keys = @list.keys
-    @subscriptions = @list.subscriptions
-    sub_fingerprints = @subscriptions.map(&:fingerprint)
-    @assigned_keys = all_keys.select do |key|
-      sub_fingerprints.include?(key.fingerprint)
+    @assigned_keys = {}
+    @unassigned_keys = []
+    subs_by_fingerprint = @list.subscriptions.group_by(&:fingerprint)
+    all_keys = @list.keys - [@list.key]
+    all_keys.each do |key|
+      if subs_by_fingerprint[key.fingerprint].present?
+        @assigned_keys[key] = subs_by_fingerprint[key.fingerprint]
+      else
+        @unassigned_keys << key
+      end
     end
-    @unassigned_keys = all_keys - @assigned_keys - [@list.key]
   end
 
   def create
-    if params[:ascii].present?
-      input = params[:ascii]
-    elsif params[:keyfile].present?
-      input = params[:keyfile].read
-    else
+    input = select_key_material
+    if input.blank?
       flash[:alert] = 'No input found'
       return redirect_to action: 'index'
-    end
-
-    if ! input.match('BEGIN PGP')
-      # Input appears to be binary
-      input = Base64.encode64(input)
     end
 
     logger.info "input: #{input.inspect}"
     # ActiveResource doesn't want to use query-params with create(), so here
     # list_id is included in the request-body.
     import_result = Key.create(keymaterial: input, list_id: @list.id)
+    # TODO: Maybe move the interpretation of the import-result into the
+    # API-daemon? schleuder-cli is doing the same intepretation, too.
     if import_result.considered == 0
       # Can't use :error as argument to redirect_to()
       flash[:error] = 'No keys found in input'

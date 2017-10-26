@@ -27,11 +27,15 @@ de:
 
     new:
       upload_key: Schlüssel hochladen
-      paste_as_text: Als Text einfügen
-      or: oder
-      select_a_file: Eine Datei auswählen
       upload: Hochladen
       save: Speichern
+
+    upload_fields:
+      paste_as_text: Einen neuen Schlüssel als Text einfügen
+      select_a_file: Eine neue Schlüssel-Datei hochladen
+
+    upload_spacer:
+      or: oder
 
     show:
       key: Schlüssel
@@ -52,8 +56,11 @@ de:
   logins:
     new:
       title: Anmelden
+      hint: Bitte melde dich mit deinem Schleuder-Konto an.
       email: Email
+      hint_email: Gib deine Email-Adresse ein
       password: Passwort
+      hint_password: Gib dein Passwort ein
       login: Anmelden
       create_account: Konto erstellen
 
@@ -90,6 +97,10 @@ de:
 
         Vielleicht möchtest du %{link}?
       link_text: ein neues anfordern
+    edit:
+      title: Konto-Einstellungen
+      change_password: Passwort ändern
+      save: Speichern
 
   subscriptions:
     show:
@@ -103,12 +114,20 @@ de:
       back_to_subscription: Zurück zu Abo-Seite
     destroy:
       cant_unsubscribe_last_admin: Letztes Admin-Abo kann nicht gelöscht werden!
+    form:
+      select_a_key: Einen vorhanden Schlüssel auswählen
 
   lists:
     delete:
       back_to_list: Zurück zur Listen-Seite
     subscriptions:
       new_subscription: Neues Abo
+    new:
+      title: Neue Liste
+      create_list: Eine neue Liste anlegen
+      hint_email: Email-Adresse der Liste
+      fingerprint: Fingerabdruck
+      hint_fingerprint: "Optional: Fingerabdruck eines existierenden öffentlichten OpenPGP-Schlüssels, der für diese Liste genutzt werden soll. Bleibt das Feld leer oder wird kein passender Schlüssel gefunden, wird ein neues Schlüsselpaar erstellt."
 
   errors:
     invalid_email: "ist keine gültige Email-Adresse"
@@ -117,3 +136,9 @@ de:
     array:
       two_words_connector: ' und '
       last_word_connector: ' und '
+
+  simple_form:
+    labels:
+      defaults:
+        password: Passwort
+        password_confirmation: Passwort wiederholen

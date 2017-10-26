@@ -1,10 +1,11 @@
-- @title = 'New list'
+- @title = t(".title")
 
 .col.col-sm-12
   %fieldset
-    %legend= 'Create a new list'
+    %legend
+      = t(".create_list")
   
     = simple_form_for(@list, html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f|
-      = f.input :email, hint: "Email-address for this list.", required: true
-      = f.input :fingerprint, hint: "Optional: fingerprint of the existing OpenPGP public key to use for this list. A new key-pair will be generated if this is blank or no matching key is found."
-      = f.button :submit, 'Create', class: 'btn btn-success'
+      = f.input :email, hint: t(".hint_email"), required: true
+      = f.input :fingerprint, label: t(".fingerprint"), hint: t(".hint_fingerprint")
+      = f.button :submit, t(".create"), class: 'btn btn-success'
