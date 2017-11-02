@@ -88,7 +88,7 @@ es:
       title: mía listas
       new_list: Nueva lista
       headline: listas
-      administrating: Listas que tu administras estar escrito
+      hint: Listas que tu administras estar escrito
       em: en cursiva
     create:
       success: "!Cuenta creada con éxito! Por favor ingresa a tu nueva cuenta."
