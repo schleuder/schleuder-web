@@ -82,6 +82,7 @@ en:
       new_list: New List
       headline: Lists
       administrating: Lists you are administrating are
+      hint: Lists you are administrating are
       em: emphasized
     update:
       password_changed: ✓ Password changed.
