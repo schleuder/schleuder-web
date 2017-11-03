@@ -19,6 +19,7 @@ en:
 
   keys:
     index:
+      title: Known keys
       listing_keys: Keyring
       fingerprint: Fingerprint
       primary_uid: Primary UID
@@ -41,6 +42,7 @@ en:
       key_is_: "Key is %{status}!"
       expiry_date: Expiry date
       none: None
+      generation_date: Generation date
       download: download
       delete_key: Delete key
       delete_this_key: Delete key from list's keyring
@@ -121,6 +123,7 @@ en:
     delete:
       back_to_list: Back to list
     subscriptions:
+      title: Subscribed addresses
       new_subscription: New subscription
     new:
       title: New List

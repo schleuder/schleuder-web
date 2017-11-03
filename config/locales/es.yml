@@ -13,12 +13,13 @@ es:
       edit_subscription: Editar suscripción
       keys: Llaves
     navbar:
-      my_lists: 
+      my_lists: Mía listas
       logout: Salir
       account_settings: Opciones de cuenta
 
   keys:
     index:
+      title: Llaves de la lista
       listing_keys: Listando llaves
       fingerprint: Huella
       primary_uid: UID primaria
@@ -42,6 +43,7 @@ es:
       key_is_: "La llave es %{status}!"
       expiry_date: Fecha de expiración
       none: Ninguna
+      generation_date: Creado en
       download: descargar
       delete_key: Borrar llave
       delete_this_key: Borrar la llave del llavero de la lista
@@ -129,6 +131,7 @@ es:
     delete:
       back_to_list: Volver a la lista
     subscriptions:
+      title: Suscripciones de la lista
       new_subscription: Nueva suscripción
     new:
       title: Nueva lista

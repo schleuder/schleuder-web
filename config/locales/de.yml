@@ -19,6 +19,7 @@ de:
 
   keys:
     index:
+      title: Verfügbare Schlüssel dieser Liste
       listing_keys: Schlüsselring
       fingerprint: Fingerabdruck
       primary_uid: Primäre ID
@@ -42,6 +43,7 @@ de:
       key_is_: "Schlüssel ist %{status}!"
       expiry_date: Ablaufdatum
       none: keins
+      generation_date: Erzeugt am
       download: Runterladen
       delete_key: Schlüssel löschen
       delete_this_key: Diesen Schlüssel aus dem Schlüsselring der Liste löschen
@@ -121,6 +123,7 @@ de:
     delete:
       back_to_list: Zurück zur Listen-Seite
     subscriptions:
+      title: Eingetragene Adressen
       new_subscription: Neues Abo
     new:
       title: Neue Liste
