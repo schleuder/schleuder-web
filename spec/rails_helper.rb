@@ -19,6 +19,6 @@ RSpec.configure do |config|
 
   config.filter_rails_from_backtrace!
 
-  # Add FactoryGirls syntax methods
-  config.include FactoryGirl::Syntax::Methods
+  # Add FactoryBots syntax methods
+  config.include FactoryBot::Syntax::Methods
 end
