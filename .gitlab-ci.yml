@@ -13,5 +13,6 @@ bundler:audit:
     - gem install bundler-audit
     - bundle-audit update
     - bundle-audit check
+  allow_failure: true
 
 
