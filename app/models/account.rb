@@ -1,6 +1,7 @@
 class Account < ActiveRecord::Base
   has_secure_password
   validates :email, presence: true, email: true
+  before_save { email.downcase! }
 
   def to_s
     email

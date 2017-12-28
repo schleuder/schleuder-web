@@ -18,6 +18,12 @@ describe Account do
     expect(account.errors.messages[:email]).to include("can't be blank")
   end
 
+  it "downcases email before saving" do
+    account = create(:account, email: "HELLO@EXAMPLE.COM")
+
+    expect(account.email).to eq("hello@example.com")
+  end
+
   describe "#to_s" do
     it "returns the email"  do
       account = create(:account)
