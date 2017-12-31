@@ -21,4 +21,6 @@ RSpec.configure do |config|
 
   # Add FactoryBots syntax methods
   config.include FactoryBot::Syntax::Methods
+
+  config.order = :random
 end
