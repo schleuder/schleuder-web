@@ -11,8 +11,6 @@ gem 'simple_form', '~> 3.2'
 gem 'squire', '~> 1.3'
 gem 'cancancan', '~> 1.9'
 
-# Include some fixes
-#gem 'activeresource', require: 'active_resource', github: 'rails/activeresource', ref: 'd6a5186'
 gem 'sqlite3'
 gem 'thin'
 gem "activeresource-response"
