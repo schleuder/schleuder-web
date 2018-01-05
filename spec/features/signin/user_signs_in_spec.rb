@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "Admin signs in" do
+feature "User signs in" do
   scenario "with valid email and password" do
     create(:account, email: "valid@example.com")
 
