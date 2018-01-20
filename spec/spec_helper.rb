@@ -11,6 +11,9 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
 
+require 'webmock/rspec'
+WebMock.disable_net_connect!
+
 def log_in_as_super_admin
   user = create(:account, email: 'root@localhost', password: 'password')
   session[:cookietest] = true
