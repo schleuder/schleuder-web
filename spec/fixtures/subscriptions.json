@@ -1,0 +1,22 @@
+[
+  {
+    "id": 25,
+    "list_id": 1,
+    "email": "subscription1@example.org",
+    "fingerprint": "129A74AD5317457F9E502844A39C61B32003A8D8",
+    "admin": false,
+    "delivery_enabled": true,
+    "created_at": "2017-10-30T19:13:17.273Z",
+    "updated_at": "2017-12-30T19:13:17.321Z"
+  },
+  {
+    "id": 34,
+    "list_id": 2,
+    "email": "subscription2@example.org",
+    "fingerprint": "129A74AD5317457F9E502844A39C61B32003A8D8",
+    "admin": false,
+    "delivery_enabled": true,
+    "created_at": "2017-11-27T15:11:17.295Z",
+    "updated_at": "2017-12-27T15:13:17.317Z"
+  }
+]
