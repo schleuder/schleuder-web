@@ -131,6 +131,7 @@ de:
       hint_email: Email-Adresse der Liste
       fingerprint: Fingerabdruck
       hint_fingerprint: "Optional: Fingerabdruck eines existierenden öffentlichten OpenPGP-Schlüssels, der für diese Liste genutzt werden soll. Bleibt das Feld leer oder wird kein passender Schlüssel gefunden, wird ein neues Schlüsselpaar erstellt."
+      create: Erstellen
 
   errors:
     invalid_email: "ist keine gültige Email-Adresse"
