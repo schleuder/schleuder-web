@@ -32,9 +32,9 @@ module ApplicationHelper
     GPGME::Key.export key.fingerprint, armor: true
   end
 
-  def checkbox(form, field, hint)
-    label = "#{field.to_s.humanize}?"
-    form.input field, label: label, hint: hint, as: :boolean, wrapper: :horizontal_boolean
+  def checkbox(form, field, hint, label=nil)
+    label ||= "#{field.to_s.humanize}?"
+    form.input field, hint: hint, label: label, as: :boolean, wrapper: :horizontal_boolean
   end
 
   def generate_h1
