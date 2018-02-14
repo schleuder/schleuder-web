@@ -12,7 +12,7 @@ RSpec.describe TuringQuestion, type: :model do
     t4 = TuringQuestion.random
     t5 = TuringQuestion.random
     # Five times the same set is unlikely enough.
-    expect(t1.id * 5).to_not eql(t1.id + t2.id + t3.id + t4.id + t5.id)
+    expect(t1.id.to_s * 5).to_not eql([t1.id, t2.id, t3.id, t4.id, t5.id].map(&:to_s).join)
   end
 
   it "finds a specific set" do
