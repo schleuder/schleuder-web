@@ -26,11 +26,6 @@ This is a full featured web interface to administrate [Schleuder v3](https://0xa
 1. Log into the webinterface with email "root@localhost" and password "slingit!".
 
 
-## Limitations
-
-Only tested with ruby 2.1 so far.
-
-
 ## TODO
 
 See also `rake notes`
