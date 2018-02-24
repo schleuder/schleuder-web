@@ -117,7 +117,17 @@ de:
     destroy:
       cant_unsubscribe_last_admin: Letztes Admin-Abo kann nicht gelöscht werden!
     form:
-      select_a_key: Einen vorhanden Schlüssel auswählen
+      email: Email
+      delivery: Empfang aktivieren?
+      delivery_hint: Emails empfangen, die über die Liste geschickt werden?
+      admin: Admin?
+      admin_hint: Darf die Person die Liste verwalten?
+      key: Schlüssel
+      select_a_key: Einen vorhandenen Schlüssel auswählen
+      update: Aktualisieren
+      cancel: Abbrechen
+      subscribe: Eintragen
+      
 
   lists:
     delete:

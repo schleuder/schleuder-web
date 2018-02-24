@@ -117,7 +117,16 @@ en:
     destroy:
       cant_unsubscribe_last_admin: Can't unsubscribe the last admin of this list!
     form:
+      email: Email
+      delivery: Delivery enabled?
+      delivery_hint: Receive the emails sent over the list?
+      admin: Admin?
+      admin_hint: May s/he administer this list?
+      key: Key
       select_a_key: Select a present key
+      update: Update
+      cancel: Cancel
+      subscribe: Subscribe
 
   lists:
     delete:

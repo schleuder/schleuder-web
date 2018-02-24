@@ -124,8 +124,17 @@ es:
       back_to_subscription: Volver a la suscripción
     destroy:
       cant_unsubscribe_last_admin: No puedes borrar la última suscripción de administración de la lista.
-    form: 
+    form:
+      email: Dirección
+      delivery: # TODO
+      delivery_hint: # TODO
+      admin: # TODO
+      admin_hint: # TODO
+      key: Llave
       select_a_key: Select a present key
+      update: # TODO
+      cancel: # TODO
+      subscribe: # TODO
 
   lists:
     delete:

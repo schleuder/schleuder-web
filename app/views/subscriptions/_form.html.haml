@@ -2,14 +2,14 @@
   = f.input :list_id, as: :hidden, input_html: { value: @subscription.list.id }
 
   %fieldset
-    %legend Email
+    %legend= t(".email")
     - if @subscription.new?
       = f.input :email, required: true
     - else
       = f.input :email, disabled: true
-    = checkbox f, :delivery_enabled, "Receive the emails sent over the list?"
+    = checkbox f, :delivery_enabled, t(".delivery_hint"), t(".delivery")
     - if can?(:update, @subscription.list)
-      = checkbox f, :admin, "May s/he administer this list?"
+      = checkbox f, :admin, t(".admin_hint"), t(".admin")
 
   %fieldset#keyselection
     %legend= t(".key")
@@ -17,12 +17,10 @@
     = render "keys/upload_spacer"
     = render "keys/upload_fields"
 
-  %fieldset
-    %legend Submit
-    - if @subscription.persisted?
-      = f.button :submit, 'Update', class: 'btn btn-primary', accesskey: :e
-      = link_to "Cancel", subscription_path(@subscription), style: "margin-left: 2em"
-    - else
-      = f.button :submit, 'Subscribe', class: 'btn btn-success', accesskey: :e
+  - if @subscription.persisted?
+    = f.button :submit, t(".update"), class: 'btn btn-primary', accesskey: :e
+    = link_to t(".cancel"), subscription_path(@subscription), style: "margin-left: 2em"
+  - else
+    = f.button :submit, t(".subscribe"), class: 'btn btn-success', accesskey: :e
 
 
