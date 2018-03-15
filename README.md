@@ -4,6 +4,15 @@ This is a full featured web interface to administrate [Schleuder v3](https://0xa
 
 ##  Installation
 
+Make sure you have these libraries installed:
+
+* libxml2
+* zlib
+* sqlite3 (or your DMBS of choice)
+
+On a Debian-system, run e.g. this: `apt install libxml2-dev zlib1g-dev libsqlite3-dev`.
+
+
 ### To have a glimpse
 
 1. ./bin/setup
@@ -24,11 +33,6 @@ This is a full featured web interface to administrate [Schleuder v3](https://0xa
 ## Usage
 
 1. Log into the webinterface with email "root@localhost" and password "slingit!".
-
-
-## Limitations
-
-Only tested with ruby 2.1 so far.
 
 
 ## TODO
