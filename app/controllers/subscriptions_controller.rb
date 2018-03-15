@@ -12,7 +12,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def edit
-    # Neccessary for the shared form.
+    # Necessary for the shared form.
     @list = @subscription.list
   end
 

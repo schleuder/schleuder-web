@@ -33,7 +33,7 @@ class KeysController < ApplicationController
     # list_id is included in the request-body.
     import_result = Key.create(keymaterial: input, list_id: @list.id)
     # TODO: Maybe move the interpretation of the import-result into the
-    # API-daemon? schleuder-cli is doing the same intepretation, too.
+    # API-daemon? schleuder-cli is doing the same interpretation, too.
     if import_result.considered == 0
       # Can't use :error as argument to redirect_to()
       flash[:error] = 'No keys found in input'
