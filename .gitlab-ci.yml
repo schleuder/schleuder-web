@@ -1,24 +1,73 @@
-image: ruby:2.4
+---
+stages:
+  - static
+  - test
 
 cache:
   paths:
-    - vendor/apt
-    - vendor/ruby
+    - vendor
 
-before_script:
-  - mkdir -p vendor/apt
-  - apt-get update -qq
-  - apt-get install -o dir::cache::archives="vendor/apt" -y -qq --no-install-recommends --no-install-suggests sqlite3 libsqlite3-dev
-  - gem install bundler --no-ri --no-rdoc
-  - bundle install --jobs $(nproc) --path vendor
-  - echo "127.0.0.1     localhost" > /etc/hosts
+# Jobs that start with a period are disabled
+# This is just a template, to be used further below in the individual job definitions
+.setup_apt: &setup_apt
+  before_script:
+    # Export APT env vars to cache packages archives and lists based on the current working directory
+    - export APT_DIR=$CI_PROJECT_DIR/vendor/apt && export APT_ARCHIVES_DIR=$APT_DIR/archives && export APT_LISTS_DIR=$APT_DIR/lists
+    # Configure APT: Only install necessary packages, set cache location
+    - printf
+      "apt::install-recommends 0;\n
+      apt::install-suggests 0;\n
+      dir::cache::archives ${APT_ARCHIVES_DIR};\n
+      dir::state::lists ${APT_LISTS_DIR};\n"
+      >> /etc/apt/apt.conf.d/99custom
+    # Ensure the custom APT directory does exist
+    - mkdir -p {${APT_ARCHIVES_DIR},${APT_LISTS_DIR}}/partial
+    - apt-get update -qq
+    # To keep things DRY, use an env var to handle packages to be installed via APT
+    - apt-get install -qq -y $APT_INSTALL_PACKAGES
+
+.test_ruby: &test_ruby
+  variables:
+    APT_INSTALL_PACKAGES: sqlite3 libsqlite3-dev eatmydata
+  <<: *setup_apt
+  script:
+    - eatmydata gem install bundler --no-ri --no-rdoc
+    - eatmydata bundle install --jobs $(nproc) --path vendor
+    # Force IPv4 usage. If IPv6 is available, but in fact not working, this leads to failed specs.
+    - echo "127.0.0.1 localhost" > /etc/hosts
+    - eatmydata bundle exec rake db:create RAILS_ENV=test
+    - eatmydata bundle exec rspec
+
+codespell:
+  variables:
+    APT_INSTALL_PACKAGES: codespell
+  <<: *setup_apt
+  script:
+    # Run codespell to check for spelling errors, using a config to skip files with German 
+    # and Spanish language and code of installed dependencies, to ignore warnings about binary 
+    # files and to check file names as well.
+    - codespell -q 2 -f -S turing-questions.yml,de.yml,es.yml,vendor
+  stage: static
+
+ruby:2.2:
+  image: ruby:2.2
+  <<: *test_ruby
+ruby:2.3:
+  image: ruby:2.3
+  <<: *test_ruby
 ruby:2.4:
-  script:
-    - bundle exec rake db:create RAILS_ENV=test
-    - bundle exec rspec
+  image: ruby:2.4
+  <<: *test_ruby
+ruby:2.5:
+  image: ruby:2.5
+  <<: *test_ruby
+
 bundler:audit:
+  image: ruby:2.5
+  only:
+    - schedules
   script:
-    - gem install bundler-audit
+    - gem install bundler-audit --no-ri --no-rdoc
+    - bundle install --jobs $(nproc) --path vendor
     - bundle-audit update
     - bundle-audit check
-  allow_failure: true
