@@ -16,7 +16,7 @@
           %li
             %em= link_to list, list_subscriptions_path(list)
         -else
-          %li= link_to list, list_subscriptions_path(list)
+          %li= link_to list, subscription_path(current_account.subscription(list))
 
     - if @admin_lists.any?
       .text-muted

@@ -16,12 +16,12 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    render 'errors/403', :status => :forbidden
+    render_error(403, :forbidden)
   end
 
   rescue_from ActiveResource::ForbiddenAccess do |exception|
     logger.error "API denied access! Check if the fingerprint of your certificate has been added to the list of fingerprints at the schleuder-server."
-    render 'errors/api_denied', :status => :forbidden
+    render_error(:api_denied, :forbidden)
   end
 
   # Happens when fingerprint verification failed.
@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
     else
       @reason = exception.message
     end
-    render 'errors/ssl_error', :status => :forbidden
+    render_error(:ssl_error, :forbidden)
   end
 
   rescue_from ActiveResource::BadRequest do |exc|
@@ -46,19 +46,24 @@ class ApplicationController < ActionController::Base
   rescue_from Errno::ECONNREFUSED do |exc|
     logger.error exc.inspect
     logger.error exc.backtrace.join("\n")
-    render 'errors/missing_schleuder_api', status: 500
+    render_error(:missing_schleuder_api, 500)
   end
 
   rescue_from ActiveResource::TimeoutError do |exc|
     logger.error exc.inspect
     logger.error exc.backtrace.join("\n")
-    render 'errors/timeout', status: 500
+    render_error(:timeout, 500)
   end
 
   private
 
+  # Keep single method for 404 to make it easier to overwrite it.
   def render_404
-    render 'errors/404', :status => :not_found
+    render 'errors/404', :status => :not_found, layout: 'error'
+  end
+
+  def render_error(view, status)
+    render "errors/#{view}", status: status, layout: 'error'
   end
 
   def current_account

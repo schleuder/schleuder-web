@@ -10,14 +10,19 @@ class KeysController < ApplicationController
   def index
     @assigned_keys = {}
     @unassigned_keys = []
-    subs_by_fingerprint = @list.subscriptions.group_by(&:fingerprint)
     all_keys = @list.keys - [@list.key]
-    all_keys.each do |key|
-      if subs_by_fingerprint[key.fingerprint].present?
-        @assigned_keys[key] = subs_by_fingerprint[key.fingerprint]
-      else
-        @unassigned_keys << key
+    # Show key<->subscription associations only if current_user is admin.
+    if current_user.superadmin? || current_user.admin_lists.include?(@list)
+      subs_by_fingerprint = @list.subscriptions.group_by(&:fingerprint)
+      all_keys.each do |key|
+        if subs_by_fingerprint[key.fingerprint].present?
+          @assigned_keys[key] = subs_by_fingerprint[key.fingerprint]
+        else
+          @unassigned_keys << key
+        end
       end
+    else
+      @unassigned_keys = all_keys
     end
   end
 

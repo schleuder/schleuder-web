@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}
+    %title Schleuder ★ Error
+    %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no", :name => "viewport"}
+
+    = stylesheet_link_tag    "application", :media => "all"
+  %body
+    - if Rails.env.development?
+      #dev-watermark development
+    .container
+      .container#header
+        .navbar-header
+          .navbar-brand#logo= link_to 'Schleuder', '/'
+        #navbar
+          = render 'navbar'
+      .container
+        = yield
