@@ -7,6 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'support/fake_schleuder'
 
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -18,6 +19,10 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.filter_rails_from_backtrace!
+
+  config.before(:each) do
+    stub_request(:any, /localhost:4443/).to_rack(FakeSchleuder)
+  end
 
   # Add FactoryBots syntax methods
   config.include FactoryBot::Syntax::Methods
