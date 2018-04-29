@@ -1,6 +1,6 @@
 require 'sinatra/base'
 
-class FakeSchleuder < Sinatra::Base
+class FakeSchleuderApiDaemon < Sinatra::Base
 
   # subscriptions
   post "/subscriptions.json" do
