@@ -1,7 +1,7 @@
   {
     "id": 1,
     "list_id": 1,
-    "email": "subscription5@example.org",
+    "email": "subscription1@example.org",
     "fingerprint": "129A74AD5317457F129A74AD5317457F",
     "admin": false,
     "delivery_enabled": true,

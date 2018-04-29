@@ -5,10 +5,13 @@ class FakeSchleuder < Sinatra::Base
   # subscriptions
   post "/subscriptions.json" do
     request_body = JSON.parse(request.body.read)
-    if request_body["admin"] == true
+    case
+    when request_body["admin"] == true
       json_response 200, "admin_subscription.json"
+    when request_body["email"] == 'subscription2@example.org'
+      json_response 200, "subscription2.json"
     else
-      json_response 200, "subscription.json"
+      json_response 200, "subscription1.json"
     end
   end
 
@@ -17,7 +20,15 @@ class FakeSchleuder < Sinatra::Base
   end
 
   get "/subscriptions/8.json" do
-    json_response 200, "subscription.json"
+    json_response 200, "admin_subscription.json"
+  end
+
+  get "/subscriptions/1.json" do
+    json_response 200, "subscription1.json"
+  end
+
+  get "/subscriptions/2.json" do
+    json_response 200, "subscription2.json"
   end
 
   # lists

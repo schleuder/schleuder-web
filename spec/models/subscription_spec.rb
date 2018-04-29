@@ -7,7 +7,7 @@
      it "returns the the key with the subscriptions fingerprint" do
        stub_request(:post, "https://localhost:4443/subscriptions.json").
          with(body: "{\"email\":\"user1@example.org\",\"fingerprint\":\"129A74AD5317457F9E502844A39C61B32003A8D8\",\"admin\":false,\"delivery_enabled\":true,\"list_id\":1}").
-         to_return(status: 200, body: File.read(fixture_path + "/subscription.json"))
+         to_return(status: 200, body: File.read(fixture_path + "/subscription1.json"))
        stub_request(:get, "https://localhost:4443/keys/129A74AD5317457F129A74AD5317457F.json?list_id=1").
          to_return(status: 200, body: File.read(fixture_path + "/key.json"))
 
@@ -21,15 +21,15 @@
 
    describe "#account" do
      it " returns the account with the subscriptions email" do
-       account = create(:account, email: "subscription5@example.org")
+       account = create(:account, email: "subscription1@example.org")
 
        stub_request(:post, "https://localhost:4443/subscriptions.json").
-         with(body: "{\"email\":\"subscription5@example.org\",\"fingerprint\":\"129A74AD5317457F9E502844A39C61B32003A8D8\",\"admin\":false,\"delivery_enabled\":true,\"list_id\":1}").
-         to_return(status: 200, body: File.read(fixture_path + "/subscription.json"))
+         with(body: "{\"email\":\"subscription1@example.org\",\"fingerprint\":\"129A74AD5317457F9E502844A39C61B32003A8D8\",\"admin\":false,\"delivery_enabled\":true,\"list_id\":1}").
+         to_return(status: 200, body: File.read(fixture_path + "/subscription1.json"))
        stub_request(:get, "https://localhost:4443/keys/129A74AD5317457F129A74AD5317457F.json?list_id=1").
          to_return(status: 200, body: File.read(fixture_path + "/key.json"))
 
-       subscription = create(:subscription, email: "subscription5@example.org")
+       subscription = create(:subscription, email: "subscription1@example.org")
 
        expect(subscription.account).to eq(account)
 
