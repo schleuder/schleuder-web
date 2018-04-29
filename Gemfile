@@ -29,4 +29,5 @@ group :test do
   gem 'factory_bot_rails'
   gem 'webmock'
   gem 'sinatra'
+  gem 'launchy'
 end
