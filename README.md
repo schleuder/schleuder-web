@@ -53,6 +53,10 @@ We are working on extendig the test coverage.
 
 Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Mission statement
+
+Please see [MISSION_STATEMENT.md](MISSION_STATEMENT.md).
+
 ## Code of Conduct
 
 We adopted a code of conduct. Please read [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
