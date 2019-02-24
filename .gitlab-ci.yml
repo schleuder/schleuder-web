@@ -31,7 +31,7 @@ cache:
     APT_INSTALL_PACKAGES: sqlite3 libsqlite3-dev eatmydata
   <<: *setup_apt
   script:
-    - eatmydata gem install bundler --no-ri --no-rdoc
+    - eatmydata gem install bundler
     - eatmydata bundle install --jobs $(nproc) --path vendor
     # Force IPv4 usage. If IPv6 is available, but in fact not working, this leads to failed specs.
     - echo "127.0.0.1 localhost" > /etc/hosts
@@ -49,9 +49,6 @@ codespell:
     - codespell -q 2 -f -S turing-questions.yml,de.yml,es.yml,vendor
   stage: static
 
-ruby:2.2:
-  image: ruby:2.2
-  <<: *test_ruby
 ruby:2.3:
   image: ruby:2.3
   <<: *test_ruby
@@ -61,13 +58,16 @@ ruby:2.4:
 ruby:2.5:
   image: ruby:2.5
   <<: *test_ruby
+ruby:2.6:
+  image: ruby:2.6
+  <<: *test_ruby
 
 bundler:audit:
   image: ruby:2.5
   only:
     - schedules
   script:
-    - gem install bundler-audit --no-ri --no-rdoc
+    - gem install bundler-audit
     - bundle install --jobs $(nproc) --path vendor
     - bundle-audit update
     - bundle-audit check
