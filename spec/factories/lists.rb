@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :list do
-    email "list@example.org"
+    email { "list@example.org" }
 
     trait :with_one_subscription do
       after(:build) do |list|
