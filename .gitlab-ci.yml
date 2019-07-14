@@ -46,7 +46,7 @@ codespell:
     # Run codespell to check for spelling errors, using a config to skip files with German 
     # and Spanish language and code of installed dependencies, to ignore warnings about binary 
     # files and to check file names as well.
-    - codespell -q 2 -f -S turing-questions.yml,de.yml,es.yml,vendor
+    - codespell -q 2 -f -I utils/ci/codespell/ignored_words.txt -S turing-questions.yml,de.yml,es.yml,vendor
   stage: static
 
 ruby:2.3:

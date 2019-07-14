@@ -1,0 +1,9 @@
+# Words to be ignored by codespell.
+# Put one word per line.
+
+ba
+# That's actually \nto, which codespell is not able to parse correctly
+nto
+keyserver
+keyservers
+fpr
