@@ -67,7 +67,5 @@ GNU GPL version 3.
 
 ## Screenshot
 
-<kbd>
 ![Screenshot of schleuder-web](doc/schleuder-web-screenshot.png)
-</kbd>
 
