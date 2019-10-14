@@ -49,7 +49,7 @@ module ApplicationHelper
   end
 
   def key_trust_title(key)
-    t('keys.show.key_is_', status: t("keys.stati.#{key.trust_issues}"))
+    t('keys.show.key_is_', status: t("keys.statuses.#{key.trust_issues}"))
   end
 
   def popup(icon, &block)
