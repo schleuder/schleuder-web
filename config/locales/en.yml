@@ -47,7 +47,7 @@ en:
       delete_key: Delete key
       delete_this_key: Delete key from list's keyring
 
-    stati:
+    statuses:
       expired: expired
       revoked: revoked
       invalid: invalid
