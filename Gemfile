@@ -16,7 +16,7 @@ gem 'thin'
 gem "activeresource-response"
 
 group :development do
-  gem 'spring', '~> 2.0.0' # Pin to 2.0 to allow running this with ruby 2.2 and 2.3.
+  gem 'spring'
   gem 'byebug'
   gem 'listen'
 end
