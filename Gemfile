@@ -11,7 +11,7 @@ gem 'simple_form', '~> 5.0.0'
 gem 'squire', '~> 1.3'
 gem 'cancancan', '~> 3.0.0'
 
-gem 'sqlite3', '~> 1.3.6'
+gem 'sqlite3', '~> 1.4.0'
 gem 'thin'
 gem "activeresource-response"
 
