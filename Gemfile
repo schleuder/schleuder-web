@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'rake'
-gem 'rails', '~> 5.1.0'
+gem 'rails', '~> 5.2.0'
+gem 'bootsnap'
 gem 'bcrypt', '~> 3.1'
 gem 'activeresource', '~> 5.1.0'
 gem 'haml-rails', '~> 2.0.0'
