@@ -26,7 +26,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara', '~> 3.15.0'
+  gem 'capybara', '~> 3.0'
   gem 'factory_bot_rails'
   gem 'webmock'
   gem 'sinatra'
