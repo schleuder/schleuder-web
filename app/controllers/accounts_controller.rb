@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
-  skip_before_filter :authenticate, only: [:new, :verify, :setup, :create]
+  skip_before_action :authenticate, only: [:new, :verify, :setup, :create]
   skip_load_resource only: [:verify, :setup, :create]
-  before_filter :validate_turing_answer, only: :verify
+  before_action :validate_turing_answer, only: :verify
 
   def index
     redirect_to root_path
@@ -42,7 +42,7 @@ class AccountsController < ApplicationController
     ac_req = AccountRequest.find_by_token!(params[:token])
 
     if ! ac_req.still_valid?
-      render text: t(".token_too_old")
+      render plain: t(".token_too_old")
       ac_req.destroy
       return
     end

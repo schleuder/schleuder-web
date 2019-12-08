@@ -1,5 +1,5 @@
 class LoginsController < ApplicationController
-  skip_before_filter :authenticate
+  skip_before_action :authenticate
   skip_load_and_authorize_resource
   skip_authorization_check
 

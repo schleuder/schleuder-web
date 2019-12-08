@@ -2,9 +2,9 @@ class KeysController < ApplicationController
   include KeyUpload
   skip_load_and_authorize_resource
   skip_authorization_check
-  before_filter :load_list_resource
-  before_filter :load_subscription_resource, only: [:index, :show, :new]
-  before_filter :load_key, only: [:show, :destroy]
+  before_action :load_list_resource
+  before_action :load_subscription_resource, only: [:index, :show, :new]
+  before_action :load_key, only: [:show, :destroy]
   # TODO: authorize if current_account.subscribed_to?(@list) || current_account.superadmin?
 
   def index

@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'rake'
-gem 'rails', '~> 5.0.0'
+gem 'rails', '~> 5.1.0'
 gem 'bcrypt', '~> 3.1'
-gem 'activeresource', '~> 5.0.0'
+gem 'activeresource', '~> 5.1.0'
 gem 'haml-rails', '~> 1.0.0'
 gem 'sass-rails', '~>  5.0'
 gem 'bootstrap-sass', '~> 3.3'
