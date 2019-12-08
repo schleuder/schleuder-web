@@ -105,6 +105,9 @@ GEM
       concurrent-ruby (~> 1.0)
     launchy (2.4.3)
       addressable (~> 2.3)
+    listen (3.2.1)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.4.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -240,6 +243,7 @@ DEPENDENCIES
   factory_bot_rails
   haml-rails (~> 1.0.0)
   launchy
+  listen
   rails (~> 5.1.0)
   rake
   rspec-rails
