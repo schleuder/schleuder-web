@@ -1,4 +1,4 @@
-class AccountRequest < ActiveRecord::Base
+class AccountRequest < ApplicationRecord
   after_initialize :set_token
 
   def set_token

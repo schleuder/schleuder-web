@@ -12,6 +12,11 @@ Dir.chdir APP_ROOT do
   system "gem install bundler --conservative"
   system "bundle check || bundle install --path vendor/bundle"
 
+  # puts "\n== Copying sample files =="
+  # unless File.exist?("config/database.yml")
+  #   system "cp config/database.yml.sample config/database.yml"
+  # end
+
   puts "\n== Preparing database =="
   system "bin/rake db:setup"
 
@@ -20,6 +25,7 @@ Dir.chdir APP_ROOT do
   system "rm -rf tmp/cache"
 
   puts "\n== Manual tasks =="
+  puts "\n* Review the database connection config in config/database.yml"
   puts "\n* In config/secrets.yml change secret_key_base"
   puts "\n* config/schleuder-web.yml add tls_fingerprint and api_key (get them from the admins that run schleuder-api-daemon)."
 end

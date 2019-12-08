@@ -1,4 +1,4 @@
-class Account < ActiveRecord::Base
+class Account < ApplicationRecord
   has_secure_password
   validates :email, presence: true, email: true
   before_save { email.downcase! }
