@@ -8,7 +8,7 @@ class Account < ActiveRecord::Base
   end
 
   def superadmin?
-    self.email == 'root@localhost'
+    Array(Conf.superadmins).include?(self.email)
   end
 
   def subscribed_to?(list)
