@@ -14,16 +14,5 @@ module SchleuderWeb
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-    require 'openssl'
-    require 'mail'
-
-    require 'bcrypt'
-    require 'active_resource'
-    require 'haml-rails'
-    require 'sass-rails'
-    require 'bootstrap-sass'
-    require 'simple_form'
-    require 'squire'
-    require 'cancancan'
   end
 end
