@@ -33,8 +33,8 @@ describe Account do
   end
 
   describe "#superadmin?" do
-    it "returns true if email address is root@localhost" do
-      admin_account = create(:account, email: "root@localhost")
+    it "returns true if email address is included in Conf.superadmins" do
+      admin_account = create(:account, email: "admin@localhost")
 
       expect(admin_account.superadmin?).to eq true
     end

@@ -25,5 +25,9 @@ describe Conf do
     ENV["SCHLEUDER_API_PORT"] = nil
     Conf.squire.reload!
   end
+
+  it "allows multiple site admins" do
+    expect(Conf.superadmins).to eql(['admin@localhost', 'someoneelse@example.net'])
+  end
 end
 
