@@ -17,6 +17,8 @@ class List < Base
 
   def key
     @key ||= Key.find(fingerprint, params: { list_id: self.id })
+  rescue ActiveResource::ResourceNotFound
+    nil
   end
 
   def headers_to_meta
