@@ -39,6 +39,7 @@ cache:
     - eatmydata bundle exec rspec
 
 codespell:
+  image: debian:unstable
   variables:
     APT_INSTALL_PACKAGES: codespell
   <<: *setup_apt
