@@ -8,8 +8,8 @@ feature "User views a list" do
     list = create(:list, email: email, subscriptions: [subscription1])
     stub_request(
       :get,
-      "https://localhost:4443/keys/59C71FB38AEE22E091C78259D06350440F759BD3.json?list_id=#{list.id}"
-    ).to_return(status: 200, body: File.read(File.join(fixture_path, "key.json")))
+      api_uri_with_path("/keys/59C71FB38AEE22E091C78259D06350440F759BD3.json?list_id=#{list.id}")
+    ).to_return(status: 200, body: read_fixture('key.json'))
 
     sign_in(account)
     visit(list_subscriptions_path(list))
@@ -25,7 +25,7 @@ feature "User views a list" do
     list = create(:list, email: email, subscriptions: [subscription1])
     stub_request(
       :get,
-      "https://localhost:4443/keys/59C71FB38AEE22E091C78259D06350440F759BD3.json?list_id=#{list.id}"
+      api_uri_with_path("/keys/59C71FB38AEE22E091C78259D06350440F759BD3.json?list_id=#{list.id}")
     ).to_return(status: 404, body: "[]")
 
     sign_in(account)
