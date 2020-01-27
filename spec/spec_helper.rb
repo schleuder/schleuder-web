@@ -11,9 +11,17 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
 
+def api_uri_with_path(path)
+  URI.join(Conf.api_uri, path)
+end
+
+def read_fixture(file)
+  File.read(File.join(fixture_path, file))
+end
+
 def json_object_as_array(file)
-  [JSON.parse(File.read(File.join(fixture_path, file)))].to_json
+  [JSON.parse(read_fixture(file))].to_json
 end
 
 require 'webmock/rspec'
-WebMock.disable_net_connect!(allow_localhost: true)
+WebMock.disable_net_connect!

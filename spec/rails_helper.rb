@@ -21,7 +21,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
 
   config.before(:each) do
-    stub_request(:any, /localhost:4443/).to_rack(FakeSchleuderApiDaemon)
+    stub_request(:any, /#{Conf.api.host}:#{Conf.api.port}/).to_rack(FakeSchleuderApiDaemon)
   end
 
   # Add FactoryBots syntax methods

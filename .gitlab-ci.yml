@@ -33,8 +33,6 @@ cache:
   script:
     - eatmydata gem install bundler
     - eatmydata bundle install --jobs $(nproc) --path vendor
-    # Force IPv4 usage. If IPv6 is available, but in fact not working, this leads to failed specs.
-    - echo "127.0.0.1 localhost" > /etc/hosts
     - eatmydata bundle exec rake db:create RAILS_ENV=test
     - eatmydata bundle exec rspec
 
