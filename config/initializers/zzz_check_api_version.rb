@@ -1,6 +1,6 @@
 if API_REQUIRED
 
-  REQUIRED_API_VERSION = '3.2'
+  REQUIRED_API_VERSION = '3.5'
 
   begin
     found_api_version = Base.api_version
