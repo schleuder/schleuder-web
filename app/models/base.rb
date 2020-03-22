@@ -26,6 +26,6 @@ class Base < ActiveResource::Base
   end
 
   def self.api_version
-    get(:version)
+    get(:version)["version"]
   end
 end
