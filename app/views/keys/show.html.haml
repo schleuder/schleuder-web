@@ -35,7 +35,7 @@
 
   %pre= @key.ascii
 
-- if @key.fingerprint != @list.fingerprint
+- if (@key.fingerprint != @list.fingerprint) && (current_user.admin_lists.include?(@list) || current_account.superadmin?)
   .col.col-lg-6.col-md-4
     .pull-right
       = button_to([@list, @key], method: :delete, title: t(".delete_this_key"), class: 'btn btn-danger') do

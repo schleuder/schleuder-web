@@ -52,11 +52,15 @@ class KeysController < ApplicationController
   end
 
   def destroy
-    # destroy() doesn't read any params, but we need to give the list_id.
-    if Key.delete(@key.fingerprint, {list_id: @list.id})
-      redirect_to list_keys_path(@list), notice: "Key deleted: #{@key.fingerprint}"
+    if current_user.superadmin? || current_user.admin_lists.include?(@list)
+      # destroy() doesn't read any params, but we need to give the list_id.
+      if Key.delete(@key.fingerprint, {list_id: @list.id})
+        redirect_to list_keys_path(@list), notice: "Key deleted: #{@key.fingerprint}"
+      else
+        redirect_to list_key_path(@list, @key), alert: "Deleting key failed: #{@key.errors.full_messages}"
+      end
     else
-      redirect_to list_key_path(@list, @key), alert: "Deleting key failed: #{@key.errors.full_messages}"
+      redirect_to list_keys_path(@list), notice: 'Only allowed for list admins'
     end
   end
 
