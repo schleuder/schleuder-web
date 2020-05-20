@@ -199,6 +199,7 @@ GEM
       tilt (>= 1.1, < 3)
     sassc (2.2.1)
       ffi (~> 1.9)
+    secure_headers (6.3.0)
     sexp_processor (4.13.0)
     simple_form (5.0.1)
       actionpack (>= 5.0)
@@ -259,6 +260,7 @@ DEPENDENCIES
   rake
   rspec-rails
   sass-rails (~> 5.0)
+  secure_headers (~> 6.3)
   simple_form (~> 5.0.0)
   sinatra
   spring
