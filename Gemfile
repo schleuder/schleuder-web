@@ -15,6 +15,7 @@ gem 'cancancan', '~> 3.0.0'
 gem 'sqlite3', '~> 1.4.0'
 gem 'thin'
 gem "activeresource-response"
+gem "secure_headers", "~> 6.3"
 
 group :development do
   gem 'spring'
