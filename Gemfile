@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rake'
-gem 'rails', '~> 5.2.0'
+gem 'rails', '~> 5.2.4'
 gem 'bootsnap'
 gem 'bcrypt', '~> 3.1'
 gem 'activeresource', '~> 5.1.0'
@@ -28,8 +28,8 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara', '~> 3.0'
-  gem 'factory_bot_rails'
+  gem 'capybara', '~> 3.29.0'
+  gem 'factory_bot_rails', '~> 5.1'
   gem 'webmock'
   gem 'sinatra'
   gem 'launchy'
