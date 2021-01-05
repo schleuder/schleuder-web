@@ -17,6 +17,16 @@ class ListsController < ApplicationController
     redirect_to list_subscriptions_path
   end
 
+  def by_email
+    email = params[:email]
+    current_user.subscriptions.map(&:list).each do |list|
+      if list.email == email
+        return redirect_to list_subscriptions_path(id: list.id)
+      end
+    end
+    redirect_to root_path
+  end
+
   def subscriptions
     @admins = @list.admins
     @non_admins = @list.subscriptions - @list.admins

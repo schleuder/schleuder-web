@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get  'accounts/:id/delete', to: 'accounts#delete',  as: :delete_account
   resources :accounts
 
+  get 'lists/:email', to: 'lists#by_email', constraints: { email: /([\S]+@[\S]+)/ }
   get 'lists/:id/subscriptions', to: 'lists#subscriptions', as: :list_subscriptions
   get 'lists/:id/new_subscription', to: 'lists#new_subscription', as: :new_list_subscription
   get 'lists/:id/delete', to: 'lists#delete',  as: :delete_list

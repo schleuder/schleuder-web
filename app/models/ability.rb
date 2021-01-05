@@ -10,7 +10,7 @@ class Ability
       # Mere subscriber
       can [:read, :update, :destroy, :home], Account, id: account.id
       can [:read, :update, :destroy], Subscription, email: account.email
-      can [:read], List, id: account.subscriptions.map(&:list).map(&:id)
+      can [:read, :by_email], List, id: account.subscriptions.map(&:list).map(&:id)
       # List-admins
       # Use a block, else it doesn't work for :create.
       can :manage, Subscription do |subscription|
