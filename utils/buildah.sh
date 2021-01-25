@@ -24,6 +24,17 @@ $run apt-get clean
 
 $run gem install bundler
 
+echo '#!/bin/bash
+
+if test -f "$SCHLEUDERWEB_DB_FILE"; then
+  bundle exec rake db:migrate
+else
+  bundle exec rake db:setup
+fi
+
+bundle exec rails server
+' | $run bash -c 'cat > /entrypoint.sh && chmod 755 /entrypoint.sh'
+
 buildah config --workingdir /app \
                --author "schleuder dev team <team@schleuder.org>" \
                --label summary="Run schleuder-web, from master branch" \
@@ -33,13 +44,7 @@ buildah config --workingdir /app \
                --env SCHLEUDERWEB_CONFIG_FILE=/data/schleuder-web.yml \
                --volume /data \
                --port 3000 \
-               --cmd '
-if test -f "$SCHLEUDERWEB_DB_FILE"; then
-  bundle exec rake db:migrate SECRET_KEY_BASE="foo"
-else
-  bundle exec rake db:setup SECRET_KEY_BASE="foo"
-fi
-bundle exec rails server' \
+               --cmd '/entrypoint.sh' \
                $image_id 
 
 $run git clone --depth 1 https://0xacab.org/schleuder/schleuder-web.git /app
