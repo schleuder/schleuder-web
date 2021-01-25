@@ -31,6 +31,7 @@ buildah config --workingdir /app \
                --env RAILS_ENV=production \
                --env SCHLEUDERWEB_DB_FILE=/data/db.sqlite \
                --env SCHLEUDERWEB_CONFIG_FILE=/data/schleuder-web.yml \
+               --volume /data \
                --cmd "bundle exec rails server" \
                $image_id 
 
