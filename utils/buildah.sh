@@ -29,6 +29,8 @@ buildah config --workingdir /app \
                --label summary="Run schleuder-web, from master branch" \
                --label maintainer="schleuder dev team <team@schleuder.org>" \
                --env RAILS_ENV=production \
+               --env SCHLEUDERWEB_DB_FILE=/data/db.sqlite \
+               --env SCHLEUDERWEB_CONFIG_FILE=/data/schleuder-web.yml \
                --cmd "bundle exec rails server" \
                $image_id 
 
