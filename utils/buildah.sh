@@ -14,12 +14,12 @@ set -e
 
 unset HISTFILE
 
-image_id=$(buildah from --pull docker.io/ruby:2.5)
+image_id=$(buildah from --pull docker.io/ruby:2.5-slim)
 
 run="buildah run $image_id --"
 $run apt-get update 
 $run apt-get --no-install-recommends upgrade -y
-$run apt-get install --no-install-recommends -y ruby-dev
+$run apt-get install --no-install-recommends -y ruby libxml2 zlib1g libsqlite3-0 git ruby-dev libxml2-dev zlib1g-dev libsqlite3-dev build-essential
 $run apt-get clean
 
 $run gem install bundler
@@ -32,7 +32,7 @@ buildah config --workingdir /app \
                --cmd "bundle exec rails server" \
                $image_id 
 
-$run git clone https://0xacab.org/schleuder/schleuder-web.git /app
+$run git clone --depth 1 https://0xacab.org/schleuder/schleuder-web.git /app
 commit_id="$($run git log --format='%h' -n 1)"
 echo cid:$commit_id
 $run rm -rf .git
@@ -49,6 +49,9 @@ else
   bundle exec rake db:setup SECRET_KEY_BASE="foo"
 fi
 '
+
+$run apt-get purge --autoremove -y git ruby-dev libxml2-dev zlib1g-dev libsqlite3-dev build-essential
+$run rm -rf "/usr/local/bundle/cache/" "/var/lib/apt/lists/" "/root/.bundle"
 
 buildah commit $image_id schleuder-web:$commit_id
 buildah commit $image_id schleuder-web:latest
