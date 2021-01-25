@@ -33,7 +33,13 @@ buildah config --workingdir /app \
                --env SCHLEUDERWEB_CONFIG_FILE=/data/schleuder-web.yml \
                --volume /data \
                --port 3000 \
-               --cmd "bundle exec rails server" \
+               --cmd '
+if test -f "$SCHLEUDERWEB_DB_FILE"; then
+  bundle exec rake db:migrate SECRET_KEY_BASE="foo"
+else
+  bundle exec rake db:setup SECRET_KEY_BASE="foo"
+fi
+bundle exec rails server' \
                $image_id 
 
 $run git clone --depth 1 https://0xacab.org/schleuder/schleuder-web.git /app
@@ -45,14 +51,7 @@ $run bundle install
 # The secret key is not actually used, but rails complains if it's unset.
 $run bundle exec rake assets:precompile SECRET_KEY_BASE="foo"
 
-$run bash -c '
-if test -f db/production.sqlite3; then
-  bundle exec rake db:migrate SECRET_KEY_BASE="foo"
-else
-  bundle exec rake db:setup SECRET_KEY_BASE="foo"
-fi
-'
-
+# Clean up
 $run apt-get purge --autoremove -y git ruby-dev libxml2-dev zlib1g-dev libsqlite3-dev build-essential
 $run rm -rf "/usr/local/bundle/cache/" "/var/lib/apt/lists/" "/root/.bundle"
 
