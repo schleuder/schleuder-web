@@ -26,6 +26,11 @@ $run gem install bundler
 
 echo '#!/bin/bash
 
+if test -z "$SECRET_KEY_BASE"; then
+  echo "!!!   Setting random, volatile SECRET_KEY_BASE — login sessions are only valid as long as this process invocation lives."
+  export SECRET_KEY_BASE="$(tr -cd \"[:print:]\" </dev/urandom| head -c 20)"
+fi
+
 if test -f "$SCHLEUDERWEB_DB_FILE"; then
   bundle exec rake db:migrate
 else
