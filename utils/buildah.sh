@@ -57,7 +57,7 @@ commit_id="$($run git log --format='%h' -n 1)"
 $run rm -rf .git
 
 $run bundle config set --local without 'development test'
-$run bundle install
+$run bundle install --jobs $(nproc)
 # The secret key is not actually used, but rails complains if it's unset.
 $run bundle exec rake assets:precompile SECRET_KEY_BASE="foo"
 
