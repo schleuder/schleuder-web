@@ -34,7 +34,6 @@ buildah config --workingdir /app \
 
 $run git clone --depth 1 https://0xacab.org/schleuder/schleuder-web.git /app
 commit_id="$($run git log --format='%h' -n 1)"
-echo cid:$commit_id
 $run rm -rf .git
 
 $run bundle config set --local without 'development test'
