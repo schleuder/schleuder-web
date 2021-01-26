@@ -66,6 +66,13 @@ $run bundle exec rake assets:precompile SECRET_KEY_BASE="foo"
 $run apt-get purge --autoremove -y git ruby-dev libxml2-dev zlib1g-dev libsqlite3-dev build-essential
 $run rm -rf "/usr/local/bundle/cache/" "/var/lib/apt/lists/" "/root/.bundle"
 
+# Make the runtime run the app as appuser.
+# We couldn't add this option to the previous call to `buildah config`, because it makes all subsequent calls to `buildah run` run as this user, which is not deinstall and clean up the FS.
+$run useradd -m appuser
+$run chown -R appuser /app
+$run install -o appuser -g appuser -d /data
+buildah config --user appuser $image_id
+
 buildah commit $image_id schleuder-web:$commit_id
 buildah commit $image_id schleuder-web:latest
 
