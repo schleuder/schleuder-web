@@ -52,7 +52,7 @@ buildah config --workingdir /app \
                --cmd '/entrypoint.sh' \
                $image_id 
 
-$run git clone --depth 1 https://0xacab.org/schleuder/schleuder-web.git /app
+$run git clone -b ${SCHLEUDER_CI_BRANCH:-master} --depth 1 https://0xacab.org/schleuder/schleuder-web.git /app
 commit_id="$($run git log --format='%h' -n 1)"
 $run rm -rf .git
 
