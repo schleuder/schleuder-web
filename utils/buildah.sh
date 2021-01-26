@@ -76,6 +76,7 @@ buildah config --user appuser $image_id
 buildah commit $image_id schleuder-web:$commit_id
 
 test -n "$CI_REGISTRY_USER" && {
-  podman push --creds="$CI_REGISTRY_USER:$CI_REGISTRY_PASSWORD" schleuder-web "docker://$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA"
+  podman push --creds="$CI_REGISTRY_USER:$CI_REGISTRY_PASSWORD" schleuder-web:$commit_id "docker://$CI_REGISTRY_IMAGE:$commit_id"
+  podman push --creds="$CI_REGISTRY_USER:$CI_REGISTRY_PASSWORD" schleuder-web:$commit_id "docker://$CI_REGISTRY_IMAGE:latest"
 }
 
