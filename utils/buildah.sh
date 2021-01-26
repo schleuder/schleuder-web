@@ -25,6 +25,7 @@ $run apt-get clean
 $run gem install bundler
 
 echo '#!/bin/bash
+set -e
 
 if test -z "$SECRET_KEY_BASE"; then
   echo "!!!   Setting random, volatile SECRET_KEY_BASE — login sessions are only valid as long as this process invocation lives."
