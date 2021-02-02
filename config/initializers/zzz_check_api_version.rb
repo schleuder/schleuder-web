@@ -25,6 +25,26 @@ if API_REQUIRED
         WARNING! This schleuder-web will be very useless without schleuder-api-daemon!
         WARNING!
         ".gsub(/^\s*/, '')
-  end
 
+  rescue ActiveResource::BadRequest => exc
+      $stderr.puts "
+        WARNING!
+        WARNING! schleuder-api-daemon returned HTTP status code 400.
+        WARNING! '#{exc}'
+        WARNING!
+        WARNING! Please have a look at its output to find out about the causal problem.
+        WARNING!
+        WARNING! This schleuder-web will be very useless without schleuder-api-daemon!
+        WARNING!
+        ".gsub(/^\s*/, '')
+
+  rescue StandardError => exc
+      $stderr.puts "
+        WARNING!
+        WARNING! An error occurred while contacting schleuder-api-daemon:
+        WARNING! '#{exc}'
+        WARNING!
+        ".gsub(/^\s*/, '')
+
+  end
 end
