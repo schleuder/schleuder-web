@@ -115,7 +115,7 @@ class ApplicationController < ActionController::Base
 
   def log_out(msg, msg_type=:notice)
     current_account = session[:current_account_id] = nil
-    redirect_to new_login_url, msg_type => msg
+    redirect_to new_login_url, flash: { msg_type => msg }
   end
 
   def load_resource
