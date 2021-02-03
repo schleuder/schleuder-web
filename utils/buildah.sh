@@ -73,10 +73,10 @@ $run chown -R appuser /app
 $run install -o appuser -g appuser -d /data
 buildah config --user appuser $image_id
 
-buildah commit $image_id schleuder-web:$commit_id
+buildah commit $image_id localhost/schleuder-web:$commit_id
 
 test -n "$CI_REGISTRY_USER" && {
-  podman push --creds="$CI_REGISTRY_USER:$CI_REGISTRY_PASSWORD" schleuder-web:$commit_id "docker://$CI_REGISTRY_IMAGE:$commit_id"
-  podman push --creds="$CI_REGISTRY_USER:$CI_REGISTRY_PASSWORD" schleuder-web:$commit_id "docker://$CI_REGISTRY_IMAGE:latest"
+  podman push --creds="$CI_REGISTRY_USER:$CI_REGISTRY_PASSWORD" localhost/schleuder-web:$commit_id "docker://$CI_REGISTRY_IMAGE:$commit_id"
+  podman push --creds="$CI_REGISTRY_USER:$CI_REGISTRY_PASSWORD" localhost/schleuder-web:$commit_id "docker://$CI_REGISTRY_IMAGE:latest"
 }
 
