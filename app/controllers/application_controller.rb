@@ -83,9 +83,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def valid_login_session?
+    if session[:login_expires_at].blank?
+      false
+    else
+      expiry = Time.parse(session[:login_expires_at])
+      current_account && expiry > Time.now
+    end
+  end
+
   def authenticate
-    expiry = Time.parse(session[:login_expires_at])
-    if current_account && expiry > Time.now
+    if valid_login_session?
       update_session_expiry
     else
       session[:return_to] = request.fullpath
