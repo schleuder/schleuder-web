@@ -1,0 +1,10 @@
+{
+  "fingerprint": "129A74AD5317457F9E502844A39C61B32003A8D8",
+  "email": "schleuder2@example.org",
+  "expiry": null,
+  "generated_at": "2016-01-01 12:00:00 +0000",
+  "primary_uid": "someone <someone@example.org>",
+  "oneline": "0x129A74AD5317457F9E502844A39C61B32003A8D8 someone@example.org 2016-01-01",
+  "trust_issues": null
+}
+

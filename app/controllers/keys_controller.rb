@@ -52,7 +52,9 @@ class KeysController < ApplicationController
   end
 
   def destroy
-    if @list.may_delete_keys?(current_account)
+    if list_key?(@key)
+      redirect_to list_keys_path(@list), notice: "Deleting the list's key is not allowed"
+    elsif @list.may_delete_keys?(current_account)
       # destroy() doesn't read any params, but we need to give the list_id.
       if Key.delete(@key.fingerprint, {list_id: @list.id})
         redirect_to list_keys_path(@list), notice: "Key deleted: #{@key.fingerprint}"
@@ -63,6 +65,11 @@ class KeysController < ApplicationController
       redirect_to list_keys_path(@list), notice: 'Only allowed for list admins'
     end
   end
+
+  def list_key?(key)
+    key.fingerprint == @list.fingerprint
+  end
+  helper_method :list_key?
 
   private
 
