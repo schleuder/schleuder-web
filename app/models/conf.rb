@@ -1,8 +1,13 @@
 class Conf
   include ::Squire::Base
+  EXT_CONF = ENV['SCHLEUDERWEB_CONFIG_FILE']
 
   def self.config_file
-    File.join(Rails.root, 'config', 'schleuder-web.yml')
+    if EXT_CONF.present? && File.readable?(EXT_CONF)
+      EXT_CONF
+    else
+      File.join(Rails.root, 'config', 'schleuder-web.yml')
+    end
   end
 
   def self.api_uri
