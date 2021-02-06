@@ -21,6 +21,14 @@ class List < Base
     nil
   end
 
+  def may_delete_keys?(account)
+    if account.superadmin? || account.admin_lists.include?(self)
+      true
+    else
+      (Array(Conf.lists_on_which_subscribers_may_delete_keys) & [self.email, '*']).any?
+    end
+  end
+
   def headers_to_meta
     @headers_to_meta ||= Array(attributes['headers_to_meta']).join("\n")
   end

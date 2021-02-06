@@ -21,6 +21,9 @@ group :development do
   gem 'spring'
   gem 'byebug'
   gem 'listen'
+  if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('2.6.0')
+    gem 'irb'
+  end
 end
 
 group :development, :test do

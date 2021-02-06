@@ -17,6 +17,9 @@ defaults: &defaults
   api_key: <%= ENV["SCHLEUDER_API_KEY"] %>
   superadmins:
     - root@localhost
+  lists_on_which_subscribers_may_delete_keys:
+    - "*" # matches all lists, make sure to quote it!
+    # - list1@example.net
 
 test:
   <<: *defaults
@@ -26,6 +29,8 @@ test:
   superadmins:
     - admin@localhost
     - someoneelse@example.net
+  lists_on_which_subscribers_may_delete_keys:
+     - <%= ENV['SCHLEUDER_LIST_DELETE_KEYS'] %>
 development:
   <<: *defaults
   web_hostname: localhost:3000
