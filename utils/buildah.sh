@@ -14,14 +14,15 @@ set -e
 
 unset HISTFILE
 
-image_id=$(buildah from --pull docker.io/ruby:2.5-slim)
+image_id=$(buildah from --pull-always registry.code.immerda.ch/immerda/container-images/base/centos:8)
 
 run="buildah run $image_id --"
-$run apt-get update 
-$run apt-get --no-install-recommends upgrade -y
-$run apt-get install --no-install-recommends -y ruby libxml2 zlib1g libsqlite3-0 git ruby-dev libxml2-dev zlib1g-dev libsqlite3-dev build-essential
-$run apt-get clean
-
+$run dnf update
+packages="ruby-devel redhat-rpm-config gcc gcc-c++ libxml2-devel libxslt-devel tar gzip make zlib-devel openssl-devel libsq3-devel libsodium which patch git bzip2"
+# centos doesn't provide these ruby classes in their stdlib.
+$run dnf install -y ruby rubygem-bigdecimal rubygem-json rubygem-io-console $packages
+# Must reinstall it, otherwise the data is not found. o_O
+$run dnf reinstall -y tzdata
 $run gem install bundler
 
 echo '#!/bin/bash
@@ -62,15 +63,18 @@ $run bundle install --jobs $(nproc)
 # The secret key is not actually used, but rails complains if it's unset.
 $run bundle exec rake assets:precompile SECRET_KEY_BASE="foo"
 
-# Clean up
-$run apt-get purge --autoremove -y git ruby-dev libxml2-dev zlib1g-dev libsqlite3-dev build-essential
-$run rm -rf "/usr/local/bundle/cache/" "/var/lib/apt/lists/" "/root/.bundle"
-
-# Make the runtime run the app as appuser.
-# We couldn't add this option to the previous call to `buildah config`, because it makes all subsequent calls to `buildah run` run as this user, which is not deinstall and clean up the FS.
+# Prepare user account which shall run the app
 $run useradd -m appuser
 $run chown -R appuser /app
 $run install -o appuser -g appuser -d /data
+
+# Clean up (after using useradd, but before configuring `appuser` as user)
+$run dnf remove -y $packages
+$run dnf clean all
+$run rm -rf "/root/.bundle" "/var/cache/" "/var/log/" "/usr/share/gems/cache"
+
+# Make the runtime run the app as appuser.
+# We couldn't add this option to the previous call to `buildah config`, because it makes all subsequent calls to `buildah run` run as this user, which is not deinstall and clean up the FS.
 buildah config --user appuser $image_id
 
 buildah commit $image_id localhost/schleuder-web:$commit_id
