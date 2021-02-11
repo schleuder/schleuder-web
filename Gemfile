@@ -10,7 +10,7 @@ gem 'sass-rails', '~>  5.0'
 gem 'bootstrap-sass', '~> 3.3'
 gem 'simple_form', '~> 5.0.0'
 gem 'squire', '~> 1.3'
-gem 'cancancan', '~> 3.0.0'
+gem 'cancancan', '~> 3.2.0'
 
 gem 'sqlite3', '~> 1.4.0'
 gem 'thin'
@@ -31,7 +31,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara', '~> 3.29.0'
+  gem 'capybara', '~> 3.35.0'
   gem 'factory_bot_rails', '~> 5.1'
   gem 'webmock'
   gem 'sinatra'

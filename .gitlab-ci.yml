@@ -57,6 +57,9 @@ ruby:2.6:
 ruby:2.7:
   image: ruby:2.7
   <<: *test_ruby
+ruby:3.0:
+  image: ruby:3.0
+  <<: *test_ruby
 
 bundler:audit:
   image: ruby:2.5
