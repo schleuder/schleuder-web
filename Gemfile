@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rake'
-gem 'rails', '~> 6.1.0'
+gem 'rails', '~> 6.1.0', '>= 6.1.2.1'
 gem 'bootsnap'
 gem 'bcrypt', '~> 3.1'
 gem 'activeresource', '~> 5.1.0'
