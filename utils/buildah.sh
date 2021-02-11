@@ -63,11 +63,6 @@ $run bundle install --jobs $(nproc)
 # The secret key is not actually used, but rails complains if it's unset.
 $run bundle exec rake assets:precompile SECRET_KEY_BASE="foo"
 
-# Prepare user account which shall run the app
-$run useradd -m appuser
-$run chown -R appuser /app
-$run install -o appuser -g appuser -d /data
-
 # Clean up (after using useradd, but before configuring `appuser` as user)
 $run dnf remove -y $packages
 $run dnf clean all
@@ -75,7 +70,7 @@ $run rm -rf "/root/.bundle" "/var/cache/" "/var/log/" "/usr/share/gems/cache"
 
 # Make the runtime run the app as appuser.
 # We couldn't add this option to the previous call to `buildah config`, because it makes all subsequent calls to `buildah run` run as this user, which is not deinstall and clean up the FS.
-buildah config --user appuser $image_id
+buildah config --user user $image_id
 
 buildah commit $image_id localhost/schleuder-web:$commit_id
 
