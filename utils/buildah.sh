@@ -42,6 +42,8 @@ fi
 bundle exec rails server
 ' | $run bash -c 'cat > /entrypoint.sh && chmod 755 /entrypoint.sh'
 
+$run install -d /app -o user -g user
+
 buildah config --workingdir /app \
                --author "schleuder dev team <team@schleuder.org>" \
                --label summary="Run schleuder-web, from master branch" \
@@ -51,6 +53,7 @@ buildah config --workingdir /app \
                --env SCHLEUDERWEB_CONFIG_FILE=/data/schleuder-web.yml \
                --volume /data \
                --port 3000 \
+               --user user \
                --cmd '/entrypoint.sh' \
                $image_id 
 
@@ -59,10 +62,12 @@ commit_id="$($run git log --format='%h' -n 1)"
 $run rm -rf .git
 
 $run bundle config set --local without 'development test'
+$run bundle config set --local path '.bundle'
 $run bundle install --jobs $(nproc)
 # The secret key is not actually used, but rails complains if it's unset.
 $run bundle exec rake assets:precompile SECRET_KEY_BASE="foo"
 
+buildah config --user root $image_id
 # Clean up (after using useradd, but before configuring `appuser` as user)
 $run dnf remove -y $packages
 $run dnf clean all
