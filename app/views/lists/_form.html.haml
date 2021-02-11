@@ -16,6 +16,8 @@
     %fieldset
       %legend Message control
       = checkbox f, :keep_msgid, "Pass incoming Message-IDs to outgoing messages? This enables threading in Mail-clients and helps to identify messages."
+      = checkbox f, :munge_from, "Include the original sender's email address into the From header of outgoing messages? If this is enabled recipients can see who sent the email before decrypting the content. Some people like that, but be aware that this puts information into the open which otherwise might have been hidden (depending on the encryption of the messages)."
+      = checkbox f, :set_reply_to_to_sender, "Set a Reply-To header to outgoing messages, which contains the originally incoming Reply-To value, or the incoming From value? If this is enabled replies will by default be sent to this email address instead of to the list. PLEASE BEWARE: this might result in ACCIDENTALLY REVEALED EMAIL ADDRESSES of subscribers even to non-subscribers!"
       = f.input :max_message_size_kb, hint: "Emails bigger than this will be rejected (measured in kilo-bytes.)"
       = f.input :headers_to_meta, hint: "One header-name per line. Case-insensitive.", as: :text
 
