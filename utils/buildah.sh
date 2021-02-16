@@ -17,7 +17,7 @@ unset HISTFILE
 image_id=$(buildah from --pull-always registry.code.immerda.ch/immerda/container-images/base/centos:8)
 
 run="buildah run $image_id --"
-$run dnf update
+$run dnf update -y
 packages="ruby-devel redhat-rpm-config gcc gcc-c++ libxml2-devel libxslt-devel tar gzip make zlib-devel openssl-devel libsq3-devel libsodium which patch git bzip2"
 # centos doesn't provide these ruby classes in their stdlib.
 $run dnf install -y ruby rubygem-bigdecimal rubygem-json rubygem-io-console $packages
@@ -71,7 +71,7 @@ buildah config --user root $image_id
 # Clean up (after using useradd, but before configuring `appuser` as user)
 $run dnf remove -y $packages
 $run dnf clean all
-$run rm -rf "/root/.bundle" "/var/cache/" "/var/log/" "/usr/share/gems/cache"
+$run bash -c 'rm -rf /home/user/.bundle /var/cache/ /var/log/* /usr/share/gems/cache'
 
 # Make the runtime run the app as appuser.
 # We couldn't add this option to the previous call to `buildah config`, because it makes all subsequent calls to `buildah run` run as this user, which is not deinstall and clean up the FS.
