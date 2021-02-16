@@ -18,13 +18,23 @@ image_id=$(buildah from --pull-always registry.code.immerda.ch/immerda/container
 
 run="buildah run $image_id --"
 $run dnf update -y
-packages="ruby-devel redhat-rpm-config gcc gcc-c++ libxml2-devel libxslt-devel tar gzip make zlib-devel openssl-devel libsq3-devel libsodium which patch git bzip2"
-# centos doesn't provide these ruby classes in their stdlib.
-$run dnf install -y ruby rubygem-bigdecimal rubygem-json rubygem-io-console $packages
-# Must reinstall it, otherwise the data is not found. o_O
+
+# Define packages required for building/installing the app and its
+# dependencies. These will be removed later.
+build_packages="ruby-devel redhat-rpm-config gcc gcc-c++ libxml2-devel libxslt-devel tar gzip make zlib-devel openssl-devel libsq3-devel libsodium which patch git bzip2"
+# Define packages required for running the app. These won't be deinstalled
+# later.
+# Centos provides less ruby classes in their stdlib than other distributions,
+# we must install some explicitly (bundler (as of v2.2) doesn't notice this
+# when installing the dependencies).
+runtime_packages="ruby rubygem-bigdecimal rubygem-json rubygem-io-console"
+
+$run dnf install -y $runtime_packages $build_packages
+# Must reinstall it, otherwise the data is not found (was removed by the base image to save some space).
 $run dnf reinstall -y tzdata
 $run gem install bundler
 
+# An entrypoint-script to run the app.
 echo '#!/bin/bash
 set -e
 
@@ -57,10 +67,12 @@ buildah config --workingdir /app \
                --cmd '/entrypoint.sh' \
                $image_id 
 
+# Download the app
 $run git clone -b ${SCHLEUDER_CI_BRANCH:-master} --depth 1 https://0xacab.org/schleuder/schleuder-web.git /app
 commit_id="$($run git log --format='%h' -n 1)"
 $run rm -rf .git
 
+# Install dependencies
 $run bundle config set --local without 'development test'
 $run bundle config set --local path '.bundle'
 $run bundle install --jobs $(nproc)
@@ -68,13 +80,12 @@ $run bundle install --jobs $(nproc)
 $run bundle exec rake assets:precompile SECRET_KEY_BASE="foo"
 
 buildah config --user root $image_id
-# Clean up (after using useradd, but before configuring `appuser` as user)
-$run dnf remove -y $packages
+# Clean up to save space and reduce the attack surface a little
+$run dnf remove -y $build_packages
 $run dnf clean all
 $run bash -c 'rm -rf /home/user/.bundle /var/cache/ /var/log/* /usr/share/gems/cache'
 
-# Make the runtime run the app as appuser.
-# We couldn't add this option to the previous call to `buildah config`, because it makes all subsequent calls to `buildah run` run as this user, which is not deinstall and clean up the FS.
+# Make the image run commands as 'user' by default
 buildah config --user user $image_id
 
 buildah commit $image_id localhost/schleuder-web:$commit_id
