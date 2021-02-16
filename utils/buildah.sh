@@ -83,7 +83,7 @@ buildah config --user root $image_id
 # Clean up to save space and reduce the attack surface a little
 $run dnf remove -y $build_packages
 $run dnf clean all
-$run bash -c 'rm -rf /home/user/.bundle /var/cache/ /var/log/* /usr/share/gems/cache'
+$run bash -c 'rm -rf /app/.bundle/ruby/2.5.0/cache/* ~user/.bundle /var/cache/* /var/log/* /usr/share/gems/cache/* /usr/local/share/gems/cache/*'
 
 # Make the image run commands as 'user' by default
 buildah config --user user $image_id
