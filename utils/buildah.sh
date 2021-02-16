@@ -79,6 +79,10 @@ $run bundle config set --local path '.bundle'
 $run bundle install --jobs $(nproc)
 # The secret key is not actually used, but rails complains if it's unset.
 $run bundle exec rake assets:precompile SECRET_KEY_BASE="foo"
+# Remove sass-related gems. We don't need them anymore (in "production"!) and they consume a lot of space
+$run bundle remove bootstrap-sass sass-rails
+$run bundle clean
+$run sed -i  -e "/^require 'bootstrap/d" -e "/^require 'sass/d" config/initializers/require_libs_and_gems.rb
 
 buildah config --user root $image_id
 # Clean up to save space and reduce the attack surface a little
