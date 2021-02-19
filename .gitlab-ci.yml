@@ -2,6 +2,7 @@
 stages:
   - static
   - test
+  - build
 
 cache:
   paths:
@@ -60,6 +61,13 @@ ruby:2.7:
 ruby:3.0:
   image: ruby:3.0
   <<: *test_ruby
+
+build-container-image:
+  image: registry.0xacab.org/schleuder/schleuder-ci-images:debian-container-tools
+  only:
+    - master
+  script: sh -x utils/buildah.sh
+  stage: build
 
 bundler:audit:
   image: ruby:2.5
