@@ -10,7 +10,7 @@ class ListsController < ApplicationController
   end
 
   def edit
-    @keywords = %w[subscribe unsubscribe list-subscriptions set-fingerprint resend resend-encrypted-only sign-this add-key delete-key list-keys get-key fetch-key]
+    @keywords = %w[subscribe unsubscribe list-subscriptions set-fingerprint resend resend-encrypted-only resend-unencrypted resend-cc resend-cc-encrypted-only resend-cc-unencrypted sign-this add-key delete-key list-keys get-key fetch-key]
   end
 
   def show
