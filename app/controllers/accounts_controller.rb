@@ -18,8 +18,15 @@ class AccountsController < ApplicationController
       @turing_question = TuringQuestion.random
       session[:turing_question_id] = @turing_question.id
     end
-    @account = Account.new(email: session[:account_email])
-    session[:account_email] = nil
+    if session[:account_email].present?
+      @account = Account.new(email: session[:account_email])
+      # Check validity to trigger error messages on the object. Chances are
+      # this code runs because the given email address is invalid.
+      @account.valid?
+      session[:account_email] = nil
+    else
+      @account = Account.new
+    end
   end
 
   def verify
@@ -29,6 +36,10 @@ class AccountsController < ApplicationController
     end
 
     ac_req = AccountRequest.create(email: @email)
+    if ! ac_req.valid?
+      return redirect_to_new(ac_req.errors.full_messages)
+    end
+
     mail = AccountMailer.send_verification_link(@email, ac_req.token)
     if ! res = mail.deliver_now
       redirect_to_new(res)
