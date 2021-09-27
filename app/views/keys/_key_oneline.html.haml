@@ -1,6 +1,6 @@
 - if key.trust_issues.blank?
-  = link_to key.summary, list_key_path(@list, key), class: key_css_classes(key)
+  = link_to key.oneline, list_key_path(@list, key), class: key_css_classes(key)
 - else
   = link_to list_key_path(@list, key), title: key_trust_title(key), class: key_css_classes(key) do
-    = key.summary
+    = key.oneline
     .glyphicon.glyphicon-warning-sign
