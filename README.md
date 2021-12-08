@@ -1,6 +1,6 @@
-# schleuder-web, a web interface for Schleuder3
+# schleuder-web, a web interface for Schleuder
 
-This is a full featured web interface to administrate [Schleuder v3](https://0xacab.org/schleuder/schleuder)-lists and subscriptions.
+This is a full featured web interface to administrate [Schleuder](https://0xacab.org/schleuder/schleuder)-lists and subscriptions.
 
 ##  Installation
 
