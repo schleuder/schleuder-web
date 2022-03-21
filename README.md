@@ -35,6 +35,13 @@ On a Debian-system, run e.g. this: `apt install libxml2-dev zlib1g-dev libsqlite
 1. Log into the webinterface with email "root@localhost" and password "slingit!".
 
 
+## Compatibility with Schleuder versions
+
+Schleuder-web adheres to [Semantic Versioning](http://semver.org/), and promises that its major versions shall always be compatible with those of Schleuder. This means that the (imagined) version `1.0.3` of Schleuder-web should work with the (imagined) versions of Schleuder `1.0.5`, `1.1.1`, and `1.2.0`, but not with the (imagined) version `2.0.0`.
+
+Versions are published using signed git-tags.
+
+
 ## TODO
 
 See also `rake notes`
