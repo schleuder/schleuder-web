@@ -6,15 +6,17 @@ This is a full featured web interface to administrate [Schleuder](https://0xacab
 
 Make sure you have these libraries installed:
 
+* ruby-bundler
 * libxml2
 * zlib
 * sqlite3 (or your DMBS of choice)
 
-On a Debian-system, run e.g. this: `apt install libxml2-dev zlib1g-dev libsqlite3-dev`.
+On a Debian-system, run e.g. this: `apt install ruby-bundler libxml2-dev zlib1g-dev libsqlite3-dev`.
 
 
 ### To have a glimpse
 
+1. bundle install
 1. ./bin/setup
 1. ./bin/start
 1. Visit http://localhost:3000/
