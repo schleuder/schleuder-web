@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rake'
 gem 'rails', '~> 7.0', '>= 6.1.2.1'
-gem 'bootsnap'
+gem 'bootsnap', '~> 1.13.0'
 gem 'bcrypt', '~> 3.1'
 gem 'haml-rails', '~> 2.0.0'
 gem 'sass-rails', '~>  5.0'
