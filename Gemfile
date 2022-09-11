@@ -3,6 +3,10 @@ source 'https://rubygems.org'
 gem 'rake'
 gem 'rails', '~> 7.0', '>= 6.1.2.1'
 gem 'bootsnap', '~> 1.13.0'
+if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.1.0')
+  # This is a dependency of bootsnap, which got extracted from the stdlib since Ruby 3.1, but isn't yet `required` by bootsnap.
+  gem 'matrix', '~> 0.4.2'
+end
 gem 'bcrypt', '~> 3.1'
 gem 'haml-rails', '~> 2.0.0'
 gem 'sass-rails', '~>  5.0'
