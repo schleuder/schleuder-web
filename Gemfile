@@ -15,7 +15,7 @@ gem 'thin'
 gem "activeresource-response"
 gem "secure_headers", "~> 6.3"
 
-if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('3')
+if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3')
   gem 'net-http', require: false
 end
 
