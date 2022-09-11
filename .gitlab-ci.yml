@@ -1,47 +1,37 @@
 ---
+default:
+  image: $IMAGE_REGISTRY:debian-generic
+
 stages:
   - static
   - test
   - build
 
+variables:
+  IMAGE_REGISTRY: $CI_REGISTRY/schleuder/schleuder-ci-images
+
+workflow:
+  rules:
+    # Don't create pipelines for branches, if associated MR do exist, or tags.
+    # Otherwise, create pipelines.
+    # This prevents duplicated pipelines and wasted resources.
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS || $CI_COMMIT_TAG
+      when: never
+    - when: always
+
 cache:
   paths:
     - vendor
 
-# Jobs that start with a period are disabled
-# This is just a template, to be used further below in the individual job definitions
-.setup_apt: &setup_apt
-  before_script:
-    # Export APT env vars to cache packages archives and lists based on the current working directory
-    - export APT_DIR=$CI_PROJECT_DIR/vendor/apt && export APT_ARCHIVES_DIR=$APT_DIR/archives && export APT_LISTS_DIR=$APT_DIR/lists
-    # Configure APT: Only install necessary packages, set cache location
-    - printf
-      "apt::install-recommends 0;\n
-      apt::install-suggests 0;\n
-      dir::cache::archives ${APT_ARCHIVES_DIR};\n
-      dir::state::lists ${APT_LISTS_DIR};\n"
-      >> /etc/apt/apt.conf.d/99custom
-    # Ensure the custom APT directory does exist
-    - mkdir -p {${APT_ARCHIVES_DIR},${APT_LISTS_DIR}}/partial
-    - apt-get update -qq
-    # To keep things DRY, use an env var to handle packages to be installed via APT
-    - apt-get install -qq -y $APT_INSTALL_PACKAGES
-
 .test_ruby: &test_ruby
-  variables:
-    APT_INSTALL_PACKAGES: sqlite3 libsqlite3-dev eatmydata
-  <<: *setup_apt
   script:
-    - eatmydata gem install bundler
     - eatmydata bundle install --jobs $(nproc) --path vendor
     - eatmydata bundle exec rake db:create RAILS_ENV=test
-    - eatmydata bundle exec rspec
+    - CHECK_CODE_COVERAGE=true eatmydata bundle exec rspec --format documentation
 
 codespell:
-  image: debian:unstable
-  variables:
-    APT_INSTALL_PACKAGES: codespell
-  <<: *setup_apt
+  rules:
+    - if: $CI_MERGE_REQUEST_IID
   script:
     # Run codespell to check for spelling errors, using a config to skip files with German 
     # and Spanish language and code of installed dependencies, to ignore warnings about binary 
@@ -56,10 +46,10 @@ ruby:2.6:
   image: ruby:2.6
   <<: *test_ruby
 ruby:2.7:
-  image: ruby:2.7
+  image: $IMAGE_REGISTRY:schleuder-ruby2.7
   <<: *test_ruby
 ruby:3.0:
-  image: ruby:3.0
+  image: $IMAGE_REGISTRY:schleuder-ruby3.0
   <<: *test_ruby
 
 build-container-image:
