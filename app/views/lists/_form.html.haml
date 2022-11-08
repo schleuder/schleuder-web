@@ -44,7 +44,7 @@
       %legend Advanced: Message headers
       = checkbox f, :include_list_headers, "Include List-headers (RFC 2369) to outgoing messages."
       = checkbox f, :include_openpgp_header, "Include OpenPGP-headers to outgoing messages."
-      = f.input :openpgp_header_preference, collection: %w[signencrypt encrypt sign], hint: "Only relevant if inclusion of OpenPGP-headers is active."
+      = f.input :openpgp_header_preference, include_blank: false, collection: %w[signencrypt encrypt sign], hint: "Only relevant if inclusion of OpenPGP-headers is active."
     %fieldset
       %legend Advanced: Bounce handling
       = f.input :bounces_drop_on_headers, placeholder: 'X-Spam-Flag: yes', hint: 'One match per line. Case-insensitive.', as: :text
@@ -52,7 +52,7 @@
       = checkbox f, :bounces_notify_admins, "Notify admins of bounced messages."
     %fieldset
       %legend Advanced: Other settings
-      = f.input :log_level, collection: %w[error warn info debug]
+      = f.input :log_level, include_blank: false, collection: %w[error warn info debug]
 
     %fieldset
       %legend Submit
