@@ -41,3 +41,7 @@ group :test do
   gem 'sinatra'
   gem 'launchy'
 end
+
+Dir['Gemfile.local*'].each do |file|
+  eval_gemfile file
+end
