@@ -1,11 +1,12 @@
 if API_REQUIRED
 
-  REQUIRED_API_VERSION = '4.0'
+  ActiveSupport::Reloader.to_prepare do
+    REQUIRED_API_VERSION = '4.0'
 
-  begin
-    found_api_version = Base.api_version
-    if Gem::Version.new(found_api_version) < Gem::Version.new(REQUIRED_API_VERSION)
-      $stderr.puts "
+    begin
+      found_api_version = Base.api_version
+      if Gem::Version.new(found_api_version) < Gem::Version.new(REQUIRED_API_VERSION)
+        $stderr.puts "
         WARNING!
         WARNING! The version of the running schleuder-api-daemon is too old!
         WARNING!
@@ -14,9 +15,9 @@ if API_REQUIRED
         WARNING! API-version running:  #{found_api_version}
         WARNING!
         ".gsub(/^\s*/, '')
-    end
+      end
 
-  rescue Errno::ECONNREFUSED => exc
+    rescue Errno::ECONNREFUSED => exc
       $stderr.puts "
         WARNING!
         WARNING! schleuder-api-daemon is not running!
@@ -24,9 +25,9 @@ if API_REQUIRED
         WARNING!
         WARNING! This schleuder-web will be very useless without schleuder-api-daemon!
         WARNING!
-        ".gsub(/^\s*/, '')
+      ".gsub(/^\s*/, '')
 
-  rescue ActiveResource::BadRequest => exc
+    rescue ActiveResource::BadRequest => exc
       $stderr.puts "
         WARNING!
         WARNING! schleuder-api-daemon returned HTTP status code 400.
@@ -36,15 +37,16 @@ if API_REQUIRED
         WARNING!
         WARNING! This schleuder-web will be very useless without schleuder-api-daemon!
         WARNING!
-        ".gsub(/^\s*/, '')
+      ".gsub(/^\s*/, '')
 
-  rescue StandardError => exc
+    rescue StandardError => exc
       $stderr.puts "
         WARNING!
         WARNING! An error occurred while contacting schleuder-api-daemon:
         WARNING! '#{exc}'
         WARNING!
-        ".gsub(/^\s*/, '')
+      ".gsub(/^\s*/, '')
 
+    end
   end
 end
