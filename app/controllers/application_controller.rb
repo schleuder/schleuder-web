@@ -126,8 +126,10 @@ class ApplicationController < ActionController::Base
 
   def put_api_messages_as_flash_error
     if messages = Base.connection.http_response.headers[:x_messages]
-      messages.split(' // ').each do |msg|
-        flash_error(msg)
+      Array(messages).each do |message|
+        message.split(' // ').each do |msg|
+          flash_error(msg)
+        end
       end
     end
   end
