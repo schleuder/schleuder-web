@@ -29,7 +29,7 @@ class KeysController < ApplicationController
   def create
     input = select_key_material
     if input.blank?
-      flash[:alert] = 'No input found'
+      flash_error 'No input found'
       return redirect_to action: 'index'
     end
 

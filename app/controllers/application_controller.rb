@@ -126,7 +126,30 @@ class ApplicationController < ActionController::Base
 
   def put_api_messages_as_flash_error
     if messages = Base.connection.http_response.headers[:x_messages]
-      flash[:error] = messages
+      messages.split(' // ').each do |msg|
+        flash_error(msg)
+      end
+    end
+  end
+  
+  def flash_error(msg)
+    ensure_flash_is_array('error')
+    flash['error'] << msg
+  end
+
+  def flash_notice(msg)
+    ensure_flash_is_array('notice')
+    flash['notice'] << msg
+  end
+
+  private
+
+  def ensure_flash_is_array(name)
+    case flash[name]
+    when nil
+      flash[name] = []
+    when String
+      flash[name] = [flash[name]]
     end
   end
 end
