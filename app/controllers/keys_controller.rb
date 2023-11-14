@@ -29,26 +29,30 @@ class KeysController < ApplicationController
   def create
     input = select_key_material
     if input.blank?
-      flash[:alert] = 'No input found'
+      flash_error 'No input found'
       return redirect_to action: 'index'
     end
 
     logger.info "input: #{input.inspect}"
     # ActiveResource doesn't want to use query-params with create(), so here
     # list_id is included in the request-body.
-    import_result = Key.create(keymaterial: input, list_id: @list.id)
-    # TODO: Maybe move the interpretation of the import-result into the
-    # API-daemon? schleuder-cli is doing the same interpretation, too.
-    if import_result.considered == 0
+    result = Key.create(keymaterial: input, list_id: @list.id)
+    keys = result.keys
+    if keys.size == 0
       # Can't use :error as argument to redirect_to()
-      flash[:error] = 'No keys found in input'
+      flash_error 'No keys found in input'
       redirect_to list_key_new_path(@list)
-    else
-      msg = import_result.imports.map do |import_status|
-        [import_status.fpr, import_status.action].join(': ')
-      end.join(', ')
-      redirect_to list_keys_path(@list), notice: msg
+      return
     end
+
+    keys.each do |key|
+      if key.import_action == 'error'
+        flash_error "Unexpected error while importing key #{key.fingerprint}"
+      else
+        flash_notice "#{key.import_action.capitalize}: #{key.summary}"
+      end
+    end
+    redirect_to list_keys_path(@list)
   end
 
   def destroy
