@@ -29,7 +29,6 @@ On a Debian-system, run e.g. this: `apt install ruby ruby-bundler libxml2-dev zl
 1. Optional: edit `config/database.yml`.
 1. `bundle install --without development`.
 1. `bundle exec rake db:setup RAILS_ENV=production`.
-1. Run `RAILS_ENV=production bundle exec rake assets:precompile` to precompile all images and css files.
 1. Setup mod_passenger, or a proxy + `bundle exec rails server -e production`.
 
 

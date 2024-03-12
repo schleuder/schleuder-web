@@ -1,7 +1,6 @@
-$table-border-color: #f2f2f2;
-
-@import "bootstrap-sprockets";
-@import "bootstrap";
+:root {
+  --maincolor: #4D994D;
+}
 
 #dev-watermark {
   position: fixed;
@@ -21,11 +20,10 @@ body {
   }
 }
 
-$maincolor: #4D994D;
 #logo {
-  color: $maincolor;
+  color: var(--maincolor);
   a {
-    color: $maincolor;
+    color: var(--maincolor);
   }
 }
 
@@ -36,9 +34,9 @@ $maincolor: #4D994D;
   #pageheadline {
     font-size: 1.7em;
     font-weight: 600;
-    color: $maincolor;
+    color: var(--maincolor);
     a {
-      color: $maincolor;
+      color: var(--maincolor);
     }
   }
   ul#listmenu {
@@ -170,7 +168,6 @@ ul.subscriptions-list {
 }
 
 .overwrites {
-  @extend .pull-right;
   font-size: .5em;
   vertical-align: bottom;
   color: #ccc;
@@ -182,12 +179,11 @@ ul.subscriptions-list {
 }
 
 .subscription_fingerprint option {
-  @extend .mono;
+  font-family: monospace;
 }
 
 input#keyfile {
-  @extend .mono;
-  @extend .form-control;
+  font-family: monospace;
   height: auto;
 }
 

@@ -6,6 +6,7 @@
     %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no", :name => "viewport"}
 
     = stylesheet_link_tag    "application", :media => "all"
+    = stylesheet_link_tag    "bootstrap", :media => "all"
     = csrf_meta_tags
   %body
     - if Rails.env.development?
