@@ -26,6 +26,7 @@ cache:
 .test_ruby: &test_ruby
   script:
     - eatmydata bundle install --jobs $(nproc) --path vendor
+    - eatmydata bundle update --bundler
     - eatmydata bundle exec rake db:create RAILS_ENV=test
     - CHECK_CODE_COVERAGE=true eatmydata bundle exec rspec --format documentation
 
