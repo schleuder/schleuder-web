@@ -1,5 +1,3 @@
-require 'openssl_ssl_patch'
-
 class Base < ActiveResource::Base
   self.timeout = 10
   self.site = Conf.api_uri
