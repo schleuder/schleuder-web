@@ -5,8 +5,3 @@ require File.expand_path('../config/application', __FILE__)
 
 Rails.application.load_tasks
 
-task :precompile do
-  `bundle exec rake assets:precompile RAILS_ENV=production`
-  `git add public/assets`
-  `git commit`
-end

@@ -33,13 +33,12 @@ class KeysController < ApplicationController
       return redirect_to action: 'index'
     end
 
-    logger.info "input: #{input.inspect}"
     # ActiveResource doesn't want to use query-params with create(), so here
     # list_id is included in the request-body.
     result = Key.create(keymaterial: input, list_id: @list.id)
-    if result.has_key?("keys")
+    if result.respond_to?("keys")
       # API v5.0.0 or later
-      keys = result["keys"]
+      keys = result.keys
       if keys.size == 0
         # Can't use :error as argument to redirect_to()
         flash_error 'No keys found in input'
