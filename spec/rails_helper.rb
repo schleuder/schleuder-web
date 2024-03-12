@@ -12,7 +12,7 @@ require 'support/fake_schleuder_api_daemon'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.fixture_paths = ["#{::Rails.root}/spec/fixtures"]
 
   config.use_transactional_fixtures = true
 
