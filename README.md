@@ -24,7 +24,7 @@ On a Debian-system, run e.g. this: `apt install ruby ruby-bundler libxml2-dev zl
 
 ### To run productively
 
-1. Mandatory: In `config/secrets.yml` change `secret_key_base` or set the environment variable SECRET_KEY_BASE.
+1. Mandatory: Set the environment variable `SECRET_KEY_BASE`, so that the rails process can read it (e.g. by exporting it). (If this values changes, all cookies and thus login sessions become invalids, so use a static value if you restart often.)
 1. Mandatory: In `config/schleuder-web.yml` add `tls_fingerprint` and `api_key` (get them from the admins that run Schleuder's api-daemon). You can also set them through the environment variables SCHLEUDER_TLS_FINGERPRINT and SCHLEUDER_API_KEY.
 1. Optional: edit `config/database.yml`.
 1. `bundle install --without development`.
