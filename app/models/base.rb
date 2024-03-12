@@ -10,6 +10,9 @@ class Base < ActiveResource::Base
     verify_callback: lambda { |*a| self.ssl_verify_callback(*a) }
     #ca_file: Conf.api_cert_file
   }
+  if Net::HTTP::SSL_ATTRIBUTES.include?(:verify_hostname)
+    self.ssl_options[:verify_hostname] = false
+  end
   # A little hack to enable requesting URLs from the root of the API (e.g.
   # </version.json> — actually <//version.json> is requested, but
   # schleuder-api-daemon is ok with that).
