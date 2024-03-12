@@ -37,20 +37,33 @@ class KeysController < ApplicationController
     # ActiveResource doesn't want to use query-params with create(), so here
     # list_id is included in the request-body.
     result = Key.create(keymaterial: input, list_id: @list.id)
-    keys = result.keys
-    if keys.size == 0
-      # Can't use :error as argument to redirect_to()
-      flash_error 'No keys found in input'
-      redirect_to list_key_new_path(@list)
-      return
-    end
-
-    keys.each do |key|
-      if key.import_action == 'error'
-        flash_error "Unexpected error while importing key #{key.fingerprint}"
-      else
-        flash_notice "#{key.import_action.capitalize}: #{key.summary}"
+    if result.has_key?("keys")
+      # API v5.0.0 or later
+      keys = result["keys"]
+      if keys.size == 0
+        # Can't use :error as argument to redirect_to()
+        flash_error 'No keys found in input'
+        redirect_to list_key_new_path(@list)
+        return
       end
+      keys.each do |key|
+        if key.import_action == 'error'
+          flash_error "Unexpected error while importing key #{key.fingerprint}"
+        else
+          flash_notice "#{key.import_action.capitalize}: #{key.summary}"
+        end
+      end
+    else
+      # API v4.x or earlier.
+      if result.considered == 0
+        flash_error 'No keys found in input'
+        redirect_to list_key_new_path(@list)
+        return
+      end
+      msg = result.imports.map do |import_status|
+        [import_status.fpr, import_status.action].join(': ')
+      end.join(', ')
+      flash_notice(msg)
     end
     redirect_to list_keys_path(@list)
   end
