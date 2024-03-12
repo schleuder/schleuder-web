@@ -1,0 +1,10 @@
+//= link application.css
+//= link keyring.svg
+//= link key.svg
+//= link people.svg
+//= link person.svg
+//= link heart.svg
+//= link delivery.svg
+//= link delivery-disabled.svg
+//= link key-missing.svg
+//= link key-outlined.svg
