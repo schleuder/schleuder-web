@@ -60,7 +60,7 @@ class SubscriptionsController < ApplicationController
 
   def destroy
     if @subscription.is_last_admin?
-      flash[:error] = t(".cant_unsubscribe_last_admin")
+      flash_error t(".cant_unsubscribe_last_admin")
       redirect_to subscription_path(@subscription)
       return
     end

@@ -16,20 +16,21 @@ if API_REQUIRED
   #  fatal "remote_cert_file is set to a not readable file (in config/schleuder-web.yml)"
   #end
 
-  if Conf.api.tls_fingerprint.blank?
-    fatal "Error: 'tls_fingerprint' is empty but required (in config/schleuder-web.yml)."
-  end
+  Rails.application.reloader.to_prepare do
+    if Conf.api.tls_fingerprint.blank?
+      fatal "Error: 'tls_fingerprint' is empty but required (in config/schleuder-web.yml)."
+    end
 
-  if Conf.api_key.blank?
-    fatal "Error: 'api_key' is empty but required (in config/schleuder-web.yml)."
-  end
+    if Conf.api_key.blank?
+      fatal "Error: 'api_key' is empty but required (in config/schleuder-web.yml)."
+    end
 
-  if Conf.api.host.blank?
-    fatal "Error: 'host' is empty, can't connect (in #{ENV['SCHLEUDER_CONF_CONFIG']})."
-  end
+    if Conf.api.host.blank?
+      fatal "Error: 'host' is empty, can't connect (in #{ENV['SCHLEUDER_CONF_CONFIG']})."
+    end
 
-  if Conf.api.port.blank?
-    fatal "Error: 'port' is empty, can't connect (in #{ENV['SCHLEUDER_CONF_CONFIG']})."
+    if Conf.api.port.blank?
+      fatal "Error: 'port' is empty, can't connect (in #{ENV['SCHLEUDER_CONF_CONFIG']})."
+    end
   end
-
 end

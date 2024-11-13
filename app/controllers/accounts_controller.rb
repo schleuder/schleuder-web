@@ -129,7 +129,7 @@ class AccountsController < ApplicationController
   end
 
   def redirect_to_new(error_message)
-    flash[:error] = error_message
+    flash_error error_message
     session[:account_email] = params[:account][:email]
     redirect_to new_account_path
     false

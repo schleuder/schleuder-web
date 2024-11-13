@@ -4,14 +4,15 @@ This is a full featured web interface to administrate [Schleuder](https://0xacab
 
 ##  Installation
 
-Make sure you have these libraries installed:
+Make sure you have these programs and libraries installed:
 
 * ruby-bundler
+* ruby >= 2.7
 * libxml2
 * zlib
 * sqlite3 (or your DMBS of choice)
 
-On a Debian-system, run e.g. this: `apt install ruby-bundler libxml2-dev zlib1g-dev libsqlite3-dev`.
+On a Debian-system, run e.g. this: `apt install ruby ruby-bundler libxml2-dev zlib1g-dev libsqlite3-dev`.
 
 
 ### To have a glimpse
@@ -23,12 +24,11 @@ On a Debian-system, run e.g. this: `apt install ruby-bundler libxml2-dev zlib1g-
 
 ### To run productively
 
-1. Mandatory: In `config/secrets.yml` change `secret_key_base` or set the environment variable SECRET_KEY_BASE.
+1. Mandatory: Set the environment variable `SECRET_KEY_BASE`, so that the rails process can read it (e.g. by exporting it). (If this values changes, all cookies and thus login sessions become invalids, so use a static value if you restart often.)
 1. Mandatory: In `config/schleuder-web.yml` add `tls_fingerprint` and `api_key` (get them from the admins that run Schleuder's api-daemon). You can also set them through the environment variables SCHLEUDER_TLS_FINGERPRINT and SCHLEUDER_API_KEY.
 1. Optional: edit `config/database.yml`.
 1. `bundle install --without development`.
 1. `bundle exec rake db:setup RAILS_ENV=production`.
-1. Run `RAILS_ENV=production bundle exec rake assets:precompile` to precompile all images and css files.
 1. Setup mod_passenger, or a proxy + `bundle exec rails server -e production`.
 
 

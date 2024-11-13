@@ -16,7 +16,7 @@ def api_uri_with_path(path)
 end
 
 def read_fixture(file)
-  File.read(File.join(fixture_path, file))
+  File.read(File.join(fixture_paths, file))
 end
 
 def json_object_as_array(file)

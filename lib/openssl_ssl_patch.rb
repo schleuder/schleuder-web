@@ -11,3 +11,7 @@ module OpenSSL
     end
   end
 end
+
+# Create a dummy module so Zeitwerk doesn't complain about a mismatch between
+# file path and module name.
+module OpensslSslPatch; end
