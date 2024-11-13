@@ -18,7 +18,7 @@ if API_REQUIRED
       if exc.message.include?("certificate verify failed")
         Rails.logger.error "Verifying the certificate of schleuder-api-daemon failed! Please check that the configured `tls_fingerprint` is correct (in config/schleuder-web.yml)."
       else
-        Rails.logger.error "An unknow SSL-related error occurred while contacting schleuder-api-daemon: #{exc}"
+        Rails.logger.error "An unknown SSL-related error occurred while contacting schleuder-api-daemon: #{exc}"
       end
     rescue StandardError => exc
       Rails.logger.error "An unknown error occurred while contacting schleuder-api-daemon: #{exc}"
